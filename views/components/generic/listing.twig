@@ -1,0 +1,85 @@
+{% for item in items %}
+    <div class="item {{type}}">
+        <a class="item_img" href="/catalog/restoran-{{item.restaurant_slug}}/">
+            <img loading="lazy" src="{{ Declension.get_image_src(item.restaurant_cover_url) }}=w300-h180-l90" alt="{{img_alt ? (img_alt | replace({"{название}" : item.restaurant_name})) : "Ресторан "~item.restaurant_name}}"/>
+        </a>
+            
+        <div class="item_info">
+
+            <div class="item_info_top">
+                <a href="/catalog/restoran-{{item.restaurant_slug}}/">
+                    <p class="item_name">{{item.restaurant_name}} /</p>
+                    <p class="item_parent_name">{{item.restaurant_name}}</p>
+                </a>
+                <p class="item_type">{{item.restaurant_main_type}}</p>
+            </div> 
+            
+            <div class="item_meta">
+                <div class="item_meta_items">
+                    {% if type != 'other' %}
+                        <p class="item_address">{{item.restaurant_address}}</p>
+                    {% endif %}
+                    <div class="item_meta_item">
+                        {{item.restaurant_cuisine}}
+                    </div>
+                </div>
+
+                <div class="item_meta_items">
+                    {% if item.rooms %}  
+                        <div class="item_meta_item">
+                            {{item.rooms|length}} открытых площадки 
+                        </div>
+                    {% endif %}
+                    {% if item.rooms %}
+                        <div class="item_meta_item">
+                            Вместимость: 
+                                {% set min_price = 100000000 %}
+                                {% for room in item.rooms %}
+                                    {{room.capacity}}{{loop.last ? '' : ','}}
+                                    {% set min_price = room.price and (min_price > room.price) ? room.price : min_price %}
+                                {% endfor %}
+                            человек
+                        </div>
+                    {% endif %}
+                    {% if min_price and min_price != 100000000 %}
+                        <div class="item_meta_item">
+                            Стоимость:<span class="item_price">от {{min_price}}р на человека</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+                    
+            <div class="item_optional">
+                {% if item.restaurant_firework %}
+                    <div class="optional">
+                        <div class="optional__pic fire"></div>
+                        <p>Площадка для<br>фейерверка</p>
+                    </div>
+                {% endif %} 
+                {% if item.restaurant_own_alcohol %}
+                    <div class="optional">
+                        <div class="optional__pic bocal"></div>
+                        <p>Можно со своим<br>алкоголем</p>
+                    </div>
+                {% endif %}    
+                <div class="optional">
+                    <div class="optional__pic outdoor"></div>
+                    <p>Выездная<br>регистрация</p>
+                </div>
+                <div class="optional">
+                    <div class="optional__pic light"></div>
+                    <p>Световое<br>оборудование</p>
+                </div>
+                <div class="optional">
+                    <div class="optional__pic music"></div>
+                    <p>Живая<br>музыка</p>
+                </div>
+                <div class="optional">
+                    <div class="optional__pic disco"></div>
+                    <p>Дискотека</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endfor %}

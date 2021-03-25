@@ -1,0 +1,118 @@
+.items_pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px 60px;
+
+    @include for-mobile{
+        margin-bottom: 30px;
+    }
+
+    @include for-phone{
+        display: none;
+    }
+
+    .items_pagination_item{
+        width: 20px;
+        height: 35px;
+        position: relative;
+        //transform: rotate(45deg);
+        //border: 3px solid $clrPagination;
+        margin: 0px 13px;
+        cursor: pointer;
+        color: $clrBlue;
+
+        @include for-mobile{
+            width: 30px;
+            height: 30px;
+            margin: 0 11px;
+        }
+
+        &._first{
+            margin-right: 26px;
+            &:before{
+                content: '...';
+                //transform: rotate(-45deg);
+                position: absolute;
+                left: calc(100% + 12px);
+                bottom: 10px;
+                color: $clrBlue;
+                font-weight: 500;
+                font-size: 16px;
+
+                @include for-mobile{
+                    left: calc(100% + 3px);
+                    bottom: 30px;
+                }
+
+            }
+        }
+
+        &._last{
+            margin-left: 26px;
+            &:before{
+                content: '...';
+                //transform: rotate(-45deg);
+                position: absolute;
+                right: calc(100% + 12px);
+                bottom: 10px;
+                color: $clrBlue;
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+
+        &._active{
+            pointer-events: none;
+        }
+
+        &:hover,
+        &._active:after{
+            //background-color: $clrPagination;
+            color: $clrBlack;
+        }
+
+        &:after{
+            content: attr(data-page-id);
+            position: absolute;
+            //transform: rotate(-45deg);
+            width: 100%;
+            font-size: 17px;
+            line-height: 25px;
+            font-weight: 500;
+            text-align: center;
+            color: $clrBlue;
+
+            @include for-mobile{
+                line-height: 25px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+div[data-listing-pagitem]{
+    color: $clrBlue;
+    font-size: 17px;
+    line-height: 25px;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+}
+div[data-page-increase="-1"]:before{
+    color: $clrBlue;
+    font-size: 17px;
+    line-height: 25px;
+    height: 35px;
+    content:"←";
+    position: absolute;
+    left: -25px;
+}
+div[data-page-increase="1"]:before{
+    color: $clrBlue;
+    font-size: 17px;
+    line-height: 25px;
+    height: 35px;
+    content:"→";
+    position: absolute;
+    right: -25px;
+}

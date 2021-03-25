@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>{{host}}</loc>
+	</url>
+	{% if isMain %}
+		<url>
+		<loc>{{host}}/politika/</loc>
+	</url>
+	{% endif %}
+	
+	<url>
+		<loc>{{host}}/catalog/</loc>
+	</url>
+
+	{% for slice in slices %}
+		<url>
+			<loc>{{host}}/catalog/{{slice.alias}}/</loc>
+		</url>
+	{% endfor %}
+
+	{% for rest in rests %}
+		<url>
+			<loc>{{host}}/catalog/restoran-{{rest.restaurant_slug}}/</loc>
+		</url>
+		{% for room in rest.rooms %}
+		<url>
+			<loc>{{host}}/catalog/restoran-{{rest.restaurant_slug}}/{{room.slug}}/</loc>
+		</url>
+		{% endfor %}
+	{% endfor %}
+
+</urlset>

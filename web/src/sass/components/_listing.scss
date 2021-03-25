@@ -1,0 +1,220 @@
+.items_list_listing{
+
+    .items_list{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .item{
+        position: relative;
+        display: flex;
+        width: 100%;
+        margin-bottom: 40px;
+        border: 1px solid #D0E1E7;
+        border-radius: 3px;
+        overflow: hidden;
+        &:first-child{
+            margin-bottom: 30px;
+        }
+        &:nth-last-child(2){
+            margin-bottom: 30px;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+        .item_img{
+            position: absolute;
+            width: 467px;
+            height: 100%;
+            overflow: hidden;
+            background-color: #c5c5c5;
+            border-radius: 3px 0 0 3px;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            @include for-pad {
+                width: 31.1%;
+            }
+        }
+        .item_info{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            margin-left: 507px;
+            .item_info_top{
+                margin: 32px 0 17px 0;
+            .item_name{
+                    margin-right: 5px;
+                    font-weight: bold;
+                    line-height: 1.2;
+                    font-size: 24px;
+                    color: #272727;
+                    @include for-pad {
+                        font-size: 18px;
+                    }
+                }
+                .item_parent_name{
+                    font-weight: bold;
+                    line-height: 1.2;
+                    font-size: 24px;
+                    color: #272727;
+                    @include for-pad {
+                        font-size: 18px;
+                    }
+                }
+                .item_type{
+                    font-size: 12px;
+                    color: #696969;
+                }
+                a {
+                    p{
+                        display: inline-block;
+                    }
+                }
+            }
+            @include for-pad {
+                margin-left: 34.3%;
+                padding: 2% 0 0;
+            }
+            .item_meta{
+                display: flex;
+                margin-bottom: 58px;
+                .item_meta_items {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 47%;
+                    .item_address{
+                        font-size: 16px;
+                        line-height: 17px;
+                        padding-left: 15px;
+                        &:before{
+                            content: url(/img/geo_icon.svg);
+                            margin-right: 6px;
+                            margin-left: -15px;
+                        }
+                        @include for-pad{
+                            font-size: 14px;
+                        }
+                        @include for-mobile{
+                            font-size: 12px;
+                        }
+                    }
+                    &:first-child{
+                        margin-right: 9px;
+                        @include for-pad{
+                            margin-right: 30px;
+                        }
+                    }
+                    @include for-pad{
+                        width: 50%;
+                    }
+                }
+                .item_meta_item{
+                    font-size: 16px;
+                    line-height: 20px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                    .item_price {
+                        color: #DA0034;
+                    }
+                    @include for-pad{
+                        font-size: 14px;
+                        line-height: 1.3;
+                    }
+                }
+            }
+
+            .item_optional{
+                display: flex;
+                flex-wrap: wrap;
+                .optional{
+                    display: flex;
+                    align-items: center;
+                    p{
+                        width: 100%;
+                        max-width: 94px;
+                        font-size: 12px;
+                        line-height: 1.2;
+                        color: #696969;
+                    }
+                    .optional__pic {
+                        width: 40px;
+                        height: 40px;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        @include for-pad{
+                            height: 30px;
+                            background-size: contain;
+                        }
+                    }
+                    @include for-pad{
+                        margin-bottom: 13px;
+                    }
+
+                    .fire{
+                        background-image: url(/img/fire.svg);
+                        @include for-pad{
+                        }
+                    }
+                    .bocal{
+                        background-image: url(/img/bocal.svg);
+                        @include for-pad{
+                        }
+                    }
+                    .outdoor{
+                        background-image: url(/img/outdoor.svg);
+                        @include for-pad{
+                        }
+                    }
+                    .light{
+                        background-image: url(/img/light.svg);
+                        @include for-pad{
+                        }
+                    }
+                    .music{
+                        background-image: url(/img/music.svg);
+                        @include for-pad{
+                        }
+                    }
+                    .disco{
+                        background-image: url(/img/disco.svg);
+                        @include for-pad{
+                        }
+                    }
+                }
+                .optional:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+        @include for-pad {
+            margin-bottom: 30px;
+        }    
+    }
+}
+
+div[data-append-items]{
+    display: none;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 15px;
+    border: 2px solid #ffc24a;
+    border-radius: 6px;
+    text-align: center;
+    margin: 16px 30px;
+    cursor: pointer;
+
+    &:hover{
+        border-color: $clrButton;
+    }
+    &:active{
+        border-color: $clrButtonPressed;
+    }
+    @include for-phone{
+        display: block;
+    }
+}

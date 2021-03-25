@@ -1,0 +1,51 @@
+{% for item in items %}
+    <div class="item swiper-slide {{type}}">
+        <a href="/catalog/{{item.id}}/">
+            <div class="item_img">
+                <img loading="lazy" src="{{Declension.get_image_src(item.restaurant_cover_url)}}" alt="{{img_alt ? (img_alt | replace({"{название}" : item.restaurant_name})) : "Ресторан "~item.restaurant_name}}"/>
+            </div>
+        </a>
+            <div class="item_info">
+                <div class="item_info_top">
+                    <a href="/catalog/{{item.id}}/">
+                        <p class="item_name">{{item.restaurant_name}}</p>
+                    </a>
+
+                    {% if type != 'other' %}
+                        <p class="item_address">{{item.restaurant_address}}</p>
+                        <!--p class="item_parent_name 11111111111">{{item.restaurant_name}}</p-->
+                    {% endif %}
+                        
+                    <div class="item_meta">
+
+                        {% if item.restaurant_max_capacity %}
+                            <div class="item_meta_item">
+                                <span class="item_meta_label">Вместимость: </span><span class="item_meta_text">{{item.restaurant_max_capacity}}</span>
+                            </div>
+                        {% endif %}
+                        {% if item.restaurant_own_alcohol %}
+                            <div class="item_meta_item">
+                                <span class="item_meta_label">Свой алкоголь: </span><span class="item_meta_text">да</span>
+                            </div>
+                        {% endif %}   
+                        {% if item.rooms %}  
+                            <div class="item_meta_item">
+                                <span class="item_meta_label">Залов: </span><span class="item_meta_text">{{item.rooms|length}}</span>
+                            </div>
+                        {% endif %}     
+                        {% if item.restaurant_parking %}    
+                            <div class="item_meta_item">
+                                <span class="item_meta_label">Парковка: </span><span class="item_meta_text">{{item.restaurant_parking|replace({'Выделенная парковка на': '', 'машин': '', 'у':'','ы':''})}} авто</span>
+                            </div>
+                        {% endif %}      
+                    </div>
+                    {#{% if item.price %}
+                        <div class="item_price">
+                            <span class="item_meta_text">от {{item.price}} ₽/чел.</span>
+                        </div>
+                    {% endif %}#}
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}

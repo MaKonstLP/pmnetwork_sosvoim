@@ -1,0 +1,55 @@
+{{ use('yii/widgets/Pjax') }}
+{{ use('yii/widgets/ListView') }}
+{{this.registerMetaTag({'property':'og:title','content':seo.h1|raw})}}
+{{this.registerMetaTag({'property':'og:description','content':(this.params['desc'] ? this.params['desc'] : seo.h1|raw)})}}
+{{this.registerMetaTag({'property':'og:type','content':'website'})}}
+{{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen~'/blog/'})}}
+{{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
+
+<div data-page-type="listing">
+	<div class="content_block" data-listing-title>
+		{#<div class="breadcrumbs">
+			{% for link,name in seo.breadcrumbs %}
+				<a class="breadcrumbs_item" href="{{link}}">{{name}}</a>
+			{% endfor %}
+		</div>#}
+		<div class="title">
+			<h1>{{seo.h1}}</h1>
+		</div>
+	</div>
+
+	<div class="object_gallery_wrap _blog">
+		<div class="listing_widget_arrow _prev"></div>
+		<div class="listing_widget_arrow _next"></div>
+		<div class="object_gallery_container swiper-container" data-gallery-blog-swiper>
+			<div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
+				{% for post in topPosts %}
+					<div class="swiper-slide fscreen_blog_top_image">
+						<div class="fscreen_blog_top_slider">
+							<img loading="lazy" src="{{ post.getFileData('image').src }}" alt="{{seo.media['header-image']|first.alt}}">
+						</div>
+
+						<div class="fscreen_blog_wrap">
+							<div class="fscreen_blog_label">{{ post.blogPostTags|map(t => t.blogTag.name)|join(' • ') }}</div>
+							<div class="fscreen_blog_title">{{ post.name }}</div>
+							<div class="fscreen_blog_date">{{ post.published_at }}</div>
+							<a class="fscreen_blog_href" href="{{ post.getUrl() }}">Читать статью</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="listing_widget_controll">
+				<div class="listing_widget_pagination"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="blogs">
+		<div class="content_block">
+			{{  pjax_begin({'id' : 'blog-listing','enablePushState':false}) }}
+			{{  list_view_widget(listConfig) }}
+			{{  pjax_end()  }}
+		</div>
+	</div>
+
+</div>

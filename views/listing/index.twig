@@ -1,0 +1,73 @@
+{{this.registerMetaTag({'property':'og:title','content':seo.h1|raw})}}
+{{this.registerMetaTag({'property':'og:description','content':(this.params['desc'] ? this.params['desc'] : seo.h1|raw)})}}
+{{this.registerMetaTag({'property':'og:type','content':'website'})}}
+{{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen~'/'~app.request.pathinfo})}}
+{{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
+
+<div data-page-type="listing">
+
+	<div class="content_block" data-listing-title>
+
+		{{ this.render('//components/generic/title.twig', {'count':count, 'seo':seo, 'appParams':appParams}) | raw }}
+
+	</div>
+
+	<div class="content_block">
+		<div data-listing-fast-filters>
+			{{ this.render('//components/generic/listing_tags.twig', {'fastFilters':fastFilters}) | raw }}			
+		</div>
+		<div class="seo_text before_filter" data-seo-text>
+			<div data-listing-text-top>{{seo.text_top | raw }}</div>
+			<div class="seo_text_control" data-seo-control>
+				<p class="_link">Показать полностью</p>
+			</div>
+		</div>
+		{{filter | raw }}
+	</div>
+
+	<div class="items_list_listing content_block" data-listing-wrapper>
+		<div class="items_list" data-listing-list>
+
+			{{ this.render('//components/generic/listing.twig', {'items':items, 'img_alt':seo.img_alt}) | raw }}
+
+		</div>
+	</div>
+
+	<div class="content_block">
+		<div data-pagination-wrapper>
+			{{pagination | raw }}
+		</div>
+		<div data-append-items>Показать еще</div>
+	</div>
+
+	<div class="content_block">
+		<div class="seo_text text_bottom" data-seo-text>
+			<div data-listing-text-bottom>{{seo.text_bottom | raw }}</div>
+			<div class="seo_text_control" data-seo-control>
+				<p class="_link">Показать полностью</p>
+			</div>
+		</div>
+	</div>
+
+	{{ this.render('//components/generic/form.twig', {'title': 'Поможем выбрать зал на день рождения', 'target': 'podval_list'}) | raw }}
+
+	<div class="content_loading"></div>
+</div>
+
+<div class="popup_filter_wrap">
+	<div class="popup_layout" data-close-popup></div>
+	<div class="popup_filter_top">
+		<a href="/" class="header_logo">
+			<div class="header_logo_img"></div>
+		</a>
+		<a href="/" class="header_logo header_logo_2">
+			<div class="header_logo_text">МОЙ ДЕНЬ</div>
+		</a>
+		<div class="popup_filter_close"></div>
+	</div>
+	<div class="popup_filter">
+		<p class="popup_filter_title">Фильтр площадок</p>
+		{{filter | raw }}
+	</div>
+
+</div>
