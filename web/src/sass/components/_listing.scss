@@ -15,12 +15,36 @@
         overflow: hidden;
         &:first-child{
             margin-bottom: 30px;
+            @include for-pad{
+                margin-bottom: 20px;
+            }
+            @include for-mobile{
+                margin-bottom: 30px;
+            }
         }
         &:nth-last-child(2){
             margin-bottom: 30px;
+            @include for-pad{
+                margin-bottom: 20px;
+            }
+            @include for-mobile{
+                margin-bottom: 30px;
+            }
         }
         &:last-child{
             margin-bottom: 0;
+        }
+        @include for-desktop{
+            margin-bottom: 30px;
+        }
+
+        @include for-pad{
+            margin-bottom: 20px;
+        }
+        @include for-mobile{
+            position: unset;
+            flex-direction: column;
+            margin-bottom: 30px;
         }
         .item_img{
             position: absolute;
@@ -29,13 +53,23 @@
             overflow: hidden;
             background-color: #c5c5c5;
             border-radius: 3px 0 0 3px;
+            @include for-desktop {
+                width: 290px;
+            }
+            @include for-mobile{
+                position: unset;
+                width: 100%;
+                height: 290px;
+                border-radius: 3px 3px 0 0;
+            }
+            @include for-phone{
+                position: unset;
+                height: 179px;
+            }
             img{
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-            }
-            @include for-pad {
-                width: 31.1%;
             }
         }
         .item_info{
@@ -43,15 +77,40 @@
             width: 100%;
             flex-direction: column;
             margin-left: 507px;
+            @include for-desktop {
+                margin-left: 320px;
+            }
+            @include for-mobile {
+                margin-left: 0;
+                padding: 0 15px;
+            }
             .item_info_top{
                 margin: 32px 0 17px 0;
+                @include for-desktop {
+                    margin: 19px 0 13px 0;
+                }
+                @include for-pad {
+                    margin: 27px 0 10px 0;
+                }
+                @include for-pad {
+                    margin: 17px 0 9px 0;
+                }
+                @include for-phone {
+                    margin: 20px 0 7px 0;
+                }
             .item_name{
                     margin-right: 5px;
                     font-weight: bold;
                     line-height: 1.2;
                     font-size: 24px;
                     color: #272727;
-                    @include for-pad {
+                    @include for-desktop {
+                        font-size: 18px;
+                    }
+                    @include for-mobile {
+                        font-size: 24px;
+                    }
+                    @include for-phone {
                         font-size: 18px;
                     }
                 }
@@ -60,13 +119,25 @@
                     line-height: 1.2;
                     font-size: 24px;
                     color: #272727;
-                    @include for-pad {
+                    @include for-desktop {
+                        font-size: 18px;
+                    }
+                    @include for-mobile {
+                        font-size: 24px;
+                    }
+                    @include for-phone {
                         font-size: 18px;
                     }
                 }
                 .item_type{
                     font-size: 12px;
                     color: #696969;
+                    @include for-pad {
+                        line-height: 1.4;
+                    }
+                    @include for-phone {
+                        margin-top: 10px;
+                    }
                 }
                 a {
                     p{
@@ -74,42 +145,68 @@
                     }
                 }
             }
-            @include for-pad {
-                margin-left: 34.3%;
-                padding: 2% 0 0;
-            }
             .item_meta{
                 display: flex;
                 margin-bottom: 58px;
+                @include for-desktop{
+                    margin-bottom: 20px;
+                }
+                @include for-pad{
+                    flex-direction: column;
+                    margin-bottom: 26px;
+                }
+                @include for-mobile{
+                    margin-bottom: 18px;
+                }
                 .item_meta_items {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
                     width: 47%;
+                    @include for-desktop{
+                        width: 50%;
+                    }
+                    @include for-pad{
+                        width: 100%;
+                    }
                     .item_address{
                         font-size: 16px;
                         line-height: 17px;
                         padding-left: 15px;
+                        @include for-pad{
+                            margin-bottom: 13px;
+                        }
                         &:before{
                             content: url(/img/geo_icon.svg);
                             margin-right: 6px;
                             margin-left: -15px;
                         }
-                        @include for-pad{
+                        @include for-desktop{
+                            line-height: 1.2;
                             font-size: 14px;
                         }
-                        @include for-mobile{
+                        @include for-pad{
                             font-size: 12px;
                         }
                     }
                     &:first-child{
                         margin-right: 9px;
-                        @include for-pad{
+                        @include for-desktop{
                             margin-right: 30px;
                         }
+                        @include for-pad{
+                            margin-bottom: 14px;
+                        }
+                        @include for-mobile{
+                            margin-right: 0;
+                        }
                     }
-                    @include for-pad{
-                        width: 50%;
+                    &:last-child{
+                        margin-right: 5px;
+                        @include for-mobile{
+                            margin-right: 0;
+                        }
+
                     }
                 }
                 .item_meta_item{
@@ -123,7 +220,7 @@
                     }
                     @include for-pad{
                         font-size: 14px;
-                        line-height: 1.3;
+                        line-height: 17px;
                     }
                 }
             }
@@ -131,58 +228,81 @@
             .item_optional{
                 display: flex;
                 flex-wrap: wrap;
+                margin-bottom: 30px;
+                @include for-desktop{
+                    margin-bottom: 2px;
+                }
+                @include for-pad{
+                    display: none;
+                }
                 .optional{
                     display: flex;
+                    margin-right: 40px;
                     align-items: center;
+                    @include for-desktop{
+                        flex: 0 0 23%;
+                        margin-right: 30px;
+                        margin-bottom: 12px;
+                    }
+
                     p{
-                        width: 100%;
-                        max-width: 94px;
                         font-size: 12px;
                         line-height: 1.2;
                         color: #696969;
                     }
                     .optional__pic {
-                        width: 40px;
                         height: 40px;
+                        margin-right: 8.5px;
                         background-repeat: no-repeat;
                         background-position: center;
-                        @include for-pad{
+                        @include for-desktop{
                             height: 30px;
                             background-size: contain;
                         }
                     }
-                    @include for-pad{
-                        margin-bottom: 13px;
-                    }
-
                     .fire{
+                        width: 37.5px;
                         background-image: url(/img/fire.svg);
-                        @include for-pad{
+                        @include for-desktop{
+                            width: 28px;
                         }
                     }
                     .bocal{
+                        width: 42px;
                         background-image: url(/img/bocal.svg);
-                        @include for-pad{
+                        @include for-desktop{
+                            width: 31.5px;
                         }
                     }
                     .outdoor{
+                        width: 31px;
                         background-image: url(/img/outdoor.svg);
-                        @include for-pad{
+                        @include for-desktop{
+                            width: 46px;
+                            margin-right: 1px;
                         }
                     }
                     .light{
+                        width: 23px;
                         background-image: url(/img/light.svg);
-                        @include for-pad{
+                        @include for-desktop{
+                            width: 32px;
+                            margin-right: 7.5px;
                         }
                     }
                     .music{
+                        width: 47px;
                         background-image: url(/img/music.svg);
-                        @include for-pad{
+                        @include for-desktop{
+                            width: 31px;
                         }
                     }
                     .disco{
+                        width: 37px;
                         background-image: url(/img/disco.svg);
-                        @include for-pad{
+                        @include for-desktop{
+                            width: 43px;
+                            margin-right: 4px;
                         }
                     }
                 }
@@ -191,9 +311,6 @@
                 }
             }
         }
-        @include for-pad {
-            margin-bottom: 30px;
-        }    
     }
 }
 

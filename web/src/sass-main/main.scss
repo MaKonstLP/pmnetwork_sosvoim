@@ -166,24 +166,23 @@ li {
 }
 
 .content_block{
-    width: 1480px;
+    width: 1470px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 
     @include for-desktop{
-        width: 970px;
+        width: 960px;
     }
 
     @include for-pad{
-        width: 77.5%;
+        width: 720px;
     }
 
     @include for-mobile{
-        width: 92%;
+        width: 100%;
     }
 
-    @include for-small-phone{
-        width: 90.5%;
+    @include for-phone{
     }
 }
 [data-page-type]{
