@@ -23,12 +23,17 @@ export default class YaMap{
                 $('.map #map').data('mapdotx'),
                 $('.map #map').data('mapdoty'),
             ],
-            zoom: 15,
+            zoom: 13.5,
             behaviors: ["drag", "dblClickZoom", "rightMouseButtonMagnifier", "multiTouch"]
         }),
 
         myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
-            hintContent: 'hintContent',
+            hintContent:    '\
+                            <div class="ballon_content_text">\
+                            <p class="ballon_content_address" href="#">'+ $('.map_rest_name').html() +'</p>\
+                            <p class="ballon_content_address">'+ $('.map_rest_address').html() +'</p>\
+                        </div>\
+            ',
             balloonContent: '\
                             <div class="balloon_content_wrap">\
                                 <div class="balloon_content_img">\
@@ -41,17 +46,20 @@ export default class YaMap{
                             </div>\
             ',
         }, {
-            //iconLayout: 'default#image',
-            preset: 'islands#darkGreenIcon',
-            hideIconOnBalloonOpen: false,
-            balloonOffset: [0,-37],
+            iconLayout: 'default#image',
+            iconImageHref: '/img/iconMap.svg',
+            iconImageSize: [65, 87],
+            iconImageOffset: [-32, -87],
+            // preset: 'islands#darkGreenIcon',
+            // hideIconOnBalloonOpen: false,
+            // balloonOffset: [0,-37],
         });
 
         myMap.geoObjects.add(myPlacemark); 
         
-        if($(window).width() > 600){
-            myPlacemark.balloon.open();
-        }
+        // if($(window).width() > 600){
+        //     myPlacemark.balloon.open();
+        // }
         });
     }
 }

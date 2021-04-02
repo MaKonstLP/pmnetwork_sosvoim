@@ -4,31 +4,32 @@
 	</div>
 
 	<div class="form_main">
+		<a name="order_form"></a>
 
 		<div class="form_title">
-			<p class="form_title_main">{{ title ? title : 'Поможем выбрать зал на день рождения'}}</p>
+			<p class="form_title_main">{{ title ? title : 'Затрудняетесь с выбором?'}}</p>
+			<p class="form_title_main"><span class="for-free">бесплатно </span>{{ title2 ? title2 : 'подберем заведение под ваше мероприятие!'}}</p>
 		</div>
 
 		<form class="form_block" action="/ajax/form/" data-form-target="{{target}}">
 			<input type="hidden" name="type" value="{{ type ? type : 'main'}}" />
 			<div class="form_inputs">
 				<div class="input_wrapper">
-					<input type="text" name="name" data-required placeholder="Как Вас зовут?" class="not_check_approove"/>
+					<input type="text" name="name" data-required placeholder="Ваше имя" class="not_check_approove"/>
 				</div>
 				<div class="input_wrapper">
-					<input type="text" name="phone" data-required placeholder="Номер телефона" autocomplete="off"/>
+					<input type="text" name="phone" data-required placeholder="+7 (999) 888 88 88" autocomplete="off"/>
 				</div>
 				<div class="input_wrapper">
 					<input type="text" name="email" data-required placeholder="Электронная почта" />
 				</div>
 				<div class="input_wrapper date_wrapper">
-					<input type="text" name="date" readonly placeholder="Желаемая дата" class="not_check_approove"/>
+					<input type="text" name="date" readonly placeholder="Дата" class="not_check_approove"/>
 					<div class="input_wrapper_date_wrapper" style="display: none;">
-						
 					</div>
 				</div>
 				<div class="input_wrapper _big_width">
-					<input type="text" name="comment" data-required placeholder="Комментарий" />
+					<textarea name="comment" data-required placeholder="Комментарий" rows="2" maxlength="200"></textarea>
 				</div>
 			</div>
 

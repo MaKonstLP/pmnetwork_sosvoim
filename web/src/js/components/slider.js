@@ -9,6 +9,7 @@ export default class Slider{
 		//if($(window).width() <= 1650){
 		if ($('[data-gallery-main-swiper]').length >0) self.initSwiperItem($('[data-gallery-main-swiper]'), $('[data-gallery-thumb-swiper]'));	
 		if ($('[data-other-objects-swiper]').length >0) self.initSwiperSameItem($('[data-other-objects-swiper]'));
+		if ($('[data-listing-wrapper]').length >0) self.initSwiperSameRest($('[data-listing-wrapper]'));
 		if ($('[data-other-blogs-swiper]').length >0) self.initSwiperSameBlogs($('[data-other-blogs-swiper]'));	
 		if ($('[data-gallery-blog-swiper]').length >0) self.initSwiperTitleBlog($('[data-gallery-blog-swiper]'));
 		if ($('[data-gallery-post-swiper]').length >0) $('[data-gallery-post-swiper]').each(function() { self.initSwiperBlog($(this), $(this).siblings('[data-gallery-post-thumb-swiper]'))});	
@@ -49,19 +50,19 @@ export default class Slider{
 
 	initSwiperItem($container_main, $container_thumb){
 		let galleryThumbs = new Swiper($container_thumb, {
-	      	spaceBetween: 0,
-	      	slidesPerView: 15,
-	      	watchSlidesVisibility: true,
-     		watchSlidesProgress: true,
-	      	centerInsufficientSlides: true,
+	      	spaceBetween: 20,
+	      	slidesPerView: 6,
+	      	watchSlidesVisibility: false,
+     		watchSlidesProgress: false,
+	      	centerInsufficientSlides: false,
 	      	//centeredSlides: true,
-	      	slideToClickedSlide: true,
+	      	slideToClickedSlide: false,
 	    });
 		
 
 		let galleryTop = new Swiper($container_main, {
 	      spaceBetween: 0,
-	      slidesPerView: 3.2,
+	      slidesPerView: 1,
 	      centeredSlides: true,
 	      loop: true,
 	      init: false,
@@ -78,8 +79,9 @@ export default class Slider{
 		            },
 
 	      breakpoints: {
-	        	1000:{
-	        		slidesPerView: 1.2,
+			slidesPerView: 1,
+	        	1920:{
+	        		slidesPerView: 1,
 	        	},
 	        	600:{
 	        		slidesPerView: 1,
@@ -150,7 +152,7 @@ export default class Slider{
 		            },
 
 	      breakpoints: {
-	        	600:{
+	        	1920:{
 	        		pagination: {
 		              el: '.listing_widget_pagination',
 		              type: 'bullets',
@@ -183,33 +185,76 @@ export default class Slider{
 	}
 
 	initSwiperSameItem($container){
-		console.log('111111111111111');
 		let swiper = new Swiper($container, {
 	        slidesPerView: 3,
-	        //spaceBetween: 30,
-	        loop: true,
+	        spaceBetween: 19,
+	        loop: false,
 	        navigation: {
-              nextEl: '.listing_widget_arrow._next',
-              prevEl: '.listing_widget_arrow._prev',
+              nextEl: '.rooms_widget_arrow._next',
+              prevEl: '.rooms_widget_arrow._prev',
             },
-            pagination: {
-		              el: '.listing_widget_pagination',
-		              type: 'bullets',
-		            },
+            // pagination: {
+		    //           el: '.listing_widget_pagination',
+		    //           type: 'bullets',
+		    //         },
 	        breakpoints: {
 	        	/*1200:{
 	        		slidesPerView: 3,
 	        	},*/
-	        	1000:{
-	        		slidesPerView: 2.5,
-					pagination: {
-		              el: '.listing_widget_pagination',
-		              type: 'bullets',
-		            },
-	        		navigation: false,
-	        		loop: false,
+	        	1920:{
+	        		slidesPerView: 3,
+					// pagination: {
+					// 	el: '.listing_widget_pagination',
+					// 	type: 'bullets',
+		            // },
+					navigation: {
+						nextEl: '.rooms_widget_arrow._next',
+						prevEl: '.rooms_widget_arrow._prev',
+					},
+					loop: false,
 	        		//centeredSlides: true,
+	        		spaceBetween: 19,
+	        	},
+	        	767:{
+	        		slidesPerView: 1.2,
 	        		spaceBetween: 20,
+	        	}
+	        }
+	    });
+
+	    let swiper_var = $container.swiper;
+	}
+
+	initSwiperSameRest($container){
+		let swiper = new Swiper($container, {
+	        slidesPerView: 3,
+	        spaceBetween: 19,
+	        loop: false,
+	        navigation: {
+              nextEl: '.other_widget_arrow._next',
+              prevEl: '.other_widget_arrow._prev',
+            },
+            // pagination: {
+		    //           el: '.listing_widget_pagination',
+		    //           type: 'bullets',
+		    //         },
+	        breakpoints: {
+	        	/*1200:{
+	        		slidesPerView: 3,
+	        	},*/
+	        	1920:{
+	        		slidesPerView: 3,
+					// pagination: {
+					// 	el: '.listing_widget_pagination',
+					// 	type: 'bullets',
+		            // },
+					navigation: {
+						nextEl: '.other_widget_arrow._next',
+						prevEl: '.other_widget_arrow._prev',
+					},
+					loop: false,
+	        		//centeredSlides: true,
+	        		spaceBetween: 19,
 	        	},
 	        	767:{
 	        		slidesPerView: 1.2,

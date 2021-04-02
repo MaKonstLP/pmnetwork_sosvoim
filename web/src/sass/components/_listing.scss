@@ -206,7 +206,11 @@
                         @include for-mobile{
                             margin-right: 0;
                         }
-
+                        .item_meta_item{
+                            &:last-child{
+                                display: none;
+                            }
+                        }
                     }
                 }
                 .item_meta_item{
