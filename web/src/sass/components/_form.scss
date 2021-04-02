@@ -276,7 +276,7 @@
 	              color: #272727;
 	            }
 	            &[name="date"] {
-	            	background: url(/img/calendar_icon.svg) no-repeat right, #fff;
+	            	background: url(/img/calendar.svg) no-repeat 95%, #fff;
 	            	//pointer-events: none;
 	            	cursor: pointer;	
 	            	@include for-phone{
@@ -480,7 +480,7 @@
 }
 .input_wrapper_date_wrapper{
 	position: absolute;
-    width: 375px;
+    width: 315px;
     //height: 305px;
     font-size: 15px;
     line-height: 24px;
@@ -488,7 +488,7 @@
     background-color: #fff;
     border: 1px solid #DEDEDE;
     z-index: 20;
-    padding: 23px 32px;
+    padding: 15px 20px 28px 20px;
     display: flex;
     flex-direction: column;
     top: 45px;
@@ -520,11 +520,11 @@
 	    height: 20px;
 	    cursor: pointer;
 	    &._prev{
-			left: 5px;
+			left: 4px;
 		    transform: rotate(-180deg);
 	    }
 		&._next{
-			right: -303px;
+			right: -270px;
 		}
     }
     .date_wrapper_weeks{

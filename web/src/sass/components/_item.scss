@@ -21,47 +21,41 @@
     flex-direction: column;
 
     @include for-desktop{
-        padding-right: 40px;
-        justify-content: left;
     }
     @include for-pad{
-        padding: 0 16px;
-        justify-content: left;
-        height: auto;
     }
     @include for-phone{
-        padding: 0 12px;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        height: auto;
     }
     p{
         font-size: 16px;
-        line-height: 20px;
+        line-height: 18px;
     }
     .object_meta_item{
         @include for-desktop{
-            margin-right: 20px;
         }
         @include for-pad{
-            margin-right: 32px; 
-            .object_book_hidden{
-                display: flex;
-                align-items: baseline;
-            }   
-            .object_book_hidden_button{
-                height: 24px;
-            }    
         }
         &:first-child{
             margin-bottom: 26px;
+            @include for-desktop{
+                width: 100%;
+            }
         }
-        &:nth-child(2){
-
+        &:not(:first-child){
+            @include for-desktop{
+                width: 48%;
+            }
         }
         &:last-child{
             display: flex;
-            flex-direction: column;            
+            flex-direction: column;
+            .item_wrap{
+                @include for-desktop{
+                    .item_left_side{
+                        width: 40%;
+                    }
+                }
+            }
         }
         .object_name{
             margin-bottom: 16px;
@@ -95,6 +89,7 @@
             }
         }
         .item_desc{
+            margin-bottom: 3px;
             font-size: 16px;
             font-weight: 400;
             color: #272727;
@@ -104,38 +99,57 @@
         }
         .item_wrap{
             display: flex;
-            margin-bottom: 5px;
-        }
-        .item_left_side{
-            display: flex;
-            max-width: 248px;
-            width: 100%;
-            .object_meta_title{
-                font-weight: 400;
-                font-size: 16px;
-                color: #4F4F4F;
-                white-space: nowrap;
-                & + div{
-                    width: 100%;  
-                }
-                & + div > p {
-                    width: 100%;
-                    height: 18px;
-                    border-bottom: 1px dashed #C2C2C2;
-                }
-            }
+            margin-bottom: 6px;
         }
     }
-    &:nth-child(2){
-        margin-bottom: 50px;
+    &:first-child{
+        margin-bottom: 55px;
         .object_meta_item{
-            &:first-child{
-                margin-bottom: 10px;
+            .item_left_side{
+                display: flex;
+                width: 35%;
+                .object_meta_title{
+                    font-weight: 400;
+                    font-size: 16px;
+                    color: #4F4F4F;
+                    white-space: nowrap;
+                    & + div{
+                        width: 100%;  
+                    }
+                    & + div > p {
+                        width: 100%;
+                        height: 18px;
+                        border-bottom: 1px dashed #C2C2C2;
+                    }
+                }
+            }
+            .object_meta_value{
+                width: 65%;
+            }
+            &:nth-child(2) {
+                margin-bottom: 3px;
+                @include for-desktop{
+                    margin-right: 30px;
+                    .item_left_side{
+                        width: 55%;
+                    }
+                    .object_meta_value{
+                        width: 45%;
+                    }
+                }
+            }
+            &:last-child{
+                .item_wrap{
+                    &:first-child{
+                        margin-bottom: 12px;
+                    }
+                }
             }
         }
     }
     &:last-child{
         flex-direction: row;
+        justify-content: space-between;
         .object_meta_item{
             display: flex;
             justify-content: center;
@@ -145,8 +159,9 @@
             height: 131px;
             margin-bottom: 0;
             background-color: #EAF7FB;
-            &:first-child{
-                margin-right: 20px;
+            @include for-desktop{
+                max-width: 450px;
+                height: 100px;
             }
             .free_order{
                 display: block;
@@ -166,6 +181,13 @@
                     background-color: #0179BD;
                 }
             }
+        }
+    }
+    @include for-desktop{
+        &:first-child{
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-bottom: 26px;
         }
     }
 }
@@ -410,14 +432,95 @@
         }
     }
     .rest_top{
+        position: relative;
         display: flex;
         margin-bottom: 50px;
         .rest_top_left{
             width: 712px;
             margin-right: 20px;
+            @include for-desktop{
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 60px;
+            }
         }
         .rest_top_right{
             width: 710px;
+        }
+        .rest_order_block{
+            position: absolute;
+            bottom: 0;
+            right: -222px;
+            width: 202px;
+            height: 160px;
+            padding: 15px 0;
+            background-color: #DA0034;
+            border-radius: 3px;
+            @include for-large-desktop{
+                display: none;
+            }
+        }
+        .order_block_wrap{
+            position: relative;;
+            width: 190px;
+            margin: 0 auto;
+            .order_block_title{
+                margin-bottom: 4px;
+                text-align: center;
+                font-size: 16px;
+                line-height: 16px;
+                color: #ffffff;
+            }
+            & > .object_book_hidden{
+                margin-bottom: 9px;
+                .object_book_phone{
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #ffffff;
+                }
+                .object_book_hidden_button{
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #ffffff;
+                    border-bottom: 1px dashed #ffffff;
+                }
+            }
+            .order_block_call{
+                width: 140px;
+                height: 40px;
+                margin: 0 auto;
+                font-size: 14px;
+                line-height: 40px;
+                text-align: center;
+                background-color: #272727;
+                color: #ffffff;
+                border-radius: 3px;
+                cursor: pointer;
+                &:hover{
+                    background-color: #404040;
+                }
+                &:focus,
+                &:active{
+                    background-color: #202020;
+                }
+            }
+            .order_block_arr{
+                position: absolute;
+                top: 64px;
+                left: -15px;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                font-size: 12px;
+                line-height: 21px;
+                border-radius: 50%;
+                background-color: #272727;
+                color: #fff;
+            }
+        }
+        @include for-desktop{
+            flex-direction: column;
         }
     }
 }
@@ -830,7 +933,7 @@
                     margin-left: 0;
                     padding: 0 22px;
                     .item_info_top{
-                        margin: 20px 0 0 0;
+                        margin: 15px 0 0 0;
                         .item_name{
                             font-size: 20px;
                             line-height: 1;

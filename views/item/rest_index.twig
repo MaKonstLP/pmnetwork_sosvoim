@@ -85,29 +85,24 @@
                                 <p class="object_meta_value">{{item.restaurant_payment}}</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="object_meta">
-                        {% if item.restaurant_special %} 
                         <div class="object_meta_item">
+                            {% if item.restaurant_special %} 
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Особенности</p>
-                                    {% set specials = item.restaurant_special | split(', ') %}
+                                    {% set specials = item.restaurant_special | split(' ') %}
                                     <div><p></p></div>
                                 </div>
                                 <div class="object_meta_value">
                                     {% for special in specials%}
-                                    <span class="object_meta_special">{{special}}</span>
+                                    {{special}}
                                     {% endfor %}
                                 </div>
                             </div>
-                        </div>
-                        {% endif %}
-                        
-                        {% if item.restaurant_extra_services %}
-                        {% set extras = item.restaurant_extra_services|split(', ') %}
-                        <div class="object_meta_item">
+                            {% endif %}
+                            {% if item.restaurant_extra_services %}
+                            {% set extras = item.restaurant_extra_services|split(', ') %}
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Способы оплаты</p>
@@ -119,8 +114,8 @@
                                     {% endfor %}
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
 
                     <div class="object_meta">
@@ -186,6 +181,27 @@
                         </div>
                     </div>
                     {% endif %}
+                </div>
+
+                <div class="rest_order_block">
+                    <div class="order_block_wrap">
+                        <p class="order_block_title">Забронировать<br>это место</p>
+                        <div class="object_book_hidden">
+                            <p class="object_book_phone object_meta_value">
+                                <span class="object_fake_phone">+7 xxx xxx-xx-xx</span>
+                                <!--a href="tel:{{item.restaurant_phone}}" class="object_real_phone">{{item.restaurant_phone}}</a-->
+                            </p>
+                            <div class="object_book_hidden_button" data-popup-phone data-target="lid_pokazat_nomer">Показать телефон</div>
+                            <div class="popup_wrap popup_phone_wrap" data-popup-phone-wrap>
+                                <div class="popup_phone">
+                                    <div class="form_close" data-close-popup></div>
+                                    <a href="tel:{{item.restaurant_phone}}" class="popup_real_phone"><span itemprop="telephone">{{item.restaurant_phone}}</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order_block_call">Заказать звонок</div>
+                        <div class="order_block_arr">&#10094;</div>
+                    </div>
                 </div>
             </div>
 
