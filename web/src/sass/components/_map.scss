@@ -1,5 +1,8 @@
 .map_wrap{
 	margin-bottom: 50px;
+	@include for-desktop{
+		margin-bottom: 60px;
+	}
 }
 .map{
 	width: 100%;

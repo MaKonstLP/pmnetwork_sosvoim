@@ -46,6 +46,11 @@
             flex-direction: column;
             margin-bottom: 30px;
         }
+        @media (max-width: 600px) {
+            width: 100%;
+            max-width: 467px;
+            margin: 0 auto;
+        }
         .item_img{
             position: absolute;
             width: 467px;
@@ -93,7 +98,10 @@
                     margin: 27px 0 10px 0;
                 }
                 @include for-pad {
-                    margin: 17px 0 9px 0;
+                    margin: 26px 0 11px 0;
+                }
+                @include for-mobile{
+                    margin: 16px 0 8px 0;
                 }
                 @include for-phone {
                     margin: 20px 0 7px 0;
@@ -149,11 +157,11 @@
                 display: flex;
                 margin-bottom: 58px;
                 @include for-desktop{
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
                 }
                 @include for-pad{
                     flex-direction: column;
-                    margin-bottom: 26px;
+                    margin-bottom: 21px;
                 }
                 @include for-mobile{
                     margin-bottom: 18px;
@@ -187,6 +195,9 @@
                         }
                         @include for-pad{
                             font-size: 12px;
+                        }
+                        @include for-mobile{
+                            font-size: 16px;
                         }
                     }
                     &:first-child{

@@ -6,25 +6,15 @@
 	background-color: #EAF7FB;
 	border-radius: 3px;
 	@include for-desktop{
-		padding: 25px 20px 30px;
-	    background-position: bottom -74px right -37px;
-	    background-size: 17%;
+		padding: 63px 0;
 	}
 
 	@include for-pad{
-		padding: 25px 20px 30px;
-	    background-position: bottom -74px right -37px;
-	    background-size: 17%;
 	}
 
 	@include for-mobile{
-		padding: 25px 20px 30px;
-	    background-position: bottom -74px right -37px;
-	    background-size: 24%;
 	}
 	@include for-phone{
-	    background-size: 59%;
-	    padding: 25px 15px 30px;
 	}
 }
 .form_main{
@@ -33,9 +23,12 @@
 	width: 955px;
 	margin: 0 auto;
 	@include for-desktop{
+		width: 930px;
 		flex-direction: column;
 	}
 	@include for-pad{
+		width: 100%;
+		max-width: 690px;
 		flex-direction: column;
 	}
 
@@ -92,18 +85,18 @@
 	margin-bottom: 15px;
 
     @include for-desktop{
-    	margin: 0;
-    	width: 100%;
+    	// margin: 0;
+    	// width: 100%;
     }
 
     @include for-pad{
-		margin: 0;
-    	width: 100%;
+		// margin: 0;
+    	// width: 100%;
 	}
 
 	@include for-mobile{
-		margin: 0;
-    	width: 100%;
+		// margin: 0;
+    	// width: 100%;
 	}
 
 	.form_title_main{
@@ -112,6 +105,9 @@
 			font-size: 24px;
 			font-weight: 700;
 			color: #272727;
+			@include for-desktop{
+				margin-bottom: 8px;
+			}
 		}
 		&:last-child{
 			font-size: 16px;
@@ -129,15 +125,15 @@
 		color: #FFB30F;
 
 		@include for-mobile{
-			display: none;
+			// display: none;
 		}
 
 		@include for-pad{
-			display: none;
+			// display: none;
 		}
 
 		@include for-mobile{
-			display: none;
+			// display: none;
 		}
 	}
 }
@@ -145,29 +141,29 @@
 .form_title_main, 
 .form_title_popup{
 	@include for-mobile{
-		margin-right: 0px;
-		font-size: 28px;
-		line-height: 32px;
-		text-align: center;
+		// margin-right: 0px;
+		// font-size: 28px;
+		// line-height: 32px;
+		// text-align: center;
 	}
 
 	@include for-pad{
-		margin-right: 0px;
-		font-size: 28px;
-		line-height: 32px;
-		text-align: center;
+		// margin-right: 0px;
+		// font-size: 28px;
+		// line-height: 32px;
+		// text-align: center;
 	}
 
 	@include for-mobile{
-		margin-right: 0px;
-		font-size: 28px;
-		line-height: 32px;
-		text-align: center;
+		// margin-right: 0px;
+		// font-size: 28px;
+		// line-height: 32px;
+		// text-align: center;
 	}
 
 	@include for-phone{
-	    text-align: left;
-		font-size: 24px;
+	    // text-align: left;
+		// font-size: 24px;
 	}
 
 }
@@ -177,62 +173,69 @@
     flex-direction: column;
 
     @include for-desktop{
-    	flex-direction: column;
-	    align-items: center;
-	    width: 100%;
+    	// flex-direction: column;
+	    // align-items: center;
+	    // width: 100%;
     }
 
 	@include for-pad{
-		flex-direction: column;
-	    align-items: center;
-	    width: 100%;
+		// flex-direction: column;
+	    // align-items: center;
+	    // width: 100%;
 	}
 
 	@include for-mobile{
-		flex-direction: column;
-	    align-items: center;
-	    width: 100%;
+		// flex-direction: column;
+	    // align-items: center;
+	    // width: 100%;
 	}
 
 	@include for-mobile{
-		margin-top: 15px;
+		// margin-top: 15px;
 	}
 
 	.form_inputs{
 		display: flex;
 		flex-wrap: wrap;
-		/*width: 780px;*/
 		justify-content: space-between;
    		width: 100%;
-
+		@include for-desktop{
+			justify-content: space-around;
+			padding: 0 20px;
+		}
 		.input_wrapper{
 			/*width: 130px;
 			margin-right: 20px;*/
 			width: 23%;
 			height: 60px;
+			@include for-desktop{
 
+			}
 			@include for-phone{
 				//width: 100% !important;
-				width: 100%;
+				// width: 100%;
 			}
 
 			&._big{
 				width: 220px;
 
 				@include for-desktop{
-					width: 196px;
+					// width: 196px;
 				}
 
 				@include for-pad{
-					width: 196px;
+					// width: 196px;
 				}
 				@include for-mobile{
-					width: 196px;
+					// width: 196px;
 				}
 			}
 
 			&._big_width{
 				width: 100%;
+				@include for-desktop{
+					width: 98%;
+				}
 					textarea{
 						width: 100%;
 						background-color: rgb(255, 255, 255);
@@ -280,7 +283,7 @@
 	            	//pointer-events: none;
 	            	cursor: pointer;	
 	            	@include for-phone{
-						width: 55%;
+						// width: 55%;
 					}
 	            }
 	            &.check_approove:not(.not_check_approove){
@@ -306,15 +309,15 @@
 			margin-top: 20px;
 
 			@include for-desktop{
-				justify-content: center;
+				// justify-content: center;
 			}
 
 			@include for-pad{
-				justify-content: center;
+				// justify-content: center;
 			}
 
 			@include for-mobile{
-				justify-content: center;
+				// justify-content: center;
 			}
 
 			.checkbox_title{
@@ -324,15 +327,15 @@
 				margin-right: 15px;
 
 				@include for-desktop{
-					margin: 0px 5px 0px 10px;
+					// margin: 0px 5px 0px 10px;
 				}
 
 				@include for-pad{
-					margin: 0px 5px 0px 10px;
+					// margin: 0px 5px 0px 10px;
 				}
 
 				@include for-mobile{
-					margin: 0px 5px 0px 10px;
+					// margin: 0px 5px 0px 10px;
 				}
 			}
 
@@ -340,43 +343,43 @@
 				display: flex;
 
 				@include for-mobile{
-				    flex-direction: column;
-					width: 100%;
+				    // flex-direction: column;
+					// width: 100%;
 				}
 			}
 		}
 
 		@include for-desktop{
-			width: initial;
-		    justify-content: space-between;
+			// width: initial;
+		    // justify-content: space-between;
 
-			.input_wrapper{
-				margin: 0px 7px;
-			}
+			// .input_wrapper{
+			// 	margin: 0px 7px;
+			// }
 		}
 
 		@include for-pad{
-			width: initial;
-			justify-content: space-between;
+			// width: initial;
+			// justify-content: space-between;
 
-			.input_wrapper{
-				margin: 0px 7px;
-			}
+			// .input_wrapper{
+			// 	margin: 0px 7px;
+			// }
 		}
 
 		@include for-mobile{
-			width: initial;
-			justify-content: space-between;
+			// width: initial;
+			// justify-content: space-between;
 
-			.input_wrapper{
-				margin: 0px 7px;
-			}
+			// .input_wrapper{
+			// 	margin: 0px 7px;
+			// }
 		}
 
 		@include for-phone{
-			.input_wrapper{
-				margin: 0;
-			}
+			// .input_wrapper{
+			// 	margin: 0;
+			// }
 		}
 	}
 
@@ -388,32 +391,32 @@
 	    margin-top: 24px;
 
 	    @include for-desktop{
-	    	width: 100%;
-		    display: flex;
-		    flex-direction: row;
-		    justify-content: center;
-		    align-items: center;
+	    	// width: 100%;
+		    // display: flex;
+		    // flex-direction: row;
+		    // justify-content: center;
+		    // align-items: center;
 	    }
 
 		@include for-pad{
-		    width: 100%;
-		    display: flex;
-		    flex-direction: row;
-		    justify-content: center;
-		    align-items: center;
+		    // width: 100%;
+		    // display: flex;
+		    // flex-direction: row;
+		    // justify-content: center;
+		    // align-items: center;
 		}
 
 		@include for-mobile{
-			width: 100%;
-		    display: flex;
-		    flex-direction: row;
-		    justify-content: left;
-		    align-items: center;
+			// width: 100%;
+		    // display: flex;
+		    // flex-direction: row;
+		    // justify-content: left;
+		    // align-items: center;
 		}
 
 		@include for-phone{
-			flex-direction: column;
-    		align-items: initial;
+			// flex-direction: column;
+    		// align-items: initial;
 		}
 
 		button{
@@ -435,15 +438,15 @@
 				background-color: #C6002F;
 			}
 			@include for-desktop{
-				width: 180px;
+				// width: 180px;
 			}
 
 			@include for-pad{
-				width: 180px;
+				// width: 180px;
 			}
 
 			@include for-mobile{
-				width: 180px;
+				// width: 180px;
 			}
 		}
 
@@ -495,8 +498,8 @@
     right: 0;
 
     @include for-phone{
-    	width: 100%;
-    	padding: 23px 12px;
+    	// width: 100%;
+    	// padding: 23px 12px;
     }
 
     .date_wrapper_title{
@@ -589,35 +592,35 @@
 	    background-size: 36% , 25%;
 	    height: 414px;
 	    @include for-desktop{
-	    	background-size: 25% , 20%;
+	    	// background-size: 25% , 20%;
 	    }
 	    @include for-pad{
-	    	padding: 0 16px;
-	    	background-size: 20% , 0;
-	    	height: auto;
+	    	// padding: 0 16px;
+	    	// background-size: 20% , 0;
+	    	// height: auto;
 	    }
 	    @include for-mobile{
-	    	padding: 0 16px;
-	    	background-size: 20% , 0;
-	    	height: auto;
+	    	// padding: 0 16px;
+	    	// background-size: 20% , 0;
+	    	// height: auto;
 	    }
 	    @include for-phone{
-    	    padding: 0px 12px 30px;
-		    height: auto;
-		    background-size: 50%,0%;
+    	    // padding: 0px 12px 30px;
+		    // height: auto;
+		    // background-size: 50%,0%;
 	    }
     }
     .form_main{
     	flex-direction: column;
     	padding:0 100px 0 40px;
     	@include for-desktop{
-    		padding: 0px 20px;
+    		// padding: 0px 20px;
     	}
     	@include for-pad{
-	    	padding: 0;
+	    	// padding: 0;
 	    }
 	    @include for-mobile{
-	    	padding: 0;
+	    	// padding: 0;
 	    }
     }
     .form_title{
@@ -625,7 +628,7 @@
     	margin: 0;
     	justify-content: left;
     	@include for-notdesc{
-	    	display: none;
+	    	// display: none;
 	    }
     }
     .form_title_main{
@@ -638,29 +641,29 @@
     .form_inputs{
     	justify-content: left;
     	@include for-pad{
-    		justify-content: space-between;
+    		// justify-content: space-between;
     	}
     	@include for-mobile{
-    		justify-content: space-between;
+    		// justify-content: space-between;
     	}
     	.input_wrapper{
 	    	width: 47%;
 
 	    	@include for-desktop{
-	    		width: 43%;
-	    		margin-left: 0;
+	    		// width: 43%;
+	    		// margin-left: 0;
 	    	}
 	    	@include for-pad{
-	    		width: 25%;
-	    		margin: 0;
+	    		// width: 25%;
+	    		// margin: 0;
 	    	}
 	    	@include for-mobile{
-	    		width: 23%;
-	    		margin: 0;
+	    		// width: 23%;
+	    		// margin: 0;
 	    	}
 	    	@include for-phone{
-	    		width: 100%;
-    			margin: 0;
+	    		// width: 100%;
+    			// margin: 0;
 	    	}
 	    	input[name=date] {
     			background: url(/img/calendar_icon.svg) no-repeat right, $clrBackground;
@@ -672,26 +675,26 @@
 	    	&:nth-child(3){
 	    		margin-right: 25px;
     			@include for-pad{
-		    		margin: 0;
+		    		// margin: 0;
 		    	}
 		    	@include for-mobile{
-		    		margin: 0;
+		    		// margin: 0;
 		    	}
 	    	}
 	    	&:nth-child(4){
 	    		width: 30%;
 	    		@include for-desktop{
-		    		width: 37%;
+		    		// width: 37%;
 		    	}
 		    	@include for-pad{
-		    		width: 18%;
+		    		// width: 18%;
 		    	}
 		    	@include for-mobile{
-		    		width: 25%;
+		    		// width: 25%;
 		    	}
 		    	@include for-phone{
-		    		width: 100%;
-	    			margin: 0;
+		    		// width: 100%;
+	    			// margin: 0;
 		    	}
 	    	}
 	    }

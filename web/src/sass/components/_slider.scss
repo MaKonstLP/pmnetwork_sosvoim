@@ -104,12 +104,14 @@
     }
   }
   .object_img{
+      position: relative;  
       height: 463px;
       width: 100%;
       overflow: hidden;
       cursor: pointer;
-      //max-height: 500px;
-      position: relative;
+      @include for-desktop{
+        height: 504px;
+      }
       @include for-mobile{
         height: 200px; 
         img{
@@ -124,9 +126,12 @@
     }
 }
 [data-gallery-main-swiper] {
+  position: relative;
   max-height: 463px;
   max-width: 100%;
-  position: relative;
+  @include for-desktop{
+    max-height: 504px;
+  }
   .listing_widget_controll{
     position: absolute;
     bottom: 16px;
@@ -151,7 +156,10 @@
   .swiper-slide {
     width: 60px;
     height: 65px;
-    opacity: 0.4; 
+    opacity: 0.4;
+    @include for-desktop{
+      height: 72px;
+    }
   }
   .swiper-slide-active, .swiper-slide-next, .swiper-slide-prev, .swiper-slide-virtual-active {
     opacity: 1;

@@ -18,7 +18,7 @@
   /* Fix of Webkit flickering */
   z-index: 1;
   @include for-desktop {
-    width: calc(100% - 80px);
+    // width: calc(100% - 80px);
   }
 }
 .swiper-container-no-flexbox .swiper-slide {
