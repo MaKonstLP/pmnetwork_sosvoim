@@ -57,6 +57,11 @@ export default class Slider{
 	      	centerInsufficientSlides: false,
 	      	//centeredSlides: true,
 	      	slideToClickedSlide: false,
+			breakpoints: {
+				720:{
+					spaceBetween: 14,
+				}
+			}
 	    });
 		
 
@@ -197,7 +202,11 @@ export default class Slider{
 	        	1470:{
 	        		slidesPerView: 2,
 	        		spaceBetween: 30,
-	        	}
+	        	},
+				720:{
+					slidesPerView: 1,
+					spaceBetween: 0,
+				}
 	        }
 	    });
 
@@ -217,7 +226,11 @@ export default class Slider{
 	        	1470:{
 	        		slidesPerView: 2,
 	        		spaceBetween: 30,
-	        	}
+	        	},
+				720:{
+					slidesPerView: 1,
+	        		spaceBetween: 0,
+				},
 	        }
 	    });
 

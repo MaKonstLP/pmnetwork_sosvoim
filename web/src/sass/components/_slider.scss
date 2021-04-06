@@ -7,6 +7,9 @@
     @include for-pad{
       margin-bottom: 4px;
     }
+    @include for-mobile{
+      margin-bottom: 8px;
+    }
   }
 
   @include for-mobile{
@@ -116,14 +119,14 @@
         height: 504px;
       }
       @include for-mobile{
-        height: 200px; 
-        img{
-          width: 100%;
-          position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-        }
+        height: 332px;
+        // img{
+        //   width: 100%;
+        //   position: absolute;
+        //    top: 50%;
+        //    left: 50%;
+        //    transform: translate(-50%, -50%);
+        // }
       }
 
     }
@@ -165,6 +168,9 @@
     opacity: 0.4;
     @include for-desktop{
       height: 72px;
+    }
+    @include for-mobile{
+      height: 48px;
     }
   }
   .swiper-slide-active, .swiper-slide-next, .swiper-slide-prev, .swiper-slide-virtual-active {

@@ -6,6 +6,17 @@
 	@include for-pad {
 		margin-bottom: 50px;
 	}
+	@include for-mobile{
+		width: 100%;
+		max-width: 510px;
+		margin: 0 auto;
+		margin-bottom: 40px;
+	}
+	.content_block{
+		@include for-mobile{
+			padding: 0;
+		}
+	}
 }
 .map{
 	width: 100%;
@@ -14,6 +25,9 @@
 	overflow: hidden;
 	@include for-mobile{
 		margin-top: 0;
+	}
+	@include for-mobile{
+		height: 370px;
 	}
 	#map{
 		width: 100%;
@@ -31,6 +45,7 @@
     }
 }
 .map_data{
+	display: none;
 	position: relative;
 	left: -50%;
 	top: -50%;

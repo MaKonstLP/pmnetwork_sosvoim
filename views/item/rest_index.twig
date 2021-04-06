@@ -10,7 +10,6 @@
 
     <div class="rest_top_wrap" itemscope itemtype="https://schema.org/Restaurant"> 
         <div class="content_block">
-
             <div class="rest_top">
                 <div class="rest_top_left">
                     <div class="object_meta">
@@ -253,7 +252,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -327,7 +325,6 @@
         </div>
     </div>
 
-
     {% if other_rests %}
     <div class="listing_wrap other_rests_wrap">
         <div class="content_block">
@@ -336,14 +333,13 @@
             <div class="same_rest_list">Похожие заведения</div>
 
             <div class="items_list_listing swiper-container" data-other-rest-swiper>
-                <div class="items_list swiper-wrapper" data-listing-list>
+                <div class="items_list swiper-wrapper">
                         {{ this.render('//components/generic/listing.twig', {'items':other_rests}) | raw }}
                 </div>
             </div>
         </div>
     </div>
     {% endif %}
-
 
     <div class="content_block">
         {{ this.render('//components/generic/form.twig', {'title': 'Бесплатно забронировать ' ~ item.restaurant_name, 'title2': 'Оставьте заявку, а мы перезвоним в ближайшее время!', 'target': 'podval_rest'}) | raw }}

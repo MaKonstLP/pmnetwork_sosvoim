@@ -1,5 +1,5 @@
 {% for item in items %}
-<div class="item {{type}}">
+<div class="item {{type}} swiper-slide">
     <a class="item_img" href="/catalog/restoran-{{item.restaurant_slug}}/">
         <img loading="lazy" src="{{ Declension.get_image_src(item.restaurant_cover_url) }}=w300-h180-l90" alt="{{img_alt ? (img_alt | replace({"{название}" : item.restaurant_name})) : "Ресторан "~item.restaurant_name}}"/>
     </a>
