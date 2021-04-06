@@ -8,8 +8,8 @@
 	@include for-desktop{
 		padding: 63px 0;
 	}
-
 	@include for-pad{
+		padding: 43px 0;
 	}
 
 	@include for-mobile{
@@ -85,13 +85,10 @@
 	margin-bottom: 15px;
 
     @include for-desktop{
-    	// margin: 0;
-    	// width: 100%;
+    	margin-bottom: 20px;
     }
-
     @include for-pad{
-		// margin: 0;
-    	// width: 100%;
+		margin-bottom: 7px;
 	}
 
 	@include for-mobile{
@@ -203,13 +200,15 @@
 			justify-content: space-around;
 			padding: 0 20px;
 		}
+		@include for-pad{
+			padding: 0 45px;
+		}
 		.input_wrapper{
-			/*width: 130px;
-			margin-right: 20px;*/
 			width: 23%;
 			height: 60px;
-			@include for-desktop{
-
+			@include for-pad{
+				width: 45%;
+				height: 55px;
 			}
 			@include for-phone{
 				//width: 100% !important;
@@ -235,6 +234,9 @@
 				width: 100%;
 				@include for-desktop{
 					width: 98%;
+				}
+				@include for-pad{
+					width: 95%; 
 				}
 					textarea{
 						width: 100%;
@@ -438,11 +440,10 @@
 				background-color: #C6002F;
 			}
 			@include for-desktop{
-				// width: 180px;
 			}
-
 			@include for-pad{
-				// width: 180px;
+				width: 200px;
+				height: 50px;
 			}
 
 			@include for-mobile{

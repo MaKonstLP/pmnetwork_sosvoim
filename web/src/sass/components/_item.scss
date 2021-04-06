@@ -72,7 +72,8 @@
             font-size: 30px;
             color: #272727;
             @include for-pad{
-                margin-bottom: 12px;
+                margin-bottom: 9px;
+                font-size: 24px;
             }
         }
         .object_address{
@@ -116,7 +117,7 @@
         }
     }
     &:first-child{
-        margin-bottom: 55px;
+        margin-bottom: 35px;
         .object_meta_item{
             .item_left_side{
                 display: flex;
@@ -148,6 +149,14 @@
             }
             &:nth-child(2) {
                 margin-bottom: 3px;
+                .item_wrap{
+                    &:last-child{
+                        .object_meta_title{
+                            flex: 0 0 85%;
+                            white-space: pre-wrap;
+                        }
+                    }
+                }
                 @include for-desktop{
                     margin-right: 30px;
                     .item_left_side{
@@ -186,6 +195,9 @@
                 max-width: 450px;
                 height: 100px;
             }
+            @include for-pad{
+                width: 330px;
+            }
             .free_order{
                 display: block;
                 width: 223px;
@@ -212,6 +224,11 @@
             flex-direction: row;
             flex-wrap: wrap;
             margin-bottom: 26px;
+        }
+    }
+    @include for-pad{
+        &:first-child{
+            margin-bottom: 9px;
         }
     }
 }
@@ -248,34 +265,31 @@
     .object_book_phone{
         font-size: 30px;
         font-weight: 700;
+        @include for-pad{
+            font-size: 24px;
+        }
     }
-    //margin-top: 6px;
-    //display: flex;
-    //align-items: flex-end;
-
     &._active{
-
         .object_book_phone{
             .object_fake_phone{
                 display: none;
             }
-
             .object_real_phone{
                 display: block;
             }
         }
-
         .object_book_hidden_button{
             display: none;
         }
     }
-
     .object_book_phone{
         margin: 10px 0 5px 0;
+        @include for-pad{
+            margin: 0;
+        }
         .object_fake_phone{
             letter-spacing: 1%;
         }
-
         .object_real_phone{
             display: none;
             font-size: 24px;
@@ -283,7 +297,6 @@
             font-weight: 600;
         }
     }
-
     .object_book_hidden_button{
         font-weight: 400;
         font-size: 16px;
@@ -467,12 +480,18 @@
                 margin-right: 0;
                 margin-bottom: 60px;
             }
+            @include for-pad{
+                margin-bottom: 50px;
+            }
         }
         .rest_top_right{
             width: 710px;
             @include for-desktop{
                 align-self: center;
                 width: 773px;
+            }
+            @include for-pad{
+                width: 690px;
             }
         }
         .rest_order_block{
@@ -551,6 +570,9 @@
             flex-direction: column;
             margin-bottom: 60px;
         }
+        @include for-pad{
+            margin-bottom: 50px;
+        }
     }
 }
 
@@ -594,6 +616,13 @@
     }
 }
 .rest_optional_wrap{
+    margin-bottom: 50px;
+    @include for-desktop{
+        margin-bottom: 60px;
+    }
+    @include for-pad{
+        margin-bottom: 50px;
+    }
     .rest_optional{
         margin-bottom: 12px;
         font-size: 26px;
@@ -603,17 +632,19 @@
     .item_optional{
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: 60px;
-        padding: 20px 0 0 36px;
+        padding: 20px 0 16px 11px;
         border: 1px solid #D0E1E7;
         @include for-desktop{
+            padding-left: 36px;
+            padding-bottom: 0;
         }
         @include for-pad{
-            display: none;
+            padding-top: 16px;
+            padding-left: 16px;
         }
         .optional{
             display: flex;
-            margin-right: 60px;
+            margin-right: 40px;
             align-items: center;
             @include for-desktop{
                 flex: 0 0 23%;
@@ -623,21 +654,24 @@
                     margin-right: 0;
                 }
             }
-    
+            @include for-pad{
+                flex: 0 0 27%;
+                margin-right: 60px;
+            }
             p{
                 font-size: 12px;
                 line-height: 1.2;
                 color: #696969;
             }
             .optional__pic {
+                width: 40px;
                 height: 40px;
                 margin-right: 8.5px;
                 background-repeat: no-repeat;
                 background-position: center;
-                @include for-desktop{
-                    width: 40px;
-                    height: 40px;
-                    background-size: contain;
+                background-size: contain;
+                @include for-pad{
+                    margin-right: 6px;
                 }
             }
             .fire{
@@ -684,6 +718,9 @@
     @include for-desktop{
         margin-bottom: 60px;
     }
+    @include for-pad{
+        margin-bottom: 50px;
+    }
     .content_block{
         position: relative;
         .other_objects_container{
@@ -699,6 +736,7 @@
             height: 31px;
             background-position: center;
             background-repeat: no-repeat;
+            background-size: cover;
             &:hover{
                 filter: brightness(150%);
             }
@@ -706,10 +744,18 @@
             &:active{
                 filter: brightness(90%);
             }
+            @include for-pad{
+                top: 5px;
+                width: 24px;
+                height: 24px;
+            }
         }
         & > ._prev{
             right: 60px;
             background-image: url(/img/prev-arr.svg);
+            @include for-pad{
+                right: 55px;
+            }
         }
         & > ._next{
             right: 16px;
@@ -722,6 +768,9 @@
         font-size: 26px;
         font-weight: 700;
         color: #272727;
+        @include for-pad{
+            margin-bottom: 13px;
+        }
     }
     .rest_rooms{
         display: flex;
@@ -750,6 +799,9 @@
                 margin-left: 24px;
                 margin-bottom: 3px;
             }
+            @include for-pad{
+                margin-left: 15px;
+            }
             a{
                 color: inherit;
             }
@@ -764,11 +816,17 @@
                 margin-left: 24px;
                 margin-bottom: 10px;
             }
+            @include for-pad{
+                margin-left: 15px;
+            }
         }
         .rest_room_item{
             margin-left: 16px;
             @include for-desktop{
                 margin-left: 24px;
+            }
+            @include for-pad{
+                margin-left: 15px;
             }
             p{
                 display: inline-block;
@@ -778,6 +836,9 @@
                 @include for-desktop{
                     margin-bottom: 20px;
                 }
+                @include for-pad{
+                    margin-bottom: 17px;
+                }
             }
         }
         .rest_room_title{
@@ -785,6 +846,9 @@
             font-size: 14px;
             font-weight: 400;
             color: #4F4F4F;
+            @include for-pad{
+                width: 165px;
+            }
         }
         .rest_room_value{
             font-size: 14px;
@@ -801,8 +865,7 @@
         height: 303px;
     }
     @include for-pad{
-        justify-content: left;
-        width: 266px;
+        height: 225px;
     }
     @include for-mobile{
         justify-content: left;
@@ -925,6 +988,7 @@
             height: 31px;
             background-position: center;
             background-repeat: no-repeat;
+            background-size: cover;
             &:hover{
                 filter: brightness(150%);
             }
@@ -932,10 +996,18 @@
             &:active{
                 filter: brightness(90%);
             }
+            @include for-pad{
+                top: 5px;
+                width: 24px;
+                height: 24px;
+            }
         }
         & > ._prev{
             right: 60px;
             background-image: url(/img/prev-arr.svg);
+            @include for-pad{
+                right: 55px;
+            }
         }
         & > ._next{
             right: 16px;
@@ -948,6 +1020,9 @@
         margin-bottom: 54px;
         @include for-desktop{
             margin-bottom: 60px;
+        }
+        @include for-pad{
+            margin-bottom: 50px;
         }
     }
     .same_rest_list{
@@ -972,12 +1047,21 @@
                     position: unset;
                     width: 100%;
                     height: 290px;
+                    @include for-pad{
+                        height: 213px;
+                    }
                 }
                 .item_info{
                     margin-left: 0;
                     padding: 0 22px;
+                    @include for-pad{
+                        padding: 0 15px;
+                    }
                     .item_info_top{
                         margin: 15px 0 0 0;
+                        @include for-pad{
+                            margin-bottom: 15px;
+                        }
                         .item_name{
                             font-size: 20px;
                             line-height: 1;
@@ -990,6 +1074,9 @@
                     .item_meta{
                         margin-bottom: 7px;
                         flex-direction: column;
+                        @include for-pad{
+                            margin-bottom: 14px;
+                        }
                         .item_meta_items{
                             margin-right: 0;
                             width: 100%;
@@ -1002,6 +1089,9 @@
                             &:last-child{
                                 padding-top: 10px;
                                 border-top: 1px solid #D0E1E7;
+                                @include for-pad{
+                                    padding-top: 6px;
+                                }
                                 .item_meta_item{
                                     &:first-child{
                                         display: none;
@@ -1012,6 +1102,12 @@
                                     &:last-child{
                                         display: block;
                                     }
+                                }
+                            }
+                            .item_address{
+                                @include for-pad{
+                                    margin-bottom: 0;
+                                    font-size: 14px;
                                 }
                             }
                         }

@@ -3,6 +3,9 @@
 	@include for-desktop{
 		margin-bottom: 60px;
 	}
+	@include for-pad {
+		margin-bottom: 50px;
+	}
 }
 .map{
 	width: 100%;
