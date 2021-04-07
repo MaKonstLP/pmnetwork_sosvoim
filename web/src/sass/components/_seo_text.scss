@@ -1,59 +1,48 @@
 .seo_text{
     font-weight: 500;
     margin: 40px 0px;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 20px 0px;
+    overflow: hidden;
+    position: relative;
 
-    
-
-    @include for-phone{
-        font-size: 14px;
-        line-height: 22px;
-        margin: 20px 0px;
-        overflow: hidden;
-        position: relative;
-
-        &._hidden{
-            max-height: 183px;
-            &.text_bottom{
-               max-height: 240px; 
-            }
-            .seo_text_control{
-                display: flex;
-            }
+    &._hidden{
+        max-height: 183px;
+        &.text_bottom{
+           max-height: 240px; 
         }
-
-        &._active{
-            max-height: initial !important;
-
-            .seo_text_control{
-                display: none;
-            }
+        .seo_text_control{
+            display: flex;
         }
     }
 
+    &._active{
+        max-height: initial !important;
+
+        .seo_text_control{
+            display: none;
+        }
+    }
     p{
         margin: 10px auto;
     }
 
     .seo_text_control{
-        display: none;
-
-        ._link{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background-image: linear-gradient(to top,#fcfcf8 33%,rgba(255,255,255,0));
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        cursor: pointer;
+    ._link{
             width: 80px;
             font-size: 16px;
             color: #3067F3;
             border-bottom: 1px dashed #3067F3;
-        }
-
-        @include for-phone{
-            //display: flex;
-            justify-content: left;
-            position: absolute;
-            //padding-top: 40px;
-            background-image: linear-gradient(to top,#fcfcf8 33%,rgba(255,255,255,0));
-            bottom: 0;
-            width: 100%;
-            height: 48px;
-            cursor: pointer;
         }
     }
 }

@@ -159,8 +159,14 @@
                 .item_wrap{
                     &:last-child{
                         .object_meta_title{
-                            flex: 0 0 85%;
-                            white-space: pre-wrap;
+                            @include for-pad{
+                                flex: 0 0 85%;
+                                white-space: pre-wrap;
+                            }
+                            @include for-mobile{
+                                // flex: unset;
+                                // white-space: unset;
+                            }
                         }
                     }
                 }
@@ -198,6 +204,10 @@
     &:last-child{
         flex-direction: row;
         justify-content: space-between;
+        @media (max-width: 580px){
+            flex-direction: column;
+            align-items: center;
+        }
         .object_meta_item{
             display: flex;
             justify-content: center;
@@ -216,6 +226,14 @@
             }
             @include for-mobile{
                 width: 240px;
+            }
+            @include for-phone{
+                width: 290px;
+            }
+            &:first-child{
+                @media (max-width: 580px){
+                    margin-bottom: 10px;
+                }
             }
             .free_order{
                 display: block;
@@ -241,6 +259,9 @@
                     font-size: 14px;
                     line-height: 35px;
                 }
+                @include for-phone{
+                    width: 218px;
+                }
             }
         }
     }
@@ -259,6 +280,11 @@
     @include for-mobile{
         &:first-child{
             margin-bottom: 21px;
+        }
+    }
+    @include for-phone{
+        &:first-child{
+            margin-bottom: 19px;
         }
     }
 }
@@ -497,8 +523,12 @@
 .rest_top_wrap{
     background-color: $clrBackground;
     .content_block{
+        @include for-mobile{
+            padding: 0 45px;
+        }
         @include for-phone{
             flex-direction: column;
+            padding: 0 15px;
         }
     }
     .rest_top{
@@ -516,18 +546,28 @@
             @include for-pad{
                 margin-bottom: 50px;
             }
+            @include for-phone{
+                margin-bottom: 40px;
+            }
         }
         .rest_top_right{
             width: 710px;
             @include for-desktop{
                 align-self: center;
-                width: 773px;
+                width: 100%;
+                max-width: 773px;
             }
             @include for-pad{
-                width: 690px;
+                width: 100%;
+                max-width: 690px;
             }
             @include for-mobile{
-                width: 510px;
+                width: 100%;
+                // max-width: 510px;
+            }
+            @include for-phone{
+                width: 100%;
+                // max-width: 290px;
             }
         }
         .rest_order_block{
@@ -611,18 +651,29 @@
         }
         @include for-mobile{
             width: 100%;
-            max-width: 510px;
+            // max-width: 510px;
             margin: 0 auto;
+            margin-bottom: 40px;
         }
     }
 }
 
 .rest_desc_wrap{
     margin-bottom: 50px;
+    @include for-desktop{
+        margin-bottom: 60px;
+    }
+    @include for-pad{
+        margin-bottom: 50px;
+    }
     @include for-mobile{
         width: 100%;
-        max-width: 510px;
+        // max-width: 510px;
         margin: 0 auto;
+        margin-bottom: 40px;
+    }
+    @include for-phone{
+        margin-bottom: 36px;
     }
 }
 
@@ -674,7 +725,7 @@
     }
     @include for-mobile{
         width: 100%;
-        max-width: 510px;
+        // max-width: 510px;
         margin: 0 auto;
         margin-bottom: 37px;
     }
@@ -697,8 +748,9 @@
             padding-top: 16px;
             padding-left: 16px;
         }
-        @include for-mobile{
-
+        @include for-phone{
+            padding-top: 21px;
+            padding-left: 7px;
         }
         .optional{
             display: flex;
@@ -721,6 +773,9 @@
                 margin-right: 0;
                 margin-bottom: 23px;
             }
+            @include for-phone{
+                margin-bottom: 27px;
+            }
             p{
                 font-size: 12px;
                 line-height: 1.2;
@@ -735,6 +790,11 @@
                 background-size: contain;
                 @include for-pad{
                     margin-right: 6px;
+                }
+                @include for-phone{
+                    flex: 0 0 24%;
+                    width: 30px;
+                    height: 30px;
                 }
             }
             .fire{
@@ -787,13 +847,21 @@
     @include for-mobile{
         margin-bottom: 40px;
     }
+    @include for-phone{
+        // width: 290px;
+        margin: 0 auto;
+        margin-bottom: 40px;
+    }
     .content_block{
         position: relative;
         @include for-mobile{
-            padding: 0;
+            padding: 0 45px;
             width: 100%;
-            max-width: 510px;
+            // max-width: 510px;
             margin: 0 auto;
+        }
+        @include for-phone{
+            padding: 0 15px;
         }
         .other_objects_container{
             width: 100%;
@@ -829,7 +897,10 @@
                 right: 55px;
             }
             @include for-mobile{
-                right: 39px;
+                right: 84px;
+            }
+            @include for-phone{
+                right: 55px;
             }
         }
         & > ._next{
@@ -837,7 +908,10 @@
             transform: unset;
             background-image: url(/img/next-arr.svg);
             @include for-mobile{
-                right: 0;
+                right: 45px;
+            }
+            @include for-phone{
+                right: 16px;
             }
         }
     }
@@ -855,7 +929,7 @@
         flex-wrap: wrap;
         @include for-mobile{
             width: 100%;
-            max-width: 450px;
+            // max-width: 450px;
             margin: 0 auto;
         }
     }
@@ -888,6 +962,9 @@
             @include for-mobile{
                 margin-left: 24px;
             }
+            @include for-phone{
+                margin-left: 15px;
+            }
             a{
                 color: inherit;
             }
@@ -908,6 +985,9 @@
             @include for-mobile{
                 margin-left: 24px;
             }
+            @include for-phone{
+                margin-left: 15px;
+            }
         }
         .rest_room_item{
             margin-left: 16px;
@@ -919,6 +999,9 @@
             }
             @include for-mobile{
                 margin-left: 24px;
+            }
+            @include for-phone{
+                margin-left: 15px;
             }
             p{
                 display: inline-block;
@@ -973,8 +1056,11 @@
     }
     @include for-mobile{
         width: 100%;
-        max-width: 450px;
+        // max-width: 450px;
         height: 303px;
+    }
+    @include for-phone{
+        height: 198px;
     }
     img{
         height: 100%;
@@ -1067,22 +1153,22 @@
         }
         @include for-phone{
             align-items: flex-start;
-            //flex-direction: row;
             justify-content: left;
         }
     }
-
 }
-
 .other_rests_wrap{
     background-color: #fff;
     .content_block{
         position: relative;
         @include for-mobile{
             width: 100%;
-            max-width: 510px;
+            // max-width: 510px;
             margin: 0 auto;
-            padding: 0;
+            padding: 0 45px;
+        }
+        @include for-phone{
+            padding: 0 15px;
         }
         .other_objects_container{
             padding: 0;
@@ -1117,7 +1203,14 @@
                 right: 55px;
             }
             @include for-mobile{
-                right: 39px;
+                right: 84px;
+            }
+            @include for-phone{
+                right: 55px;
+            }
+            @media (max-width: 360px) {
+                left: 16px;
+                top: 45px;
             }
         }
         & > ._next{
@@ -1125,7 +1218,14 @@
             transform: unset;
             background-image: url(/img/next-arr.svg);
             @include for-mobile{
-                right: 0;
+                right: 45px;
+            }
+            @include for-phone{
+                right: 16px;
+            }
+            @media (max-width: 360px) {
+                top: 45px;
+                right: 15px;
             }
         }
     }
@@ -1141,21 +1241,34 @@
         @include for-mobile{
             margin-bottom: 10px;
         }
+        @include for-phone{
+            // width: 290px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
     }
     .same_rest_list{
         margin-bottom: 13px;
-        text-align: center;
+        // text-align: center;
         font-size: 26px;
         font-weight: 700;
         color: #272727;
         @include for-mobile{
             margin-bottom: 15px;
         }
+        @media (max-width: 360px) {
+            margin-bottom: 55px;
+            text-align: center;
+        }
     }
     .items_list_listing{
         padding: 0;
         @include for-mobile{
-            width: 450px;
+            width: 100%;
+            // max-width: 450px;
+        }
+        @include for-phone{
+            width: 100%;
         }
         .items_list{
             flex-direction: row;
@@ -1172,6 +1285,9 @@
                     @include for-mobile{
                         height: 290px;
                     }
+                    @include for-phone{
+                        height: 187px;
+                    }
                 }
                 .item_info{
                     margin-left: 0;
@@ -1182,10 +1298,16 @@
                     @include for-mobile{
                         padding: 0 22px;
                     }
+                    @include for-phone{
+                        padding: 0 15px; 
+                    }
                     .item_info_top{
                         margin: 15px 0 0 0;
                         @include for-pad{
                             margin-bottom: 15px;
+                        }
+                        @include for-phone{
+                            margin-top: 21px;
                         }
                         .item_name{
                             font-size: 20px;
@@ -1195,12 +1317,18 @@
                             font-size: 20px;
                             line-height: 1;
                         }
+                        .item_type{
+                            margin-top: 0;
+                        }
                     }
                     .item_meta{
                         margin-bottom: 7px;
                         flex-direction: column;
                         @include for-pad{
                             margin-bottom: 14px;
+                        }
+                        @include for-phone{
+                            margin-bottom: 11px;
                         }
                         .item_meta_items{
                             margin-right: 0;

@@ -1,29 +1,24 @@
 .form_wrapper{
-	position: relative;
 	width: 100%;
 	margin-bottom: 50px;
-	padding: 60px 0;
-	background-color: #EAF7FB;
-	border-radius: 3px;
-	@include for-desktop{
-		padding: 63px 0;
-	}
-	@include for-pad{
-		padding: 43px 0;
-	}
-	@include for-mobile{
-		width: 100%;
-		max-width: 510px;
-		margin: 0 auto;
-	}
-	@include for-phone{
+	.content_block{
+		position: relative;
+		padding: 0 15px;
+		@include for-mobile{
+			padding: 0 45px;
+		}
+		@include for-phone{
+			padding: 0 15px;
+		}
 	}
 }
 .form_main{
 	display: flex;
 	flex-direction: column;
-	width: 955px;
 	margin: 0 auto;
+	padding-top: 64px;
+	background-color: #EAF7FB;
+	border-radius: 3px;
 	@include for-desktop{
 		width: 930px;
 		flex-direction: column;
@@ -32,10 +27,13 @@
 		width: 100%;
 		max-width: 690px;
 		flex-direction: column;
+		padding-top: 42px;
 	}
-
 	@include for-mobile{
 		flex-direction: column;
+	}
+	@include for-phone{
+		padding-top: 34px;
 	}
 }
 
@@ -84,8 +82,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 15px;
-
+	text-align: center;
+	margin-bottom: 17px;
+	padding: 0 10px;
     @include for-desktop{
     	margin-bottom: 20px;
     }
@@ -95,10 +94,13 @@
 	@include for-mobile{
 		margin-bottom: 15px;
 	}
+	@include for-phone{
+		margin-bottom: 12px;
+	}
 
 	.form_title_main{
 		&:first-child{
-			margin-bottom: 13px;
+			margin-bottom: 7px;
 			font-size: 24px;
 			font-weight: 700;
 			color: #272727;
@@ -168,7 +170,9 @@
 .form_block{
 	display: flex;
     flex-direction: column;
-
+	width: 100%;
+	max-width: 953px;
+    margin: 0 auto;
     @include for-desktop{
     	// flex-direction: column;
 	    // align-items: center;
@@ -203,6 +207,9 @@
 		@include for-pad{
 			padding: 0 45px;
 		}
+		@include for-phone{
+			padding: 0;
+		}
 		.input_wrapper{
 			width: 23%;
 			height: 60px;
@@ -211,9 +218,11 @@
 				height: 55px;
 			}
 			@include for-mobile{
-				width: 64%;
+				width: 270px;
 			}
-
+			@include for-phone{
+				width: 94%;
+			}
 			&._big{
 				width: 220px;
 
@@ -238,15 +247,18 @@
 					width: 95%; 
 				}
 				@include for-mobile{
-					width: 64%;
+					width: 270px;
 					height: 80px;
+				}
+				@include for-phone{
+					width: 94%;
 				}
 					textarea{
 						width: 100%;
+						padding: 8px 15px 18px;
+						font: inherit;
 						background-color: rgb(255, 255, 255);
 						color: rgb(39, 39, 39);
-						padding: 8px 15px 18px;
-						font-size: 16px;
 						resize: none;
 						border: 1px solid #D0E1E7;
 						@include form_placeholder {
@@ -325,15 +337,21 @@
 			}
 		}
 	}
-
 	.form_submit{
 		/*width: calc(100% - 780px);*/
 	    width: 100%;
 	    display: flex;
 	    align-items: center;
-	    margin-top: 24px;
+		margin: 24px 0 60px 0;
+		@include for-pad{
+			margin-bottom: 40px;
+		}
 		@include for-mobile{
 			margin-top: 20px;
+		}
+		@include for-phone{
+			margin-top: 16px;
+			margin-bottom: 30px;
 		}
 		button{
 			width: 223px;

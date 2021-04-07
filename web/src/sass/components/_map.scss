@@ -8,13 +8,20 @@
 	}
 	@include for-mobile{
 		width: 100%;
-		max-width: 510px;
+		// max-width: 510px;
 		margin: 0 auto;
 		margin-bottom: 40px;
 	}
+	@include for-phone{
+		width: 100%;
+		// max-width: 290px;
+	}
 	.content_block{
 		@include for-mobile{
-			padding: 0;
+			padding: 0 45px;
+		}
+		@include for-phone{
+			padding: 0 15px;
 		}
 	}
 }

@@ -46,11 +46,6 @@
             flex-direction: column;
             margin-bottom: 30px;
         }
-        @media (max-width: 600px) {
-            width: 100%;
-            max-width: 467px;
-            margin: 0 auto;
-        }
         .item_img{
             position: absolute;
             width: 467px;

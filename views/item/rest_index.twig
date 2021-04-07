@@ -341,7 +341,5 @@
     </div>
     {% endif %}
 
-    <div class="content_block">
-        {{ this.render('//components/generic/form.twig', {'title': 'Бесплатно забронировать ' ~ item.restaurant_name, 'title2': 'Оставьте заявку, а мы перезвоним в ближайшее время!', 'target': 'podval_rest'}) | raw }}
-    </div>
+    {{ this.render('//components/generic/form.twig', {'title': 'Бесплатно забронировать ' ~ item.restaurant_name, 'title2': 'Оставьте заявку, а мы перезвоним в ближайшее время!', 'target': 'podval_rest'}) | raw }}
 </div>

@@ -53,17 +53,20 @@
 
 
 	<div class="listing_wrap" style="/*height: 550px;*/background: #F8F8F8;">
-		<div class="content_block" data-widget-wrapper>
-			<div class="listing_widget_arrow _prev"></div>
-			<div class="items_list_listing swiper-container" data-listing-wrapper>
-				<div class="items_list swiper-wrapper" data-listing-list>
+		<div class="content_block">
+		{# <div class="content_block" data-widget-wrapper> #}
+			{# <div class="listing_widget_arrow _prev"></div> #}
+			<div class="items_list_listing swiper-container">
+			{# <div class="items_list_listing swiper-container" data-listing-wrapper> #}
+				<div class="items_list swiper-wrapper">
+				{# <div class="items_list swiper-wrapper" data-listing-list> #}
 					{{slider|raw}}
 				</div>
-				<div class="listing_widget_controll">
+				{# <div class="listing_widget_controll">
 					<div class="listing_widget_pagination"></div>
-				</div>
+				</div> #}
 			</div>
-			<div class="listing_widget_arrow _next"></div>
+			{# <div class="listing_widget_arrow _next"></div> #}
 		</div>
 	</div>
 
