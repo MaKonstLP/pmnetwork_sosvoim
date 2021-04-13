@@ -16,7 +16,7 @@
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	padding-top: 64px;
+	padding-top: 63px;
 	background-color: #EAF7FB;
 	border-radius: 3px;
 	@include for-desktop{
@@ -83,10 +83,10 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	margin-bottom: 17px;
+	margin-bottom: 19px;
 	padding: 0 10px;
     @include for-desktop{
-    	margin-bottom: 20px;
+    	margin-bottom: 18px;
     }
     @include for-pad{
 		margin-bottom: 7px;
@@ -212,7 +212,7 @@
 		}
 		.input_wrapper{
 			width: 23%;
-			height: 60px;
+			height: 57px;
 			@include for-pad{
 				width: 45%;
 				height: 55px;
@@ -255,7 +255,7 @@
 				}
 					textarea{
 						width: 100%;
-						padding: 8px 15px 18px;
+						padding: 8px 15px 20px;
 						font: inherit;
 						background-color: rgb(255, 255, 255);
 						color: rgb(39, 39, 39);
@@ -342,12 +342,13 @@
 	    width: 100%;
 	    display: flex;
 	    align-items: center;
-		margin: 24px 0 60px 0;
+		margin: 29px 0 60px 0;
 		@include for-pad{
+			margin-top: 25px;
 			margin-bottom: 40px;
 		}
 		@include for-mobile{
-			margin-top: 20px;
+			margin-top: 17px;
 		}
 		@include for-phone{
 			margin-top: 16px;

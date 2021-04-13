@@ -3,11 +3,14 @@
 {{this.registerMetaTag({'property':'og:type','content':'website'})}}
 {{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen~'/catalog/restoran-'~item.restaurant_slug~'/'})}}
 {{this.registerMetaTag({'property':'og:image','content':Declension.get_image_src(item.restaurant_cover_url)})}}
-<div data-page-type="item">
-    <div class="content_block" data-listing-title>
-        {{ this.render('//components/generic/item_title.twig', {'seo':seo}) | raw }}
-    </div>
 
+<div data-page-type="item">
+    <div class="content_block">
+        <a class="return_btn" onclick="history.back();">Вернуться назад</a>
+    </div>
+    {# <div class="content_block" data-listing-title>
+        {{ this.render('//components/generic/item_title.twig', {'seo':seo}) | raw }}
+    </div> #}
     <div class="rest_top_wrap" itemscope itemtype="https://schema.org/Restaurant"> 
         <div class="content_block">
             <div class="rest_top">
@@ -47,7 +50,7 @@
                                     <div><p></p></div>
                                 </div>
                                 <p class="object_meta_value">
-                                {% for type in item.restaurant_types%}
+                                {% for type in item.restaurant_types %}
                                     {{loop.first ? type.name : type.name|lower}}{{loop.last ? '' : ', '}}
                                 {% endfor %}
                                 </p>
@@ -67,8 +70,8 @@
                             </div>
 
                             <div class="item_wrap">
+                                {% if item.restaurant_cuisine %}
                                 <div class="item_left_side">
-                                    {% if item.restaurant_cuisine %}
                                     <p class="object_meta_title">Кухня</p>
                                     <div><p></p></div>
                                 </div>
@@ -121,23 +124,14 @@
                         <div class="object_meta_item">
                             <div class="object_book_hidden">
                                 <p class="object_book_phone object_meta_value">
-                                    <span class="object_fake_phone">+7 xxx xxx-xx-xx</span>
-                                    <!--a href="tel:{{item.restaurant_phone}}" class="object_real_phone">{{item.restaurant_phone}}</a-->
+                                    <span class="object_fake_phone1">+7 xxx xxx-xx-xx</span>
                                 </p>
-                                <div class="object_book_hidden_button" data-popup-phone data-target="lid_pokazat_nomer">Показать телефон</div>
-                                <div class="popup_wrap popup_phone_wrap" data-popup-phone-wrap>
-                                    <div class="popup_phone">
-                                        <div class="form_close" data-close-popup></div>
-                                        <p class="popup_phone_title">Ресторан <span itemprop="name">{{item.restaurant_name}}</span></p>
-                                        <a href="tel:{{item.restaurant_phone}}" class="popup_real_phone"><span itemprop="telephone">{{item.restaurant_phone}}</span></a>
-                                        <p class="popup_phone_address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                                            {{item.restaurant_address|raw}}
-                                            <meta content="{{app.params.subdomen_name}}" itemprop="addressLocality">
-                                            <meta content="{{item.restaurant_address|split(', ')[1:]|join(', ')}}" itemprop="streetAddress">
-                                        </p>
-                                        <link href="{{ Declension.get_image_src(item.restaurant_cover_url) }}" itemprop="image">
-                                    </div>
-                                </div>
+                                <div class="object_book_hidden_button" data-popup-phone-f>Показать телефон</div>
+                                <script>
+                                    document.querySelector('[data-popup-phone-f]').addEventListener('click', function () {
+                                        document.querySelector('.object_fake_phone1').innerHTML = {{ item.restaurant_phone|json_encode|raw }};
+                                    });
+                                </script>
                             </div>
                         </div>
                         <div class="object_meta_item">
@@ -187,16 +181,14 @@
                         <p class="order_block_title">Забронировать<br>это место</p>
                         <div class="object_book_hidden">
                             <p class="object_book_phone object_meta_value">
-                                <span class="object_fake_phone">+7 xxx xxx-xx-xx</span>
-                                <!--a href="tel:{{item.restaurant_phone}}" class="object_real_phone">{{item.restaurant_phone}}</a-->
+                                <span class="object_fake_phone2">+7 xxx xxx-xx-xx</span>
                             </p>
-                            <div class="object_book_hidden_button" data-popup-phone data-target="lid_pokazat_nomer">Показать телефон</div>
-                            <div class="popup_wrap popup_phone_wrap" data-popup-phone-wrap>
-                                <div class="popup_phone">
-                                    <div class="form_close" data-close-popup></div>
-                                    <a href="tel:{{item.restaurant_phone}}" class="popup_real_phone"><span itemprop="telephone">{{item.restaurant_phone}}</span></a>
-                                </div>
-                            </div>
+                            <div class="object_book_hidden_button" data-popup-phone-s>Показать телефон</div>
+                            <script>
+                                document.querySelector('[data-popup-phone-s]').addEventListener('click', function () {
+                                    document.querySelector('.object_fake_phone2').innerHTML = {{ item.restaurant_phone|json_encode|raw }};
+                                });
+                            </script>
                         </div>
                         <div class="order_block_call">Заказать звонок</div>
                         <div class="order_block_arr">&#10094;</div>
@@ -233,7 +225,9 @@
                             <div class="optional__pic bocal"></div>
                             <p>Можно со своим алкоголем</p>
                         </div>
-                    {% endif %}    
+                    {% endif %}
+
+                    {# в эластике нет следующих ниже 4х элементов поэтому пока без проверки #}
                     <div class="optional">
                         <div class="optional__pic outdoor"></div>
                         <p>Выездная регистрация</p>
@@ -265,11 +259,12 @@
                 <div class="other_objects_container swiper-container" data-other-objects-swiper>
                     <div class="other_objects_swiper swiper-wrapper" data-other-objects-list>
                         {% for same_object in same_objects %}
-                            <div class="rest_room swiper-slide">
+                        <a class="swiper-slide" href="/catalog/restoran-{{item.restaurant_slug}}/{{same_object.slug}}/">
+                            <div class="rest_room">
                                 <div class="rest_room_img">
                                     <img loading="lazy" src="{{ Declension.get_image_src(same_object.images[0].realpath ? (same_object.images[0].realpath~'=w250-h170-l90') : same_object.cover_url|replace({'w445-h302-n-l95':'w250-h170-l90'})) }}">
                                 </div>
-                                <div class="rest_room_name"><a href="/catalog/restoran-{{item.restaurant_slug}}/{{same_object.slug}}/">{{same_object.name}}</a></div>
+                                <div class="rest_room_name">{{same_object.name}}</div>
 
                                 {% if min_price and min_price != 100000000 %}
                                 <p class="rest_room_price"><span>от {{min_price}} руб./чел</span></p>
@@ -297,6 +292,7 @@
                                     <p class="rest_room_value">{{same_object.separate_entrance==0 ? 'нет' : 'да' }}</p>
                                 </div>
                             </div>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>

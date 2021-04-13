@@ -26,34 +26,12 @@
 }
 
 .popup_form{
-	width: 1200px;
-	position: relative;
-	z-index: 1;
-
-	
-	@include for-phone{
-		width: 100%;
-		height: 100%;
-		//overflow: scroll;
-	}
-
-	.form_close{
-		display: block;
-	}
-}
-
-.popup_form{
-	width: 560px;
-    height: 373px;
-
+	width: 100%;
     .form_wrapper{
     	border-radius: 4px;
-	    padding: 24px 48px 33px 40px;
-	    background: url(/img/Gift_box.png) no-repeat left, url(/img/Gift_ribbon_popup.png) no-repeat right, white;
-	    background-position: bottom -74px right -37px, bottom 0px left 0px;
-	    background-size: 28% , 20%;
     }
     .form_close{
+		display: block;
     	top: -22px;
 	    right: -22px;
 	    width: 22px;

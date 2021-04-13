@@ -48,56 +48,60 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <?php $this->beginBody() ?>
 
     <div class="main_wrap">
-
         <header>
-            <div class="header_wrap<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
-                <a href="/" class="header_logo">
-                    <div class="header_logo_img"></div>
-                </a>
-                <a href="/" class="header_logo header_logo_2">
-                    <div class="header_logo_text">МОЙ ДЕНЬ</div>
-                </a>
-                <div class="header_city<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
-                    <img src="/img/geo_label.png" />
-                    <span class="city"><?= Yii::$app->params['subdomen_name'] ?></span>
-                    <span class="choose"></span>
-                </div>
-                <div class="city_list_wrap" data-search-wrap>
-                    <div class="city_list_top">
-                        <a href="/" class="header_logo">
-                            <div class="header_logo_img"></div>
-                        </a>
-                        <a href="/" class="header_logo header_logo_2">
-                            <div class="header_logo_text">МОЙ ДЕНЬ</div>
-                        </a>
-                        <div class="city_list_close"></div>
+            <nav class="main_menu">
+                <div class="content_block">
+                    <ul class="main_menu_items">
+                        <li class="main_menu_item"><a href="/catalog/restoran/">Рестораны</a></li>
+                        <li class="main_menu_item"><a href="#">Банкетные залы</a></li>
+                        <li class="main_menu_item"><a href="/catalog/loft/">Лофт</a></li>
+                        <li class="main_menu_item"><a href="#">Антикафе</a></li>
+                        <li class="main_menu_item"><a href="/catalog/bar/">Бары</a></li>
+                        <li class="main_menu_item"><a href="#">Статьи</a></li>
+                    </ul>
+                    <div class="header_city<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
+                        <span>Ваш город: </span>
+                        <span class="city"><?= Yii::$app->params['subdomen_name'] ?></span>
                     </div>
-                    <span class="city_list_title">Выберите город</span>
-                    <input type="text" name="city" placeholder="Название города" data-search-input>
-                    <div class="city_list">
-                        <?php
-                        $address = \Yii::$app->params['siteAddress'];
-                        $activeSubdomenRecords = \Yii::$app->params['activeSubdomenRecords'];
-                        $reduced = array_reduce($activeSubdomenRecords, function ($acc, $subdomen) use ($address) {
-                            $firstLetter = mb_substr($subdomen->name, 0, 1);
-                            $alias = $subdomen->city_id == 4400 ? '' : $subdomen->alias . '.';
-                            $link = "<a href='http://$alias$address' data-search-city>$subdomen->name</a>\n";
-                            isset($acc[$firstLetter]) ? $acc[$firstLetter] .= $link : $acc[$firstLetter] = $link;
-                            return $acc;
-                        }, []);
-                        foreach ($reduced as $letter => $links) : ?>
-                            <div class='city_list_item' data-search-city_in_char_wrap>
-                                <div class='char'><?= $letter ?></div>
-                                <div class='city_in_char' data-search-city_in_char>
-                                    <?= $links ?>
+                    <div class="city_list_wrap" data-search-wrap>
+                        <div class="city_list_title">Выберите город</div>
+                        <!-- <input type="text" name="city" placeholder="Название города" data-search-input> -->
+                        <div class="city_list">
+                            <?php
+                            $address = \Yii::$app->params['siteAddress'];
+                            $activeSubdomenRecords = \Yii::$app->params['activeSubdomenRecords'];
+                            $reduced = array_reduce($activeSubdomenRecords, function ($acc, $subdomen) use ($address) {
+                                // $firstLetter = mb_substr($subdomen->name, 0, 1);
+                                $alias = $subdomen->city_id == 4400 ? '' : $subdomen->alias . '.';
+                                $link = "<div class='city_block'><input id='$alias' type='radio' name='site' value='http://$alias$address'><label for='$alias'>$subdomen->name</label></div>";
+                                // $link = "<a href='http://$alias$address' data-search-city>$subdomen->name</a>";
+                                isset($acc[$firstLetter]) ? $acc[$firstLetter] .= $link : $acc[$firstLetter] = $link;
+                                return $acc;
+                            }, []);
+                            foreach ($reduced as $letter => $links) : ?>
+                                <div class='city_list_item' data-search-city_in_char_wrap>
+                                    <!-- <div class='char'><?= $letter ?></div> -->
+                                    <div class='city_in_char' data-search-city_in_char>
+                                        <?= $links ?>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+
+                            <input class="city_btn" type="button" value="Выбрать" onClick="window.location.href = document.querySelectorAll('[name=site]:checked')[0].value">
+                        </div>
                     </div>
                 </div>
-                <div class="header_phone">
-                    <a href="tel:+79252380246" data-target="telefon_1">8 (925) 238-02-46</a>
-                    <p data-open-popup-form class="_link" data-target="podbor_1">Подберите мне зал</p>
+            </nav>
+            <div class="header_wrap<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
+                <div class="content_block">
+                    <div class="content_left_side">
+                        <a href="/" class="header_logo">SO-SVOIM.RU</a>
+                        <a class="header_phone" href="tel:+79252380246" data-target="telefon_1"><span>(846) 555-55-00<span></a>
+                    </div>
+                    <div class="content_right_side">
+                        <div class="_link" data-open-popup-form data-target="podbor_1">Подобрать заведение</div>
+                        <div class="_recall">Обратный звонок</div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -161,14 +165,11 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     </div>
 
     <div class="popup_wrap">
-
         <div class="popup_layout" data-close-popup></div>
-
         <div class="popup_form">
             <?= $this->render('//components/generic/form.twig', ['title' => 'Помочь подобрать зал?', 'type' => 'header', 'target' => 'podbor_2']) ?>
         </div>
-
-        <div class="popup_img">
+        <!-- <div class="popup_img">
             <div class="popup_img_close" data-close-popup></div>
             <div class="popup_img_slider_wrap">
                 <div class="slider_arrow _prev"></div>
@@ -177,7 +178,7 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                     <div class="object_gallery_swiper swiper-wrapper" data-gallery-list></div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 
@@ -185,7 +186,9 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <?php $this->endBody() ?>
     <!--link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap&subset=cyrillic" rel="stylesheet"-->
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&display=swap&subset=cyrillic" rel="stylesheet" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&display=swap&subset=cyrillic" rel="stylesheet" crossorigin="anonymous"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link href="//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css" rel="stylesheet" crossorigin="anonymous">
 </body>
 

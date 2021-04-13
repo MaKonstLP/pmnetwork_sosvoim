@@ -180,6 +180,7 @@
     img{
       width: 100%;
       height: auto;
+      cursor: pointer;
       @include for-phone{
         height: 27px;
       }

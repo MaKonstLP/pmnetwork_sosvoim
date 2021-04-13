@@ -24,10 +24,9 @@
 	</div>
 	
 	<div class="main_top">
-		<h1>{{seo.h1|raw}}</h1>
+		{# <h1>{{seo.h1|raw}}</h1> #}
 		<div class="main_top_desc">
-			{{count}}
-			заведен{{Declension.get_num_ending(count,['ие','ия','ий'])}}
+			Заведения, куда можно со своим алкоголем<br>в ??????
 		</div>
 		<div class="main_search">
 			<div class="main_search_city" data-search-wrap>
@@ -45,7 +44,7 @@
 					{{ this.render('//components/filter/homepage_rest-types_list.twig', { 'filters': filters }) | raw }}
 				</div>
 			</div>
-			<span class="main_search_submit" data-target="pdbor_2">Подобрать</span>
+			<div class="main_search_submit" data-target="pdbor_2">Найти</div>
 		</div>
 
 		

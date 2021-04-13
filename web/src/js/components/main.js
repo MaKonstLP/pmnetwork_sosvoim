@@ -27,13 +27,10 @@ export default class Main {
             $('.popup_wrap').addClass('_active');
         });*/
 
-        $('body').on('click', '[data-popup-phone]', function () {
-            $('.popup_wrap .popup_phone').css({
-                top: $(this).position().top,
-                left: $(this).position().left,
-            });
-            $('.popup_phone_wrap').addClass('_active');
-        });
+        // $('body').on('click', '[data-popup-phone]', function () {
+        //     var restaurant_phone = '{{ item.restaurant_phone|json_encode|raw }}';
+        //     $('.object_fake_phone').html(restaurant_phone);
+        // });
 
         /*$('body').on('click', '.header_city', function () {
             if ($('.city_list_wrap').hasClass('__visible')) {
@@ -340,10 +337,10 @@ export default class Main {
             }
         );
 
-        $('body').on('click', '[data-target]', function(){
-            console.log('reachGoal',$(this).data('target'));
-            ym('67719148', 'reachGoal', $(this).data('target'));
-            gtag('event', $(this).data('target'), {'event_category': 'click'});
-        });
+        // $('body').on('click', '[data-target]', function(){
+        //     console.log('reachGoal',$(this).data('target'));
+        //     ym('67719148', 'reachGoal', $(this).data('target'));
+        //     gtag('event', $(this).data('target'), {'event_category': 'click'});
+        // });
     }
 }

@@ -79,6 +79,18 @@
                 margin-bottom: 9px;
                 font-size: 24px;
             }
+            span{
+                font-family: 'Proxima Nova Regular';
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+        .object_parent_name{
+            font-family: 'Proxima Nova Regular';
+            font-size: 18px;
+            font-weight: 400;
+            color: #0C8CD4;
+            border-bottom: 1px solid #0C8CD4;
         }
         .object_address{
             margin-bottom: 20px;
@@ -111,9 +123,6 @@
             font-size: 16px;
             font-weight: 400;
             color: #272727;
-        }
-        .object_price{
-            color: #DA0034;
         }
         .item_wrap{
             display: flex;
@@ -246,6 +255,11 @@
                 color: #ffffff;
                 border-radius: 3px;
                 cursor: pointer;
+                user-select: none;
+                -ms-user-select: none;
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
                 &:hover{
                     background-color: #24A3EB;
                 }
@@ -288,7 +302,9 @@
         }
     }
 }
-
+.object_price{
+    color: #DA0034;
+}
 .object_book{
     background: white;
     padding: 15px 20px 25px;
@@ -365,6 +381,11 @@
         //margin: 0px 0px 2px;
         cursor: pointer;
         width: max-content;
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
     }
 }
 
@@ -519,7 +540,57 @@
         padding: 16px 0 0 0;
     }
 }
+button{
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+.return_btn{
+    position: relative;
+    display: block;
+    width: 195px;
+    height: 40px;
+    margin-bottom: 37px;
+    margin-left: 15px;
+    line-height: 40px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #0C8CD4;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    &::before{
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        transform: rotate(45deg);
+        left: -12px;
+        top: 5px;
+        background-color: #0c8cd4;
+        border-radius: 3px;
+    }
+    &:hover{
+        background-color: #24A3EB;
+        &:before{
+            background-color: #24A3EB;
+        }
+    }
+    &:focus,
+    &:active{
+        background-color: #0179BD;
+        &:before{
+            background-color: #0179BD;
+        }
 
+    }
+}
 .rest_top_wrap{
     background-color: $clrBackground;
     .content_block{
@@ -730,7 +801,7 @@
         margin-bottom: 37px;
     }
     .rest_optional{
-        margin-bottom: 12px;
+        margin-bottom: 13px;
         font-size: 26px;
         font-weight: 700;
         color: #272727;
@@ -916,7 +987,7 @@
         }
     }
     .rest_rooms_list{
-        margin-bottom: 11px;
+        margin-bottom: 13px;
         font-size: 26px;
         font-weight: 700;
         color: #272727;
@@ -944,7 +1015,7 @@
             margin-right: 0;
         }
         p{
-            line-height: 18px;
+            line-height: 16px;
         }
         .rest_room_name{
             margin-bottom: 10px;
@@ -970,7 +1041,7 @@
             }
         }
         .rest_room_price{
-            margin-bottom: 17px;
+            margin-bottom: 15px;
             margin-left: 16px;
             font-size: 18px;
             font-weight: 700;
@@ -1007,7 +1078,7 @@
                 display: inline-block;
             }
             &:last-child{
-                margin-bottom: 11px;
+                margin-bottom: 15px;
                 @include for-desktop{
                     margin-bottom: 20px;
                 }
@@ -1041,9 +1112,10 @@
 
 .rest_room_img{
     height: 311px;
-    margin-bottom: 20px;
+    margin-bottom: 17px;
     @include for-desktop{
         height: 303px;
+        margin-bottom: 18px;
     }
     @include for-pad{
         height: 225px;
@@ -1085,12 +1157,16 @@
     }
 }
 .other_object{
+    margin-bottom: 30px;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    border: 1px solid #d0e1e7;
     background-color: #fff;
-    padding: 24px;
-    width: 391px;
-    height: 412px;
     .other_object_img{
-        height: 55%;
+        height: 289px;
+    }
+    a{
+        color: #272727;
     }
     img{
         width: 100%;
@@ -1231,7 +1307,7 @@
     }
     &.listing_wrap{
         padding: 0;
-        margin-bottom: 24px;
+        margin-bottom: 21px;
         @include for-desktop{
             margin-bottom: 30px;
         }
@@ -1289,85 +1365,91 @@
                         height: 187px;
                     }
                 }
-                .item_info{
-                    margin-left: 0;
-                    padding: 0 22px;
-                    @include for-pad{
-                        padding: 0 15px;
-                    }
-                    @include for-mobile{
-                        padding: 0 22px;
-                    }
-                    @include for-phone{
-                        padding: 0 15px; 
-                    }
-                    .item_info_top{
-                        margin: 15px 0 0 0;
-                        @include for-pad{
-                            margin-bottom: 15px;
-                        }
-                        @include for-phone{
-                            margin-top: 21px;
-                        }
-                        .item_name{
-                            font-size: 20px;
-                            line-height: 1;
-                        }
-                        .item_parent_name{
-                            font-size: 20px;
-                            line-height: 1;
-                        }
-                        .item_type{
-                            margin-top: 0;
-                        }
-                    }
-                    .item_meta{
-                        margin-bottom: 7px;
-                        flex-direction: column;
-                        @include for-pad{
-                            margin-bottom: 14px;
-                        }
-                        @include for-phone{
-                            margin-bottom: 11px;
-                        }
-                        .item_meta_items{
-                            margin-right: 0;
-                            width: 100%;
-                            &:first-child{
-                                margin-bottom: 11px;
-                                .item_meta_item{
-                                    display: none;
-                                }
-                            }
-                            &:last-child{
-                                padding-top: 10px;
-                                border-top: 1px solid #D0E1E7;
-                                @include for-pad{
-                                    padding-top: 6px;
-                                }
-                                .item_meta_item{
-                                    &:first-child{
-                                        display: none;
-                                    }
-                                    &:nth-child(3){
-                                        order: -1;
-                                    }
-                                    &:last-child{
-                                        display: block;
-                                    }
-                                }
-                            }
-                            .item_address{
-                                @include for-pad{
-                                    margin-bottom: 0;
-                                    font-size: 14px;
-                                }
-                            }
-                        }
-                    }
-                }
                 .item_optional{
                     display: none;
+                }
+            }
+            .item_info{
+                margin-left: 0;
+                padding: 0 22px;
+                @include for-pad{
+                    padding: 0 15px;
+                }
+                @include for-mobile{
+                    padding: 0 22px;
+                }
+                @include for-phone{
+                    padding: 0 15px; 
+                }
+                .item_info_top{
+                    margin: 17px 0 0 0;
+                    @include for-pad{
+                        margin-bottom: 15px;
+                    }
+                    @include for-phone{
+                        margin-top: 21px;
+                    }
+                    .item_name{
+                        font-size: 20px;
+                        line-height: 1;
+                    }
+                    .item_parent_name{
+                        font-size: 20px;
+                        line-height: 1;
+                    }
+                    .item_type{
+                        margin-top: 0;
+                    }
+                }
+                .item_meta{
+                    margin-bottom: 9px;
+                    flex-direction: column;
+                    @include for-pad{
+                        margin-bottom: 16px;
+                    }
+                    @include for-phone{
+                        margin-bottom: 11px;
+                    }
+                    .item_meta_items{
+                        margin-right: 0;
+                        width: 100%;
+                        &:first-child{
+                            margin-bottom: 13px;
+                            @include for-pad{
+                                margin-bottom: 8px;
+                            }
+                            @include for-phone{
+                                margin-bottom: 12px;
+                            }
+                            .item_meta_item{
+                                display: none;
+                            }
+                        }
+                        &:last-child{
+                            padding-top: 8px;
+                            border-top: 1px solid #D0E1E7;
+                            @include for-pad{
+                                padding-top: 6px;
+                            }
+                            .item_meta_item{
+                                &:first-child{
+                                    display: none;
+                                }
+                                &:nth-child(3){
+                                    order: -1;
+                                }
+                                &:last-child{
+                                    display: block;
+                                }
+                            }
+                        }
+                        .item_address{
+                            @include for-pad{
+                                margin-bottom: 0;
+                                font-size: 14px;
+                            }
+                        }
+                    }
                 }
             }
         }

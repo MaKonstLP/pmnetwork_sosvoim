@@ -68,6 +68,11 @@ class ItemController extends BaseFrontendController
 				return array_merge($acc, $rest['rooms']);
 			}, []);
 
+			//echo '<pre>';
+			//print_r(['item' => $room,
+			//'rest_item' => $rest_item]);
+			//exit;
+
 			return $this->render('index.twig', array(
 				'item' => $room,
 				'rest_item' => $rest_item,

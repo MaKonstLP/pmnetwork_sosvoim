@@ -3,166 +3,346 @@
 {{this.registerMetaTag({'property':'og:type','content':'website'})}}
 {{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen~'/catalog/restoran-'~item.restaurant_slug~'/'~item.slug~'/'})}}
 {{this.registerMetaTag({'property':'og:image','content':Declension.get_image_src(item.cover_url)})}}
+
 <div data-page-type="item">
-
-    <div class="content_block" data-listing-title>
+    <div class="content_block">
+        <a class="return_btn" onclick="history.back();">Вернуться назад</a>
+    </div>
+    {# <div class="content_block" data-listing-title>
         {{ this.render('//components/generic/item_title.twig', {'seo':seo}) | raw }}
-    </div>
+    </div> #}
+    <div class="rest_top_wrap" itemscope itemtype="https://schema.org/Restaurant"> 
+        <div class="content_block">
+            <div class="rest_top">
+                <div class="rest_top_left">
+                    <div class="object_meta">
+                        <div class="object_meta_item">
+                            <p class="object_name">{{item.name}} <span>в </span><a class="object_parent_name" href="/catalog/restoran-{{item.restaurant_slug}}/">«{{item.restaurant_name}}»</a></p>
+                            {% if type != 'other' %}
 
-    {% if item.images %}
-    <div class="object_gallery_wrap">
-        <div class="listing_widget_arrow _prev"></div>
-        <div class="listing_widget_arrow _next"></div>
-        <div class="object_gallery_container swiper-container" data-gallery-main-swiper data-gallery-swiper>
-            <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
-                {% for image in item.images%}
-                    <div class="object swiper-slide">
-                        <div class="object_img">
-                           <img loading="lazy" src="{{ Declension.get_image_src(image.waterpath~'=w746-h498-l95') }}" data-gallery-img-view/>
-                       </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="listing_widget_controll">
-                <div class="listing_widget_pagination"></div>
-            </div> 
-        </div>
-        <div class="object_gallery_container swiper-container" data-gallery-thumb-swiper style="">
-            <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
-                {% for image in item.images%}
-                    <div class="object swiper-slide">
-                       <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w150-h90-l80') }}"/>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endif %}
+                            {# ЯКОРЬ ЗАМЕНИТЬ НА СКРИПТ #}
+                            <p class="object_address"><a href="#map"><span>{{rest_item.restaurant_address}}</span></a></p>
+                            {% endif %}
+                            <p class="item_desc">Вместимость: {{item.capacity}} человек</p>
+                            <p class="item_desc">Стоимость: <span class="object_price">от {{item.price}}р на человека</span></p>
+                        </div>
 
-    <div class="content_block object_desc_wrap">
-        <div class="object_desc">
-            <p class="object_desc_item">
-               <span class="object_desc_title">Вместимость:<span class="dots"></span></span><span class="object_desc_value">{{item.capacity}} человек</span>
-            </p>
-            <p class="object_desc_item">
-               <span class="object_desc_title">Тип зала:<span class="dots"></span></span><span class="object_desc_value">{{item.type_name}} человек</span>
-            </p>
-            <p class="object_desc_item">
-               <span class="object_desc_title">Возможность аренды без еды:<span class="dots"></span></span><span class="object_desc_value">{{item.rent_only==0 ? 'нет' : 'да' }}</span>
-            </p>
-            <p class="object_desc_item">
-               <span class="object_desc_title">Светлый зал:<span class="dots"></span></span><span class="object_desc_value">{{item.bright_room==0 ? 'нет' : 'да' }}</span>
-            </p>
-            <p class="object_desc_item">
-               <span class="object_desc_title">Схема оплаты:<span class="dots"></span></span><span class="object_desc_value">только за еду и напитки</span>
-            </p>
-            <p class="object_desc_item">
-               <span class="object_desc_title">Отдельный вход:<span class="dots"></span></span><span class="object_desc_value">{{item.separate_entrance==0 ? 'нет' : 'да' }}</span>
-            </p>
-            <!--p>{{item.features}}</p-->
-            <!--p>Anstar House Vatutinki - это уникальное место для проведения идеальной свадьбы. На территории комплекса имеется живописный сад, где возможно организовать выездную церемонию и фотосессию.</p>
-            <p>В большом доме на берегу озера жених и невеста смогут провести утренние сборы, а также комфортно разместиться гости.</p>
-            <p>Для проведения мероприятий имеется большой банкетный зал. Интерьер выполнен в светлых тонах, что позволяет использовать любое стилистическое оформление.</p-->
-        </div>
-        <div class="object_contacts">
-            <div class="object_meta">
-                <div class="object_meta_item">
-                    <p class="object_meta_title">Средний чек:</p>
-                    <p class="object_meta_value">{{ item.price ? 'от '~item.price~' ₽/чел.' : 'по запросу'}}</p>
-                </div>
-                <div class="object_meta_item">
-                    <p class="object_meta_title">Забронировать по телефону:</p>
-                    <div class="object_book_hidden">
-                        <p class="object_book_phone object_meta_value">
-                            <span class="object_fake_phone">+7 xxx xxx-xx-xx</span>
-                        </p>
-                        <div class="object_book_hidden_button" data-popup-phone data-popup-phone data-target="lid_pokazat_nomer">Показать номер</div>
-                        <div class="popup_wrap popup_phone_wrap" data-popup-phone-wrap>
-                            <div class="popup_phone">
-                                <div class="form_close" data-close-popup></div>
-                                <p class="popup_phone_title">{{seo.h1}}</p>
-                                <div class="popup_phone_present">
-                                    <img loading="lazy" src="/img/present.svg">
-                                    <p>Забронируй зал и получи подарок!</p>
+                        <div class="object_meta_item">
+                            <div class="item_wrap">
+                                <div class="item_left_side">
+                                    <p class="object_meta_title">Тип заведения</p>
+                                    <div><p></p></div>
                                 </div>
-                                <a href="tel:{{item.restaurant_phone}}" class="popup_real_phone">{{rest_item.restaurant_phone}}</a>
-                                <p class="popup_phone_address">{{rest_item.restaurant_address|raw}}</p>
+                                <p class="object_meta_value">
+                                {% for type in rest_item.restaurant_types%}
+                                    {{loop.first ? type.name : type.name|lower}}{{loop.last ? '' : ', '}}
+                                {% endfor %}
+                                </p>
                             </div>
+
+                            <div class="item_wrap">
+                                <div class="item_left_side">
+                                    <p class="object_meta_title">Расположение</p>
+                                    {% set location = {'1':'Около моря','2':'Около реки','7':'Около озера','3':'В горах','4':'В городе','5':'В центре города','6':'За городом'} %}
+                                    <div><p></p></div>
+                                </div>
+                                <p class="object_meta_value">
+                                {% for type in rest_item.restaurant_location%}
+                                {{loop.first ? location[type.id] : location[type.id]|lower}}{{loop.last ? '' : ', '}}
+                                {% endfor %}
+                                </p>
+                            </div>
+
+                            <div class="item_wrap">
+                                {% if rest_item.restaurant_cuisine %}
+                                <div class="item_left_side">
+                                    <p class="object_meta_title">Кухня</p>
+                                    <div><p></p></div>
+                                </div>
+                                <p class="object_meta_value">{{rest_item.restaurant_cuisine}}</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="item_wrap">
+                                <div class="item_left_side">
+                                    <p class="object_meta_title">Сервисы за отдельную плату</p>
+                                    <div><p></p></div>
+                                </div>
+                                <p class="object_meta_value">{{rest_item.restaurant_payment}}</p>
+                            </div>
+                        </div>
+
+                        <div class="object_meta_item">
+                            {% if rest_item.restaurant_special %} 
+                            <div class="item_wrap">
+                                <div class="item_left_side">
+                                    <p class="object_meta_title">Особенности</p>
+                                    {% set specials = rest_item.restaurant_special | split(' ') %}
+                                    <div><p></p></div>
+                                </div>
+                                <div class="object_meta_value">
+                                    {% for special in specials%}
+                                    {{special}}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if rest_item.restaurant_extra_services %}
+                            {% set extras = rest_item.restaurant_extra_services|split(', ') %}
+                            <div class="item_wrap">
+                                <div class="item_left_side">
+                                    <p class="object_meta_title">Способы оплаты</p>
+                                    <div><p></p></div>
+                                </div>
+                                <div class="object_meta_value">
+                                    {% for extra in extras%}
+                                    <span class="object_meta_value">{{extra}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="object_meta">
+                        <div class="object_meta_item">
+                            <div class="object_book_hidden">
+                                <p class="object_book_phone object_meta_value">
+                                    <span class="object_fake_phone1">+7 xxx xxx-xx-xx</span>
+                                </p>
+                                <div class="object_book_hidden_button" data-popup-phone-f>Показать телефон</div>
+                                <script>
+                                    document.querySelector('[data-popup-phone-f]').addEventListener('click', function () {
+                                        document.querySelector('.object_fake_phone1').innerHTML = {{ rest_item.restaurant_phone|json_encode|raw }};
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <div class="object_meta_item">
+                            
+                            {# ЯКОРЬ ЗАМЕНИТЬ НА СКРИПТ #}
+                            <a class="free_order" href="#order_form">Забронировать бесплатно</a>
                         </div>
                     </div>
                 </div>
+
+                <div class="rest_top_right">
+                    {% if item.images %}
+                    <div class="object_gallery_wrap _rest">
+                        <div class="object_gallery_container swiper-container" data-gallery-main-swiper data-gallery-swiper> 
+                            <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
+                                {% for image in item.images %}
+                                    <div class="object swiper-slide">
+                                        <div class="object_img">
+                                            <img loading="lazy" src="{{ Declension.get_image_src(image.waterpath~'=w800-h600-l100') }}" data-gallery-img-view/>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="object_gallery_block">
+                            <div class="object_gallery_container swiper-container" data-gallery-thumb-swiper style="">
+                                <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
+                                    {% for image in item.images %}
+                                        <div class="object swiper-slide">
+                                        <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w150-h90-l80') }}"/>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="rest_order_block">
+                    <div class="order_block_wrap">
+                        <p class="order_block_title">Забронировать<br>это место</p>
+                        <div class="object_book_hidden">
+                            <p class="object_book_phone object_meta_value">
+                                <span class="object_fake_phone2">+7 xxx xxx-xx-xx</span>
+                            </p>
+                            <div class="object_book_hidden_button" data-popup-phone-s>Показать телефон</div>
+                            <script>
+                                document.querySelector('[data-popup-phone-s]').addEventListener('click', function () {
+                                    document.querySelector('.object_fake_phone2').innerHTML = {{ rest_item.restaurant_phone|json_encode|raw }};
+                                });
+                            </script>
+                        </div>
+                        <div class="order_block_call">Заказать звонок</div>
+                        <div class="order_block_arr">&#10094;</div>
+                    </div>
+                </div>
             </div>
-            <div class="object_form">
-                {{ this.render('//components/generic/form.twig',{'title': 'Хотите день рождения в этом зале?', 'type' : 'room', 'target': 'zal', 'venue_id': rest_item.restaurant_gorko_id}) | raw }}
+
+            <div class="rest_desc_wrap">
+                {# {% if seo.text_1 %} #}
+                <div class="rest_desc_text">
+                    <div class="rest_desc_item seo_text" data-seo-text>
+                        <div class="object_meta_value"><p>Понтон на воде 400 м2 с белым шатром 260 м2. Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые «Пары».</p>
+                        {# {{seo.text_1|raw}} #}
+                        </div>
+                        <div class="seo_text_control" data-seo-control>
+                            <p class="_link">Подробнее</p>
+                        </div>
+                    </div>
+                </div>
+                {# {% endif %} #}
+            </div>
+            
+            <div class="rest_optional_wrap">
+                <div class="rest_optional">Особенности</div>
+                <div class="item_optional">
+                    {% if item.restaurant_firework %}
+                        <div class="optional">
+                            <div class="optional__pic fire"></div>
+                            <p>Площадка для фейерверка</p>
+                        </div>
+                    {% endif %} 
+                    {% if item.restaurant_own_alcohol %}
+                        <div class="optional">
+                            <div class="optional__pic bocal"></div>
+                            <p>Можно со своим алкоголем</p>
+                        </div>
+                    {% endif %}
+
+                    {# в эластике нет следующих ниже 4х элементов поэтому пока без проверки #}
+                    <div class="optional">
+                        <div class="optional__pic outdoor"></div>
+                        <p>Выездная регистрация</p>
+                    </div>
+                    <div class="optional">
+                        <div class="optional__pic light"></div>
+                        <p>Световое оборудование</p>
+                    </div>
+                    <div class="optional">
+                        <div class="optional__pic music"></div>
+                        <p>Живая музыка</p>
+                    </div>
+                    <div class="optional">
+                        <div class="optional__pic disco"></div>
+                        <p>Дискотека</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    {% if same_objects %}
-    <div class="content_block same_objects">
-        <h2>Другие залы этой же площадки</h2>
-        <div class="same_objects_wrap">
-            {% for same_object in same_objects %}
-                <div class="same_object">
-                    <div class="same_object_img">
-                        <div class="same_object_img_item">
-                            <img loading="lazy" src="{{ Declension.get_image_src(same_object.images[0].realpath ? (same_object.images[0].realpath~'=w250-h170-l90') : same_object.cover_url|replace({'w445-h302-n-l95':'w250-h170-l90'})) }}">
-                        </div>
-                        <div class="same_object_img_item">
-                            <img loading="lazy" src="{{ Declension.get_image_src(same_object.images[1].realpath ? (same_object.images[1].realpath~'=w250-h170-l90') : same_object.cover_url|replace({'w445-h302-n-l95':'w250-h170-l90'})) }}">
-                        </div>
-                    </div>
-                    <div class="same_object_desc">
-                        <div class="title"><a href="/catalog/restoran-{{item.restaurant_slug}}/{{same_object.slug}}/">{{same_object.name}}</a></div>
-                        <div class="object_desc_item">
-                           <p class="object_desc_title">Вместимость:</p>
-                           <p class="object_desc_value">{{same_object.capacity}} человек</p>
-                        </div>
-                        {% if same_object.price %}
-                            <div class="object_desc_item">
-                               <p class="object_desc_title">Стоимость аренды без еды:</p>
-                               <p class="object_desc_value">{{same_object.price}} ₽</p>
+    <div class="rest_rooms_wrap">
+        <div class="content_block">
+            <div class="rooms_widget_arrow _prev"></div>
+            <div class="rooms_widget_arrow _next"></div>
+            <div class="rest_rooms_list">Другие залы заведения</div>
+            <div class="rest_rooms">
+
+                <div class="other_objects_container swiper-container" data-other-objects-swiper>
+                    <div class="other_objects_swiper swiper-wrapper" data-other-objects-list>
+                        {% for same_object in same_objects %}
+                        <a class="swiper-slide" href="/catalog/restoran-{{item.restaurant_slug}}/{{same_object.slug}}/">
+                            <div class="rest_room">
+                                <div class="rest_room_img">
+                                    <img loading="lazy" src="{{ Declension.get_image_src(same_object.images[0].realpath ? (same_object.images[0].realpath~'=w250-h170-l90') : same_object.cover_url|replace({'w445-h302-n-l95':'w250-h170-l90'})) }}">
+                                </div>
+                                <div class="rest_room_name">{{same_object.name}}</div>
+
+                                {% if min_price and min_price != 100000000 %}
+                                <p class="rest_room_price"><span>от {{min_price}} руб./чел</span></p>
+                                {% endif %}
+                                <div class="rest_room_item">
+                                    <p class="rest_room_title">Тип</p>
+                                    <p class="rest_room_value">
+                                    {{same_object.type_name}}
+                                    </p>
+                                </div>
+                                <div class="rest_room_item">
+                                    <p class="rest_room_title">Вместимость</p>
+                                    <p class="rest_room_value">{{same_object.capacity}} человек</p>
+                                </div>
+                                <div class="rest_room_item">
+                                    <p class="rest_room_title">Вместимость на фуршет</p>
+                                    <p class="rest_room_value">{{same_object.capacity}} человек</p>
+                                </div>
+                                <div class="rest_room_item">
+                                    <p class="rest_room_title">Светлый зал</p>
+                                    <p class="rest_room_value">{{same_object.bright_room==0 ? 'нет' : 'да' }}</p>
+                                </div>
+                                <div class="rest_room_item">
+                                    <p class="rest_room_title">Отдельный вход</p>
+                                    <p class="rest_room_value">{{same_object.separate_entrance==0 ? 'нет' : 'да' }}</p>
+                                </div>
                             </div>
-                        {% endif %}
+                        </a>
+                        {% endfor %}
                     </div>
                 </div>
-            {% endfor %}
+
+            </div>
         </div>
     </div>
-    {% endif %}
-    
-    <div class="other_objects">
-        <h2>Похожие залы</h2>
-        <div class="other_objects_wrap content_block">
-            <div class="listing_widget_arrow _prev"></div>
-            <div class="listing_widget_arrow _next"></div>
-            <div class="other_objects_container swiper-container" data-other-objects-swiper>
-                <div class="other_objects_swiper swiper-wrapper" data-other-objects-list>
+
+    <div class="map_wrap">
+        <div class="content_block">
+            <div class="map" name="map">
+                <div class="map_data_wrap">
+                    <div class="map_data">
+                        <div class="map_img_wrap">
+                            <img loading="lazy" class="map_img" src="{{ Declension.get_image_src(rest_item.restaurant_cover_url|replace({'w445-h302-n-l95': 'w710-h472-n-l95'})) }}">
+                        </div>
+                        
+                        <a href="/catalog/restoran-{{rest_item.restaurant_slug}}/" class="map_rest_name">{{ rest_item.restaurant_name }}</a>
+                        <p class="map_rest_address">{{ rest_item.restaurant_address }}</p>
+                        <p class="map_close">Спасибо, закрыть</p>
+                    </div>
+                </div>
+                <div id="map" data-mapDotX="{{rest_item.restaurant_latitude}}" data-mapDotY="{{rest_item.restaurant_longitude}}" data-balloon="" data-hint="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if other_rooms %}
+    <div class="listing_wrap other_rests_wrap">
+        <div class="content_block">
+            <div class="other_widget_arrow _prev"></div>
+            <div class="other_widget_arrow _next"></div>  
+            <div class="same_rest_list">Похожие залы</div>
+
+            <div class="items_list_listing swiper-container" data-other-rest-swiper>
+                <div class="items_list swiper-wrapper">
                    {% for other_room in other_rooms %} 
                         <div class="other_object swiper-slide">
-                            <div class="other_object_img">
-                                <a href="/catalog/restoran-{{other_room.restaurant_slug}}/{{other_room.slug}}/">
+                            <a href="/catalog/restoran-{{other_room.restaurant_slug}}/{{other_room.slug}}/">
+                                <div class="other_object_img">
                                     <img loading="lazy" src="{{ Declension.get_image_src(other_room.cover_url|replace({'w445-h302-n-l95': 'w305-h200-s-l95'})) }}">
-                                </a>
-                            </div>
-                            <div class="title"><a href="/catalog/restoran-{{other_room.restaurant_slug}}/{{other_room.slug}}/">{{other_room.name}}</a></div>
-                            <div class="restaurant_name">{{other_room.restaurant_name}}</div>
-                            <div class="object_meta_item">
-                                <div class="object_desc_item">
-                                   <p class="object_desc_title">Вместимость:</p>
-                                   <p class="object_desc_value">{{other_room.capacity}} человек</p>
                                 </div>
-                                <div class="object_desc_item">
-                                   <p class="object_desc_title">Стоимость аренды без еды:</p>
-                                   <p class="object_desc_value">{{other_room.price}} ₽</p>
+
+                                <div class="item_info">
+                                    <div class="item_info_top">
+                                        <p class="item_name">{{other_room.restaurant_name}} / {{other_room.name}}</p>
+                                        <p class="item_type">{{rest_item.restaurant_main_type}}</p>
+                                    </div>
+                                    <div class="item_meta">
+                                        <div class="item_meta_items">
+                                            <p class="item_address">{{rest_item.restaurant_address}}</p>
+                                        </div>
+                                        <div class="item_meta_items">
+                                            <div class="item_meta_item"></div>
+                                            <div class="item_meta_item">Вместимость: до {{item.capacity}} человек</div>
+                                            <div class="item_meta_item">Стоимость: <span class="object_price">от {{item.price}}р на человека</span></div>
+                                            <div class="item_meta_item">Парковочных мест: {{rest_item.restaurant_parking|length}}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
-                <div class="listing_widget_controll">
-                    <div class="listing_widget_pagination"></div>
-                </div>  
             </div>
         </div>
     </div>
+    {% endif %}
+
+    {{ this.render('//components/generic/form.twig', {'title': 'Бесплатно забронировать ' ~ item.restaurant_name, 'title2': 'Оставьте заявку, а мы перезвоним в ближайшее время!', 'target': 'podval_rest'}) | raw }}
+</div>
