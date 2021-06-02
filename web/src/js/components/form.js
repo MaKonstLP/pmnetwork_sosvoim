@@ -7,14 +7,17 @@ var animation = new Animation;
 export default class Form {
 	constructor(form) {
 		this.$form = $(form);
-		this.$formWrap = this.$form.parents('.form_main');
+		// this.$formWrap = this.$form.parents('.form_main');
 		this.$submitButton = this.$form.find('button[type="submit"]');
 		this.$policy = this.$form.find('[name="policy"]');
 		this.$policy_checkbox = this.$form.find('[data-action="form_checkbox"]');
 		this.to = (this.$form.attr('action') == undefined || this.$form.attr('action') == '') ? this.to : this.$form.attr('action');
-		this.$formModal = this.$form.parents('body').find('.popup_wrap');
+		this.$formModal = this.$form.parents('body').find('.form_wrapper');
+		this.$formModalRecall = this.$form.parents('body').find('.popup_wrap_recall');
 		this.$formModalMain = this.$formModal.find('.form_main');
+		this.$formModalMainRecall = this.$formModalRecall.find('.form_main_recall');
 		this.$formSuccess = this.$formModal.find('.form_success');
+		this.$formSuccessRecall = this.$formModalRecall.find('.form_success_recall');
 		this.target = this.$form.data('form-target');
 		
 		let im_phone = new Inputmask('+7 (999) 999-99-99', {
@@ -23,12 +26,29 @@ export default class Form {
 
 	    im_phone.mask($(this.$form).find('[name="phone"]'));
 
-
 		this.bind();
 	}
 
-	bind() {
+	success(data) {
+		//modal.append(data);
+		// modal.show();
+		this.$formModalMain.hide();
+		this.$formModalMainRecall.hide();
+		data.title && this.$formSuccess.find('[data-form-result-title]').text(data.title);
+		data.body && this.$formSuccess.find('[data-form-result-body]').text(data.body);
+		data.title && this.$formSuccessRecall.find('[data-form-result-title]').text(data.title);
+		data.body && this.$formSuccessRecall.find('[data-form-result-body]').text(data.body);
+		this.$formSuccess.show();
+		this.$formSuccessRecall.show();
 
+		this.reset();
+		console.log('reachGoal', this.target);
+		ym('67719148', 'reachGoal', this.target);
+		gtag('event', $(this).data('target'), {'event_category': 'click'});
+		// this.$submitButton.removeClass('button__pending');
+	}
+
+	bind() {
 		this.$form.find('[data-dynamic-placeholder]').each(function () {
 			$(this).on('blur',function () {
 				if ($(this).val() == '')
@@ -37,13 +57,11 @@ export default class Form {
 					$(this).addClass('form_input_filled');
 			})
 		})
-
 		this.$form.find('[data-required]').each((i, el) => {
 			$(el).on('blur', (e) => {
 				this.checkField($(e.currentTarget));
 				this.checkValid();
 			});
-
 			$(el).on('change', (e) => {
 			  // console.log('input change');
 			  this.checkValid();
@@ -51,16 +69,13 @@ export default class Form {
 			  // this.checkValid();
 			});
 		});
-
 		this.$form.on('submit', (e) => {
 			this.sendIfValid(e);
 		});
-
 		this.$form.on('click', 'button.disabled', function(e) {
 			e.preventDefault();
 			return false;
 		})
-
 		this.$policy.on('click',(e) => {
 			var $el = $(e.currentTarget);
 
@@ -71,7 +86,6 @@ export default class Form {
 
 			this.checkValid();
 		})
-
 		this.$policy_checkbox.on('click',(e) => {
 
 			let $el = $(e.currentTarget);
@@ -90,7 +104,6 @@ export default class Form {
 			let $el = $(e.currentTarget);
 			this.calendarInit($el.data('next_date'));
 		})
-
 		this.$form.on('click', 'input[name="date"]', (e) => {
 			let $el = $(e.currentTarget);
 			if ($el.html() == '') {
@@ -98,16 +111,13 @@ export default class Form {
 			} else {
 				this.calendarInit($el.html());
 			}
-			
 		})
-
 		this.$form.on('click', '.date_wrapper_week p', (e) => {
 			let $el = $(e.currentTarget);
 			let $elParent = $el.parent();
 			if (!$elParent.hasClass('week_title')) {
 				$elParent.parents('.date_wrapper').find('input').val($el.data('cur_date'));
 			} 
-			
 		})
 	}
 
@@ -192,21 +202,6 @@ export default class Form {
 
 	beforeSend() {
 		// this.$submitButton.addClass('button__pending');
-	}
-
-	success(data) {
-		//modal.append(data);
-		//modal.show();
-		this.$formModalMain.hide();
-		data.title && this.$formSuccess.find('[data-form-result-title]').text(data.title);
-		data.body && this.$formSuccess.find('[data-form-result-body]').text(data.body);
-		this.$formSuccess.show();
-		this.$formModal.not('._active').addClass('_active');
-		this.reset();
-		console.log('reachGoal', this.target);
-		ym('67719148', 'reachGoal', this.target);
-		gtag('event', $(this).data('target'), {'event_category': 'click'});
-		// this.$submitButton.removeClass('button__pending');
 	}
 
 	error() {

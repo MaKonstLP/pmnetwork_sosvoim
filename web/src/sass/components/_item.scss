@@ -565,6 +565,13 @@ button{
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
+    @include for-pad{
+        width: 154px;
+        height: 34px;
+        margin-bottom: 16px;
+        line-height: 34px;
+        font-size: 14px;
+    }
     &::before{
         content: '';
         position: absolute;
@@ -575,6 +582,12 @@ button{
         top: 5px;
         background-color: #0c8cd4;
         border-radius: 3px;
+        @include for-pad{
+            width: 25px;
+            height: 26px;
+            left: -10px;
+            top: 4px;
+        }
     }
     &:hover{
         background-color: #24A3EB;
@@ -1006,7 +1019,7 @@ button{
     }
     .rest_room{
         display: flex;
-        width: 467px;
+        // width: 467px;
         flex-direction: column;
         border-radius: 3px 3px 0 0;
         overflow: hidden;
@@ -1457,6 +1470,12 @@ button{
 }
 
 div[data-page-type='item']{
+    // &>.content_block{
+    //     @include for-phone{
+    //         margin-top: 212px;
+    //         margin-bottom: 30px;
+    //     }
+    // }
     .for-free{
         display: none;
     }

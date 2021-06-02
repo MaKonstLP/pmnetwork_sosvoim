@@ -22,6 +22,10 @@ class ItemController extends BaseFrontendController
 				],
 			]
 		])->one();
+
+		// echo "<pre>";
+		// print_r($rest_item);
+		// exit;
 		
 		if(empty($rest_item)) {
 			throw new NotFoundHttpException();

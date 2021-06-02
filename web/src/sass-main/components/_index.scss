@@ -6,23 +6,25 @@
     align-items: center;
     width: 100%;
     margin: 120px auto;
-    @include for-notdesc{
-        flex-direction: column;
-        padding: 0px 15px;
+    .content_block{
+        padding: 0 50px;
+        @include for-pad{
+            padding: 0 20px;
+        }
     }
-
     @include for-desktop{
-        margin: 42px auto 35px;
+        margin: 0;
+        margin-top: 104px;
     }
-
     @include for-pad{
-        margin: 42px auto 35px;
+        margin-top: 100px;
     }
-
     @include for-mobile{
-        margin: 0 auto 20px;
+        margin-top: 64px;
     }
-
+    @include for-phone{
+        margin-top: 125px;
+    }
     h1{
     	/*width: calc(50% - 35px);
     	text-align: right;*/
@@ -33,49 +35,46 @@
         line-height: 60px;
         letter-spacing: 0.01em;
         max-width: 1000px;
-
         @include for-notdesc{
             text-align: center;
             margin-right: 0px;
             width: 100%;
         }
-
         @include for-mobile{
             font-size: 40px;
             line-height: 44px;
         }
-
         @include for-phone{
             font-size: 32px;
             line-height: 34px;
         }
     }
-
     .main_top_desc{
         margin-bottom: 30px;
+        padding: 0 10px;
         font-size: 42px;
         font-weight: bold;
         color: #fff;
         text-align: center;
-
-        @include for-notdesc{
-            text-align: center;
-            width: 100%;
+        @include for-desktop{
+            margin-bottom: 24px;
+            font-size: 30px;
         }
-
+        @include for-pad{
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
         @include for-mobile{
             margin-top: 10px;
+            margin-bottom: 11px;
         }
-
         @include for-phone{
-            display: none;
+            margin-bottom: 14px;
         }
-
 	    p{
 		    font-weight: 500;
 			font-size: 24px;
 		    line-height: 39px;
-
             @include for-mobile{
                 font-size: 20px;
                 line-height: 29px;
@@ -83,11 +82,212 @@
 		}
 	}
 }
+div[data-page-type="listing"] {
+    .main_top{
+        @include for-pad{
+            margin-top: 60px;
+        }
+        @include for-mobile{
+            margin-top: 64px;
+        }
+        @include for-phone{
+            margin-top: 125px;
+        }
+    }
+    .main_top_desc{
+        @include for-pad{
+            margin-bottom: 12px;
+        }
+        @include for-phone{
+            margin-bottom: 8px;
+        }
+    }
+    .content_block{
+        @include for-mobile{
+            padding: 0 45px;
+        }
+        @include for-phone{
+            padding: 0 15px;
+        }
+    }
+}
+
+.error_page{
+    .error_top_image{
+        margin-bottom: 50px;
+        @include for-phone{
+            margin-bottom: 40px;
+        }
+        .error_img{
+            height: 650px;
+            @include for-desktop{
+                height: 486px;
+            }
+            @include for-pad{
+                height: 539px;
+            }
+            @include for-mobile{
+                height: 565px;
+            }
+            @include for-phone{
+                height: 613px;
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    .error_top{
+        position: absolute;
+        top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 120px auto;
+        @include for-desktop{
+            margin: 92px 0;
+        }
+        @include for-pad{
+            margin: 84px 0;
+        }
+        @include for-phone{
+            margin-top: 165px;
+        }
+        .main_search{
+            @include for-pad{
+                flex-direction: column;
+            }
+        }
+        .main_search_type_room{
+            width: 345px;
+            height: 60px;
+            padding-top: 16px;
+            @include for-desktop{
+                width: 320px;
+            }
+            @include for-pad{
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            @include for-phone{
+                width: 290px;
+            }
+            .choose{
+                top: 27px;
+                &._expand{
+                    top: 20px;
+                }
+            }
+            .main_search_type_room_list{
+                width: 345px;
+                @include for-desktop{
+                    width: 320px;
+                }
+                @include for-pad{
+                    top: 58px;
+                }
+                @include for-phone{
+                    width: 290px;
+                }
+            }
+        }
+        .main_search_submit{
+            width: 223px;
+            @include for-desktop{
+                width: 200px;
+            }
+            @include for-phone{
+                width: 180px;
+                height: 50px;
+                line-height: 50px;
+            }
+        }
+    }
+    .error_top_message{
+        display: flex;
+        align-items: center;
+        @include for-phone{
+            margin-bottom: 7px;
+        }
+    }
+    .error_number{
+        width: 90px;
+        font-size: 160px;
+        line-height: 115px;
+        font-weight: bold;
+        color: #ffffff;
+        @include for-desktop{
+            width: 60px;
+            font-size: 109px;
+            line-height: 86px;
+        }
+        @include for-phone{
+            width: 45px;
+            font-size: 82px;
+            line-height: 66px;
+        }
+    }
+    .error_logo{
+        width: 120px;
+        height: 117px;
+        background-image: url(/img/logo.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        @include for-desktop{
+            width: 80px;
+            height: 80px;
+        }
+        @include for-phone{
+            width: 60px;
+            height: 60px;
+        }
+    }
+    .error_desc{
+        margin-bottom: 12px;
+        font-size: 36px;
+        font-weight: bold;
+        color: #ffffff;
+        @include for-desktop{
+            font-size: 30px;
+        }
+        @include for-phone{
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+    }
+    .error_notice{
+        margin-bottom: 25px;
+        padding: 0 45px;
+        font-size: 16px;
+        color: #ffffff;
+        text-align: center;
+        @include for-mobile{
+            margin-bottom: 15px;
+        }
+        @include for-phone{
+            margin-bottom: 23px;
+            padding: 0 15px;
+        }
+    }
+}
+
 .main_search{
     display: flex;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    @include for-pad{
+        width: 80%;
+    }
+    @media (max-width: 560px) {
+        width: 100%;
+    }
     @include for-phone{
-        display: block;
+        flex-direction: column;
     }
     .main_search_city{
         display: none;
@@ -112,7 +312,7 @@
         position: relative;
         width: 250px;
         margin-right: 20px;
-        padding: 17px 20px;
+        padding: 16px 20px;
         background: rgba(39, 39, 39, 0.6);;
         border: 1px solid #ffffff;
         border-radius: 2px;
@@ -121,9 +321,19 @@
         color: #ffffff;
         text-align: left;
         cursor: pointer;
+        @include for-pad{
+            width: 210px;
+            height: 50px;
+            margin-right: 30px;
+            padding: 11px 20px;
+        }
+        @include for-mobile{
+            margin-right: 20px;
+        }
         @include for-phone{
-            width: 100%;
-            margin: 12px auto;
+            width: 218px;
+            margin-right: 0;
+            margin-bottom: 15px;
         }
         .type_room_choose{
             font-size: 18px;
@@ -133,12 +343,18 @@
         .choose{
             position: absolute;
             right: 10px;
-            top: 25px;
-            border: 8px solid transparent;
-            border-top: 8px solid #ffffff;
+            top: 27px;
+            border: 6px solid transparent;
+            border-top: 6px solid #ffffff;
             &._expand{
-                top: 18px;
+                top: 20px;
                 transform: rotate(180deg);
+                @include for-pad{
+                    top: 15px;
+                }
+            }
+            @include for-pad{
+                top: 22px;
             }
         }
     }
@@ -166,9 +382,14 @@
         &:active{
             background-color: #C6002F;
         }
+        @include for-pad{
+            width: 210px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+        }
         @include for-phone{
-            width: 100%;
-            margin: 0 auto;
+            width: 218px;
         }
     }
     .main_search_city_list{
@@ -214,20 +435,22 @@
     .main_search_type_room_list{
         display: none;
         position: absolute;
-        top: 58px;
+        top: 57px;
         left: -1px;
-
         width: 250px;
         height: 100px;
         padding: 3px 5px 3px 20px;
-
         z-index: 1;
         overflow-y: auto;
         background: rgba(39, 39, 39, 0.6);;
         border: 1px solid #ffffff;
         border-radius: 2px;
+        @include for-pad{
+            top: 48px;
+            width: 218px;
+        }
         @include for-mobile{
-            width: 100%;
+            // width: 100%;
         }
 
         p{
@@ -439,32 +662,36 @@
         } 
     }
 }
-
+.main_top_image{
+    margin-bottom: 80px;
+    @include for-desktop{
+        margin-bottom: 55px;
+    }
+    @include for-pad{
+        margin-bottom: 53px;
+    }
+    @include for-phone{
+        margin-bottom: 33px;
+    }
+}
 .main_top_slider{
     position: relative;
     top: 0;
     width: 100%;
     height: 485px;
-    margin-bottom: 60px;
     overflow: hidden;
     background-color: #272727;
+    @include for-desktop{
+        height: 374px;
+    }
+    @include for-pad{
+        height: 385px;
+    }
     @include for-mobile{
-        height: 350px;
-        &._short{
-            height: 400px; 
-        }
-        &.__shotr_3{
-            height: 450px;
-        }
+        height: 374px;
     }
     @include for-phone{
-        height: 560px;  
-        &._short{
-            height: 430px; 
-        }
-        &.__short_3{
-            height: 450px;
-        }
+        height: 655px;  
     }
     img{
         width: 100%;
@@ -472,6 +699,261 @@
         object-fit: cover;
     }
 }
+.main_page_slider{
+    @include for-phone{
+        height: 449px;  
+    }
+}
+.items_count{
+    margin-bottom: 16px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #272727;
+    text-align: center;
+    @include for-desktop{
+        margin-bottom: 25px;
+        font-size: 26px;
+    }
+    @include for-pad{
+        margin-bottom: 23px;
+    }
+    @include for-phone{
+        margin-bottom: 13px;
+    }
+}
+.tablinks{
+    display: flex;
+    width: 225px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    align-items: center;
+    @include for-desktop{
+        margin-bottom: 20px;
+    }
+    @include for-mobile{
+        margin-bottom: 15px;
+    }
+    @include for-phone{
+        justify-content: flex-start;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .tablinks_item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 122px;
+        height: 30px;
+        font-size: 16px;
+        color: #0C8CD4;
+        cursor: pointer;
+        user-select: none;
+        &:hover{
+            color: #24A3EB;
+        }
+        &:focus,
+        &:active{
+            color: #0179BD;
+        }
+        p{
+            width: fit-content;
+            margin: 0 auto;
+            border-bottom: 1px dashed #0C8CD4;
+        }
+        &._active{
+            width: 122px;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            text-align: center;
+            background-color: #0C8CD4;
+            color: #ffffff;
+            border-radius: 3px;
+            cursor: pointer;
+            user-select: none;
+            &:hover{
+                background-color: #24A3EB;
+            }
+            &:focus,
+            &:active{
+                background-color: #0179BD;
+            }
+            p{
+                border-bottom: none;
+            }
+            @include for-phone{
+                margin-left: 17px;
+            }
+        }
+        @include for-phone{
+            margin-left: 35px;
+        }
+    }
+}
+#tabMap{
+    display: none;
+}
+.order-block{
+    position: absolute;
+    right: -209px;
+    width: 202px;
+    padding: 14px 0;
+    background-color: #da0034;
+    border-radius: 3px;
+    @include for-large-desktop{
+        display: none;
+    }
+    .order_wrap{
+        position: relative;;
+        width: 190px;
+        margin: 0 auto;
+        .order_block_title{
+            margin-bottom: 3px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 16px;
+            color: #ffffff;
+        }
+        .order_block_desc{
+            margin-bottom: 9px;
+            font-size: 13px;
+            text-align: center;
+            line-height: 14px;
+            color: #ffffff;
+        }
+        .order_block_phone{
+            margin-bottom: 11px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #ffffff;
+        }
+        .order_block_call{
+            width: 140px;
+            height: 40px;
+            margin: 0 auto;
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #272727;
+            color: #ffffff;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover{
+                background-color: #404040;
+            }
+            &:focus,
+            &:active{
+                background-color: #202020;
+            }
+        }
+        .order_block_arr{
+            position: absolute;
+            left: -16px;
+            width: 21px;
+            height: 21px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 21px;
+            border-radius: 50%;
+            background-color: #272727;
+            color: #fff;
+        }
+    }
+    &._active{
+        display: block;
+    }
+}
+.order_help_block{
+    // top: -28px;
+    top: 150px;
+    height: 176px;
+    .order_wrap{
+        .order_block_arr{
+            top: 63px;
+        }
+    }
+}
+.order_recall_block{
+    display: none;
+    top: 150px;
+    // top: 162px;
+    height: 280px;
+    .order_wrap{
+        .order_block_arr{
+            top: 93px;
+            transform: rotate(180deg);
+        }
+    }
+    .form_block{
+        .form_inputs{
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+            .input_wrapper{
+                width: 92%;
+                height: 35px;
+                &:first-child{
+                    margin-bottom: 10px;
+                }
+                input{
+                    height: 35px;
+                }
+                .input_error{
+                    line-height: 8px;
+                    color: #ffffff;
+                }
+            }
+        }
+        .form_submit{
+            margin: 0;
+            flex-direction: column;
+            .checkbox_pseudo{
+                color: #ffffff;
+                &::before{
+                    border: 1px solid #ffffff;
+                }
+                &::after{
+                    background-image: url(/img/checkbox_pin_main.svg);
+                }
+            }
+            .form_policy{
+                width: 95%;
+                margin: 0 auto;
+                font-size: 12px;
+                a{
+                    border-bottom: 1px solid #ffffff;
+                }
+            }
+        }
+    }
+}
+.order_succes_block{
+    display: none;
+    top: 150px;
+    // top: 456px;
+    height: 122px;
+    .order_wrap{
+        .order_block_arr{
+            top: 38px;
+            transform: rotate(180deg);
+        }
+    }
+    .retype_call{
+        width: fit-content;
+        margin: 0 auto;
+        font-size: 12px;
+        color: #ffffff;
+        border-bottom: 1px dashed #ffffff;
+    }
+}
+
+.items_list_listing.content_block{
+    margin-bottom: 50px;
+}
+
 // .listing_wrap{
 //     background: #F8F8F8;
 //     padding: 80px 0 60px;

@@ -82,7 +82,7 @@ class SiteController extends BaseFrontendController
 
         // print_r($mainRestTypesCounts);die;
 
-        $items = new ItemsFilterElastic([], 30, 1, false, 'restaurants', new ElasticItems());
+        $items = new ItemsFilterElastic([], 10, 1, false, 'restaurants', new ElasticItems());
         $mainWidget = $this->renderPartial('//components/generic/listing.twig', [
             'items' => $items->items
         ]);
@@ -90,7 +90,9 @@ class SiteController extends BaseFrontendController
         $filtersItemsForSelect = array_filter($this->filter_model, function ($filter) {
             return in_array($filter->alias, self::MAIN_FILTERS);
         });
-        #Фиксированные срезы на главной
+
+
+        #Фиксированные срезы на главной - из birthday-place.ru
         $mainSlices = [
             '1500-rub'    => ['name' => 'Недорогие рестораны', 'count' => 0],
             'veranda'       => ['name' => 'Веранды', 'count' => 0],
@@ -104,12 +106,13 @@ class SiteController extends BaseFrontendController
         foreach ($mainSlices as $alias => $sliceTexts) {
             $slice_obj = new QueryFromSlice($alias);
             $temp_params = new ParamsFromQuery($slice_obj->params, $this->filter_model, $this->slices_model);
-            // $sliceItems = new ItemsFilterElastic($temp_params->params_filter, 1, 1, false, 'restaurants', new ElasticItems());
+            $sliceItems = new ItemsFilterElastic($temp_params->params_filter, 1, 1, false, 'restaurants', new ElasticItems());
             $mainSlices[$alias]['count'] = $temp_params->query_hits;
         }
         $mainSlices = array_filter($mainSlices, function ($slice) {
             return $slice['count'] > 0;
         });
+
 
         $blogPosts = BlogPost::findWithMedia()
             ->limit(5)->where(['published' => 1])
@@ -119,6 +122,8 @@ class SiteController extends BaseFrontendController
 
         $seo = $this->getSeo('index', 1,  $totalRests);
         $this->setSeo($seo);
+
+        \Yii::$app->params['isHome'] = true;
 
         return $this->render('index.twig', [
             'filters' => $filtersItemsForSelect,
@@ -150,13 +155,13 @@ class SiteController extends BaseFrontendController
         if (
             !($cityId = Yii::$app->request->get('city_id'))
             || !($filter = Yii::$app->request->get('filter'))
-        )  return ['error' => "invalid get query params"];
+        )  return json_encode(['error' => "invalid get query params"]);
 
         //city_id 123213, filter "6,1" = Filter id,FilterItems value
         if (
             count($exploded = explode(',', $filter)) != 2
             || !($filter = Filter::findOne($exploded[0]))
-        ) return ['error' => "unable to find filter"];
+        ) return json_encode(['error' => "unable to find filter"]);
 
         //params {"mesto":5}
         $slices = Slices::find()->where(['like', 'params', $filter->alias])->all();
@@ -216,7 +221,13 @@ class SiteController extends BaseFrontendController
 
     public function actionError()
     {
-        return $this->render('error.twig');
+        $filtersItemsForSelect = array_filter($this->filter_model, function ($filter) {
+            return in_array($filter->alias, self::MAIN_FILTERS);
+        });
+        \Yii::$app->params['isHome'] = true;
+        return $this->render('error.twig', [
+            'filters' => $filtersItemsForSelect
+        ]);
     }
 
     public function actionRobots()

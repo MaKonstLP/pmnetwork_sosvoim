@@ -7,7 +7,10 @@ import Index from './components/index';
 import Widget from './components/widget';
 import Form from './components/form';
 import YaMap from './components/map';
+//import YaMapAll from './components/map_all';
 import Slider from './components/slider';
+import TabLinks from './components/tablinks';
+import Burger from './components/burger';
 
 window.$ = $;
 window.jQuery = $;
@@ -37,6 +40,12 @@ window.jQuery = $;
 
 	    if ($('.map').length > 0) {
 	    	var yaMap = new YaMap();
+	    }
+	    if ($('.tablinks').length > 0) {
+	    	var tabLinks = new TabLinks();
+	    }
+	    if ($('.menu_burger').length > 0) {
+	    	var burger = new Burger();
 	    }
 
 	    var main = new Main();

@@ -86,14 +86,6 @@ class Module extends \yii\base\Module
 
         $subdomenId = Yii::$app->params['subdomen_baseid'];
         Yii::$app->params['filter_model'] = Filter::find()
-            ->with(['items' => function ($query) use ($subdomenId) {
-                $query->leftJoin(
-                    'subdomen_filteritem',
-                    "subdomen_filteritem.filter_items_id = filter_items.id AND subdomen_filteritem.subdomen_id = $subdomenId"
-                )
-                    ->where("subdomen_filteritem.is_valid=0 OR (subdomen_filteritem.is_valid=1 AND subdomen_filteritem.hits>0)")
-                    ->select('*');
-            }])
             ->where(['active' => 1])
             ->orderBy(['sort' => SORT_ASC])
             ->all();
@@ -102,20 +94,46 @@ class Module extends \yii\base\Module
         $footerSlices = [
             'restoran' => ['name' => 'Рестораны', 'type' => 'kind','count' => 0],
             'kafe' => ['name' => 'Кафе', 'type' => 'kind','count' => 0],
+            'kottedzh' => ['name' => 'Коттеджи', 'type' => 'kind','count' => 0],
+            'bar' => ['name' => 'Бары', 'type' => 'kind','count' => 0],
+            'otel' => ['name' => 'Отели/Гостиницы', 'type' => 'kind','count' => 0],
             'loft' => ['name' => 'Лофты', 'type' => 'kind','count' => 0],
-            'veranda' => ['name' => 'Веранды', 'type' => 'kind','count' => 0],
-            'otel' => ['name' => 'Отели', 'type' => 'kind','count' => 0],
+            'veranda' => ['name' => 'Веранды/Террасы', 'type' => 'kind','count' => 0],
+            'baza-otdiha' => ['name' => 'Базы отдыха', 'type' => 'kind','count' => 0],
+            'sauna' => ['name' => 'Бани/Сауны', 'type' => 'kind','count' => 0],
+            'letnyaya-ploshadka' => ['name' => 'Летние площадки', 'type' => 'kind','count' => 0],
+            'shater' => ['name' => 'Шатры', 'type' => 'kind','count' => 0],
+            'detskaya-ploshadka' => ['name' => 'Детские площадки', 'type' => 'kind','count' => 0],
+            'banketniy-zal' => ['name' => 'Банкетные залы', 'type' => 'kind','count' => 0],
+            'antikafe' => ['name' => 'Антикафе', 'type' => 'kind','count' => 0],
+
+            '1000-rub' => ['name' => 'до 1000 руб', 'type' => 'cost','count' => 0],
+            '1500-rub' => ['name' => 'до 1500 руб', 'type' => 'cost','count' => 0],
+            '2000-rub' => ['name' => 'до 2000 руб', 'type' => 'cost','count' => 0],
+            '2500-rub' => ['name' => 'до 2500 руб', 'type' => 'cost','count' => 0],
+            '3000-rub' => ['name' => 'до 3000 руб', 'type' => 'cost','count' => 0],
+
             'za-gorodom' => ['name' => 'За городом', 'type' => 'feature','count' => 0],
             'svoy-alko' => ['name' => 'Со своим алкоголем', 'type' => 'feature','count' => 0],
+            'u-vodi' => ['name' => 'У воды', 'type' => 'feature','count' => 0],
         ];
         foreach ($footerSlices as $alias => $sliceTexts) {
             $slice_obj = new QueryFromSlice($alias);
             $temp_params = new ParamsFromQuery($slice_obj->params, Yii::$app->params['filter_model'], Yii::$app->params['slices_model']);
             $footerSlices[$alias]['count'] = $temp_params->query_hits;
+            // echo '<pre>';
+            // print_r($temp_params);
+            // exit;
         }
         Yii::$app->params['footer_slices'] = array_filter($footerSlices, function ($slice) {
             return $slice['count'] > 0;
         });
+
+        Yii::$app->params['footer_slices'] = $footerSlices;
+
+        //echo '<pre>';
+        //print_r(Yii::$app->params['footer_slices']);
+        //exit;
     }
 
     private function redirect($redirect)

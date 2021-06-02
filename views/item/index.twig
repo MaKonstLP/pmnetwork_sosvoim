@@ -169,7 +169,7 @@
                                 });
                             </script>
                         </div>
-                        <div class="order_block_call">Заказать звонок</div>
+                        <div class="order_block_call" data-open-recall-form>Заказать звонок</div>
                         <div class="order_block_arr">&#10094;</div>
                     </div>
                 </div>
@@ -193,13 +193,13 @@
             <div class="rest_optional_wrap">
                 <div class="rest_optional">Особенности</div>
                 <div class="item_optional">
-                    {% if item.restaurant_firework %}
+                    {% if rest_item.restaurant_firework %}
                         <div class="optional">
                             <div class="optional__pic fire"></div>
                             <p>Площадка для фейерверка</p>
                         </div>
                     {% endif %} 
-                    {% if item.restaurant_own_alcohol %}
+                    {% if rest_item.restaurant_own_alcohol != 'Нельзя свой алкоголь' %}
                         <div class="optional">
                             <div class="optional__pic bocal"></div>
                             <p>Можно со своим алкоголем</p>
@@ -319,7 +319,7 @@
                                 <div class="item_info">
                                     <div class="item_info_top">
                                         <p class="item_name">{{other_room.restaurant_name}} / {{other_room.name}}</p>
-                                        <p class="item_type">{{rest_item.restaurant_main_type}}</p>
+                                        <p class="item_type">{{other_room.restaurant_main_type}}</p>
                                     </div>
                                     <div class="item_meta">
                                         <div class="item_meta_items">
@@ -329,7 +329,6 @@
                                             <div class="item_meta_item"></div>
                                             <div class="item_meta_item">Вместимость: до {{item.capacity}} человек</div>
                                             <div class="item_meta_item">Стоимость: <span class="object_price">от {{item.price}}р на человека</span></div>
-                                            <div class="item_meta_item">Парковочных мест: {{rest_item.restaurant_parking|length}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -344,5 +343,5 @@
     </div>
     {% endif %}
 
-    {{ this.render('//components/generic/form.twig', {'title': 'Бесплатно забронировать ' ~ item.restaurant_name, 'title2': 'Оставьте заявку, а мы перезвоним в ближайшее время!', 'target': 'podval_rest'}) | raw }}
+    {{ this.render('//components/generic/form.twig', {'title': 'Бесплатно забронировать ' ~ item.name ~ ' в ' ~ item.restaurant_name, 'title2': 'Оставьте заявку, а мы перезвоним в ближайшее время!', 'target': 'podval_room'}) | raw }}
 </div>

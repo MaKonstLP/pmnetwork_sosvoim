@@ -28,23 +28,23 @@ export default class YaMap{
         }),
 
         myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
-            hintContent:    '\
-                            <div class="ballon_content_text">\
-                            <p class="ballon_content_address" href="#">'+ $('.map_rest_name').html() +'</p>\
-                            <p class="ballon_content_address">'+ $('.map_rest_address').html() +'</p>\
-                        </div>\
-            ',
-            balloonContent: '\
-                            <div class="balloon_content_wrap">\
-                                <div class="balloon_content_img">\
-                                    <img src="'+ $('.map_img').attr('src') +'">\
-                                </div>\
-                                <div class="ballon_content_text">\
-                                    <a class="ballon_content_name" href="#">'+ $('.map_rest_name').html() +'</a>\
-                                    <p class="ballon_content_address">'+ $('.map_rest_address').html() +'</p>\
-                                </div>\
-                            </div>\
-            ',
+            // hintContent:    '\
+            //                 <div class="ballon_content_text">\
+            //                 <p class="ballon_content_address" href="#">'+ $('.map_rest_name').html() +'</p>\
+            //                 <p class="ballon_content_address">'+ $('.map_rest_address').html() +'</p>\
+            //             </div>\
+            // ',
+            // balloonContent: '\
+            //                 <div class="balloon_content_wrap">\
+            //                     <div class="balloon_content_img">\
+            //                         <img src="'+ $('.map_img').attr('src') +'">\
+            //                     </div>\
+            //                     <div class="ballon_content_text">\
+            //                         <div class="ballon_content_name">'+ $('.map_rest_name').html() +'</div>\
+            //                         <p class="ballon_content_address">'+ $('.map_rest_address').html() +'</p>\
+            //                     </div>\
+            //                 </div>\
+            // ',
         }, {
             iconLayout: 'default#image',
             iconImageHref: '/img/iconMap.svg',

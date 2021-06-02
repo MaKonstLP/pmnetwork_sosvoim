@@ -3,10 +3,10 @@
 		<a href="{{ model.getUrl() }}"><img src="{{ model.getFileData('image').src }}"></a>
 	</div>
 	<div class="blog_text">
-		<p class="blog_date">{{ model.published_at }}</p>
-		<a href="{{ model.getUrl() }}">
-			<p class="blog_title">{{ model.name }}</p>
-		</a>
+		<div class="blog_title">
+			<a href="{{ model.getUrl() }}">{{ model.name }}</a>
+		</div>
 		<p class="blog_description">{{ model.short_intro }}</p>
+		<p class="blog_date">{{ model.published_at }}</p>
 	</div>
 </div>

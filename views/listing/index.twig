@@ -5,14 +5,40 @@
 {{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
 
 <div data-page-type="listing">
-
-	<div class="content_block" data-listing-title>
-
+	{# <div class="content_block" data-listing-title>
 		{{ this.render('//components/generic/title.twig', {'count':count, 'seo':seo, 'appParams':appParams}) | raw }}
+	</div> #}
 
+	<div class="main_top_image">
+		<div class="main_top_slider">
+		{# <div class="main_top_slider{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}"> #}
+			<img loading="lazy" src="/img/image-1.jpg" alt="Главная">
+		</div>
+		{# <div class="main_rectangle_wrap{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}">
+			{% for item in mainRestTypesCounts %}
+				<div class="main_rectangle">
+					<div class="main_rectangle_1"></div>
+					<div class="main_rectangle_2"></div>
+					<a href="/catalog/{{item.alias}}/">
+						<div class="main_rectangle_count">{{item.count}}</div>
+						<div class="main_rectangle_type">{{item.plural}}</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div> #}
 	</div>
-
-	<div class="content_block">
+	
+	<div class="main_top">
+		{# <h1>{{seo.h1|raw}}</h1> #}
+		<div class="main_top_desc">
+			Заведения, куда можно со своим алкоголем в 
+			<span class="city">{{app.params.subdomen_dec}}</span>
+		</div>
+		<div class="main_search">
+			{{filter | raw }}
+		</div>
+	</div>
+	{# <div class="content_block">
 		<div data-listing-fast-filters>
 			{{ this.render('//components/generic/listing_tags.twig', {'fastFilters':fastFilters}) | raw }}			
 		</div>
@@ -22,39 +48,118 @@
 				<p class="_link">Показать полностью</p>
 			</div>
 		</div>
-		{{filter | raw }}
+	</div> #}
+
+	<div class="content_block">
+		<div class="items_count" data-listing-title>
+			{{count}} заведен{{Declension.get_num_ending(count,['ие','ия','ий'])}} найдено
+		</div>
+
+		{% if count != 0 %}
+		<div class="tablinks">
+			<div class="tablinks_item _list _active"><p>Списком</p></div>
+			<div class="tablinks_item _map"><p>На карте</p></div>
+		</div>
+		{% endif %}
 	</div>
+	
+	<div class="map_wrap" id="tabMap">
+		<div class="content_block">
 
-	<div class="items_list_listing content_block" data-listing-wrapper>
-		<div class="items_list" data-listing-list>
+			<div class="map_data_wrap">
+				<div class="map_data">
+					<div class="map_img_wrap">
+						<img loading="lazy" class="map_img" src="{{ Declension.get_image_src(item.restaurant_cover_url|replace({'w445-h302-n-l95': 'w710-h472-n-l95'})) }}">
+					</div>
+					
+					<a href="/catalog/restoran-{{item.restaurant_slug}}/" class="map_rest_name">{{ item.restaurant_name }}</a>
+					<p class="map_rest_address">{{ item.restaurant_address }}</p>
+					<p class="map_close">Спасибо, закрыть</p>
+				</div>
+			</div>
 
-			{{ this.render('//components/generic/listing.twig', {'items':items, 'img_alt':seo.img_alt}) | raw }}
+
+			<div class="map-all" id="map_on" data-listing-map data-map-api-subid="2" data-map></div>
+						
+			<div class="order_help_block order-block">
+				<div class="order_wrap">
+					<p class="order_block_title">Помочь с выбором<br>зала?</p>
+					<p class="order_block_desc">бесплатно подберем оптимальный для вас вариант</p>
+					<p class="order_block_phone">8 (846) 555-55-00</p>
+					<div class="order_block_call">Заказать звонок</div>
+					<div class="order_block_arr">&#10094;</div>
+				</div>
+			</div>
+			<div class="order_recall_block order-block">
+				<div class="order_wrap">
+					<p class="order_block_title">Заказать обратный<br>звонок</p>
+					<p class="order_block_desc">наш менеджер перезвонит через 30 минут</p>
+					<form class="form_block" action="/ajax/form/" data-form-target="{{target}}">
+						<input type="hidden" name="type" value="{{ type ? type : 'main'}}" />
+						<div class="form_inputs">
+							<div class="input_wrapper">
+								<input type="text" name="name" data-required placeholder="Ваше имя"/>
+							</div>
+							<div class="input_wrapper">
+								<input type="text" name="phone" data-required placeholder="+7 (999) 888 88 88" autocomplete="off"/>
+							</div>
+						</div>
+
+						{% if target == 'zal' %}
+							<input type="hidden" name="venue_id" value="{{venue_id}}" />
+						{% endif %}
+
+						<div class="form_submit">
+							<button class="order_block_call">Заказать звонок</button>
+							<div class="form_policy checkbox_item _active" data-action="form_checkbox">
+								<input type="checkbox" name="policy" class="personalData">
+								<p class="checkbox_pseudo" >Я согласен с <a target="_blank" href="{{app.params.siteProtocol}}://{{app.params.siteAddress}}/politika/">политикой конфиденциальности</a></p>
+							</div>
+						</div>
+							
+					</form>
+
+					<div class="order_block_arr">&#10094;</div>
+				</div>
+			</div>
+			<div class="order_succes_block order-block">
+				<div class="order_wrap">
+					<p class="order_block_title" data-form-result-title>Заявка отправлена</p>
+					<p class="order_block_desc" data-form-result-body>Name, ваша заявка принята, мнеджер перезвонит вам через 30 минут</p>
+					<p class="retype_call">Заполнить ещё раз</p>
+					<div class="order_block_arr">&#10094;</div>
+				</div>
+			</div>
 
 		</div>
 	</div>
+	
+	<div class="items_list_listing content_block" id="tabList" data-listing-wrapper>
+		<div class="items_list" data-listing-list>
+			{{ this.render('//components/generic/listing.twig', {'items':items, 'img_alt':seo.img_alt}) | raw }}
+		</div>
 
-	<div class="content_block">
 		<div data-pagination-wrapper>
 			{{pagination | raw }}
 		</div>
-		<div data-append-items>Показать еще</div>
+		{# <div data-append-items>Показать еще</div> #}
 	</div>
 
-	<div class="content_block">
+	{# <div class="content_block">
 		<div class="seo_text text_bottom" data-seo-text>
 			<div data-listing-text-bottom>{{seo.text_bottom | raw }}</div>
 			<div class="seo_text_control" data-seo-control>
 				<p class="_link">Показать полностью</p>
 			</div>
 		</div>
-	</div>
+	</div> #}
 
-	{{ this.render('//components/generic/form.twig', {'title': 'Поможем выбрать зал на день рождения', 'target': 'podval_list'}) | raw }}
+	{{ this.render('//components/generic/form.twig', {'title': 'Затрудняетесь с выбором?', 'target': 'podval_list'}) | raw }}
 
 	<div class="content_loading"></div>
 </div>
 
-<div class="popup_filter_wrap">
+{# <div class="popup_filter_wrap">
 	<div class="popup_layout" data-close-popup></div>
 	<div class="popup_filter_top">
 		<a href="/" class="header_logo">
@@ -69,5 +174,4 @@
 		<p class="popup_filter_title">Фильтр площадок</p>
 		{{filter | raw }}
 	</div>
-
-</div>
+</div> #}

@@ -1,27 +1,106 @@
 header{
     position: absolute;
     width: 100%;
-    top: 0px;
-    left: 0px;
-    height: 99px;
+    // top: 0px;
+    // left: 0px;
+    // height: 99px;
     z-index: 100;
     background: rgba(255,255,255,0);
     color: #000;
     .main_menu{
         background-color: #272727;
         color: #ffffff;
+        margin-bottom: 30px;
+        @include for-pad{
+            margin-bottom: 24px;
+        }
+        @include for-mobile{
+            margin-bottom: 34px;
+        }
+        @include for-phone{
+            margin-bottom: 25px;
+        }
         .content_block{
             position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 40px;
+            @include for-mobile{
+                padding-left: 45px;
+            }
+            @include for-phone{
+                padding-left: 15px;
+            }
+        }
+        .menu_burger{
+            display: none;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            @include for-mobile{
+                display: flex;
+                align-items: center;
+            }
+            span{
+                position: relative;
+                display: block;
+                width: 20px;
+                height: 2px;
+                background-color: #ffffff;
+                &::after{
+                    position: absolute;
+                    top: -7px;
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 2px;
+                    background-color: #ffffff;
+                }
+                &::before{
+                    position: absolute;
+                    top: 7px;
+                    content: '';
+                    display: block;
+                    width: 20px;
+                    height: 2px;
+                    background-color: #ffffff;
+                }
+            }
+            &._active{
+                span{
+                    background-color: #272727;
+                    &::after{
+                        top: 0;
+                        transform: rotate(45deg);
+                        transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+                    }
+                    &::before{
+                        top: 0;
+                        transform: rotate(-45deg);
+                        transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+                    }
+                }
+            }
         }
         .main_menu_items{
             display: flex;
             list-style: none;
             .main_menu_item{
                 margin-right: 32px;
+                @include for-pad{
+                    margin-right: 26px;
+                }
+                @include for-mobile{
+                    margin: 0 auto;
+                    margin-bottom: 30px;
+                    text-align: center;
+                }
+                &:first-child{
+                    @include for-mobile{
+                        margin-top: 20px;
+                    }
+                }
                 a{
                     font-size: 14px;
                     color: #ffffff;
@@ -32,7 +111,22 @@ header{
                     &:visited{
                         color: inherit;
                     }
+                    @include for-mobile{
+                        font-size: 24px;
+                        border-bottom: none;
+                    }
                 }
+            }
+            @include for-mobile{
+                display: none;
+                position: absolute;
+                top: 35px;
+                left: 0px;
+                width: 100%;
+                z-index: 999;
+                flex-direction: column;
+                background-color: #272727;
+                border-radius: 0 3px 3px 0;
             }
         }
         .header_city{
@@ -44,11 +138,11 @@ header{
                     border-bottom: none;
                 }
             }
-            @include for-desktop{
-            }
             @include for-mobile{
+                right: 42px;
             }
             @include for-phone{
+                right: 12px;
             }
         }
         .city{
@@ -131,25 +225,50 @@ header{
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0px;
-        height: 100%;
+        // padding: 0px;
+        // height: 100%;
         .content_block{
             position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 40px;
+            @include for-mobile{
+                flex-direction: column;
+            }
             .content_left_side{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 width: 44%;
+                @include for-desktop{
+                    width: 51%;
+                }
+                @include for-pad{
+                    width: 47%;
+                }
+                @include for-mobile{
+                    width: 90%;
+                    margin-bottom: 12px;
+                    justify-content: flex-start;
+                }
+                @include for-phone{
+                    flex-direction: column;
+                    margin-bottom: 11px;
+                }
             }
             .content_right_side{
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
                 width: 50%;
+                @include for-mobile{
+                    width: 90%;
+                    justify-content: flex-end;
+                }
+                @include for-phone{
+                    flex-direction: column;
+                }
                 & > ._link,
                 & > ._recall{
                     width: 223px;
@@ -164,6 +283,15 @@ header{
                     -moz-user-select: none;
                     -khtml-user-select: none;
                     -webkit-user-select: none;
+                    @include for-desktop{
+                        width: 190px;
+                    }
+                    @include for-pad{
+                        width: 164px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-size: 14px;
+                    }
                 }
                 & > ._link{
                     background-color: #DA0034;
@@ -173,6 +301,9 @@ header{
                     &:focus,
                     &:active{
                         background-color: #C6002F;
+                    }
+                    @include for-phone{
+                        margin-bottom: 10px;
                     }
                 }
                 & > ._recall{
@@ -184,6 +315,21 @@ header{
                     &:focus,
                     &:active{
                         background-color: #0179BD;
+                    }
+                    @include for-pad{
+                        margin-left: 10px;
+                    }
+                    @include for-mobile{
+                        width: 138px;
+                        margin-left: 17px;
+                    }
+                    @include for-mobile{
+                        width: 140px;
+                        margin-left: 15px;
+                    }
+                    @include for-phone{
+                        width: 164px;
+                        margin-left: 0;
                     }
                 }
             }
@@ -217,6 +363,17 @@ header{
             font-weight: bold;
             text-transform: uppercase;
             color: #272727;
+            @include for-pad{
+                padding-left: 30px;
+                font-size: 18px;
+            }
+            @include for-mobile{
+                margin-right: 45px;
+            }
+            @include for-phone{
+                margin-bottom: 17px;
+                margin-right: 0;
+            }
             &::before{
                 position: absolute;
                 left: 0;
@@ -229,6 +386,10 @@ header{
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
+                @include for-pad{
+                    width: 21px;
+                    height: 29px;
+                }
             }
         }
         .header_phone{
@@ -239,6 +400,13 @@ header{
             font-weight: bold;
             text-transform: uppercase;
             color: #272727;
+            @include for-desktop{
+                font-size: 22px;
+            }
+            @include for-pad{
+                padding-left: 20px;
+                font-size: 18px;
+            }
             span{
                 border-bottom: 1px dashed #272727;
             }
@@ -253,12 +421,21 @@ header{
                 top: 0;
                 content: '';
                 display: block;
-                width: 30px;
-                height: 30px;
+                width: 25px;
+                height: 25px;
                 background-image: url(/img/phone-black.svg);
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
+                @include for-desktop{
+                    width: 22px;
+                    height: 22px;
+                }
+                @include for-pad{
+                    top: 2px;
+                    width: 17px;
+                    height: 17px;
+                }
             }
         }
     }
@@ -291,6 +468,17 @@ header{
     box-shadow: 0 0 3px 1px #DEDEDE;
     &.__visible{
         display: block;
+    }
+    @include for-desktop{
+        width: 500px;
+    }
+    @include for-pad{
+        right: 50%;
+        transform: translateX(50%);
+    }
+    @include for-phone{
+        width: 300px;
+        height: 440px;
     }
 }
 .city_list_close{
@@ -333,6 +521,9 @@ header{
         background-color: #DA0034;
         color: #ffffff;
         border-radius: 2px;
+        @include for-phone{
+            width: 180px;
+        }
     }
 }
 .city_list_item{
@@ -346,12 +537,21 @@ header{
     font-weight: bold;
     font-size: 24px;
     line-height: 24px;
+    @include for-desktop{
+        margin: 30px auto 20px auto;
+    }
 }
 .city_in_char {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 0 100px;
+    @include for-desktop{
+        padding: 0 80px;
+    }
+    @include for-phone{
+        padding: 0 30px;
+    }
     .city_block{
         display: flex;
         align-items: center;
@@ -359,6 +559,9 @@ header{
         margin-bottom: 15px;
         font-size: 16px;
         color: #272727;
+        @include for-phone{
+            width: 100%;
+        }
         input[type="radio"] {
             position: relative;
             width: 15px;
@@ -391,6 +594,15 @@ header{
         }
         label{
             cursor: pointer;
+        }
+    }
+}
+.main_wrap{
+    .main_menu{
+        .city_list_wrap{
+            .mCSB_dragger_bar{
+                background-color: #DA0034 !important;
+            }
         }
     }
 }

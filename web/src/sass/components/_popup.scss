@@ -1,4 +1,5 @@
-.popup_wrap{
+.popup_wrap,
+.popup_wrap_recall{
 	position: fixed;
 	z-index: 9999999;
 	width: 100%;
@@ -9,12 +10,10 @@
 	&:not(.popup_phone_wrap){
 		overflow: auto;
 	}
-
 	&._active{
 		display: flex;
 	}
 }
-
 .popup_layout{
 	position: absolute;
 	top: 0px;
@@ -24,104 +23,328 @@
 	background-color: $clrBlack;
 	opacity: 0.5;
 }
-
-.popup_form{
+.popup_form,
+.popup_form_recall{
 	width: 100%;
-    .form_wrapper{
+    .form_wrapper,
+	.form_wrapper_recall{
     	border-radius: 4px;
     }
     .form_close{
 		display: block;
-    	top: -22px;
-	    right: -22px;
+		top: 18px;
+	    right: 30px;
 	    width: 22px;
 	    height: 22px;
 	    will-change: transform;
+		@include for-mobile{
+			top: 10px;
+			right: 55px;
+		}
+		@include for-phone{
+			right: 25px;
+		}
 	    &:before,
 	    &:after {
-	    	background: $clrBg;
+	    	background: #272727;
 	    }
     }
     .form_main{
     	flex-direction: column;
     }
-    .form_title{
-    	width: 100%;
-    	margin: 0;
-/*    	.form_title_main{
-    		display: none;
-    	}
+	.form_title{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		margin-bottom: 19px;
+		padding: 0 10px;
+		@include for-desktop{
+			margin-bottom: 18px;
+		}
+		@include for-pad{
+			margin-bottom: 7px;
+		}
+		@include for-mobile{
+			margin-bottom: 15px;
+		}
+		@include for-phone{
+			margin-bottom: 12px;
+		}
+	
+		.form_title_main{
+			&:first-child{
+				margin-bottom: 7px;
+				font-size: 24px;
+				font-weight: 700;
+				color: #272727;
+				@include for-desktop{
+					margin-bottom: 8px;
+				}
+			}
+			&:last-child{
+				font-size: 16px;
+				font-weight: 400;
+				color: #272727;
+			}
+		}
 		.form_title_popup{
-			display: block;
-		}*/
-    }
-    .form_block{
+			display: none;
+		}
+	
+		.form_title_desc{
+			font-weight: bold;
+			font-size: 16px;
+			color: #FFB30F;
+	
+			@include for-mobile{
+				// display: none;
+			}
+	
+			@include for-pad{
+				// display: none;
+			}
+	
+			@include for-mobile{
+				// display: none;
+			}
+		}
+	}
+	.form_block{
     	width: 100%;
     }
-    .form_inputs{
-    	justify-content: left;
-    	.input_wrapper{
-	    	width: 47%;
-	    	&:nth-child(1),
-	    	&:nth-child(3){
-	    		margin-right: 25px;
-	    	}
-	    	&:nth-child(4){
-	    		width: 30%;
-	    	}
-	    	@include for-desktop{
-		    	width: 45%;
-		    }
-		    @include for-pad{
-		    	width: 45%;
-		    }
-		    @include for-phone{
-		    	width: 100% !important;
-		    	margin-right: 0 !important;
-		    }
-	    }
-    }
-    
+	.form_inputs{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+   		width: 100%;
+		@include for-desktop{
+			justify-content: space-around;
+			padding: 0 20px;
+		}
+		@include for-pad{
+			padding: 0 45px;
+		}
+		@include for-phone{
+			padding: 0;
+		}
+		.input_wrapper{
+			width: 23%;
+			height: 57px;
+			@include for-pad{
+				width: 45%;
+				height: 55px;
+			}
+			@include for-mobile{
+				width: 270px;
+			}
+			@include for-phone{
+				width: 94%;
+			}
+			&._big{
+				width: 220px;
+
+				@include for-desktop{
+					// width: 196px;
+				}
+
+				@include for-pad{
+					// width: 196px;
+				}
+				@include for-mobile{
+					// width: 196px;
+				}
+			}
+			&._big_width{
+				width: 100%;
+				@include for-desktop{
+					width: 98%;
+				}
+				@include for-pad{
+					width: 95%; 
+				}
+				@include for-mobile{
+					width: 270px;
+					height: 80px;
+				}
+				@include for-phone{
+					width: 94%;
+				}
+				textarea{
+					width: 100%;
+					padding: 8px 15px 20px;
+					font: inherit;
+					background-color: rgb(255, 255, 255);
+					color: rgb(39, 39, 39);
+					resize: none;
+					border: 1px solid #D0E1E7;
+					@include form_placeholder {
+						font-size: 16px;
+						color: #272727;
+					}
+					@include for-mobile{
+						padding-bottom: 33px;
+					}
+				}
+			}
+			.input_label{
+				font-weight: 500;
+				font-size: 16px;
+				line-height: 26px;
+			}
+			.input_error{
+				font-size: 11px;
+				line-height: 20px;
+				color: #DF0C0C;
+				//display: none;
+			}
+			input{
+				border: 1px solid #D0E1E7;
+				box-sizing: border-box;
+				width: 100%;
+				height: 40px;
+				padding: 10px 10px 9px 15px;
+				font-size: 16px;
+				background-color: #ffffff;
+				&[name="phone"] {
+					@include form_placeholder {
+						color: #939393;
+					}
+				}
+				@include form_placeholder {
+	              color: #272727;
+	            }
+	            &[name="date"] {
+	            	background: url(/img/calendar.svg) no-repeat 95%, #fff;
+	            	//pointer-events: none;
+	            	cursor: pointer;	
+	            	@include for-phone{
+						// width: 55%;
+					}
+	            }
+	            &.check_approove:not(.not_check_approove){
+	            	background: url(/img/check_approove.svg) no-repeat right, #fff;
+	            }
+	            &._invalid{
+	            	border-bottom: 1px solid #DF0C0C;
+	            }
+			}
+			.input_desc{
+				font-weight: 500;
+				font-size: 12px;
+				line-height: 20px;
+				color: #666666;
+			}
+		}
+		.form_checkboxes{
+			width: 100%;
+			display: flex;
+			align-items: center;
+			margin-top: 20px;
+			.checkbox_title{
+				font-weight: bold;
+				font-size: 16px;
+				line-height: 26px;
+				margin-right: 15px;
+			}
+			.checkbox_wrapper{
+				display: flex;
+			}
+		}
+	}
     .form_submit{
     	.form_policy{
     		margin-top: 0px;
+			@include for-phone{
+				width: 56%;
+			}
+
     	}
     }
     @include for-mobile{
-		//width: 100%;
-		//height: 100%;
-		//overflow: scroll;
 		width: calc(100% - 10px);
     	height: auto;
     	.form_close{
-		    top: 10px;
-    		right: 10px;
     		&:before, &:after{
 			    background: #000;
     		}
     	}
 	}
 	@include for-phone{
-	    
-    	.form_wrapper{
+    	.form_wrapper,
+		.form_wrapper_recall{
     		background-size: 43%,35%;
     	}
-    	
     	.form_title{
     		justify-content: left;
     	}
     	.form_submit{
-    		._button{
-	    		width: 100%;
-	    	}
-	    }
-    	.form_submit{
-	    	.form_policy{
-	    		margin-top: 12px;
-	    		width: 100%;
-	    	}
-	    }
+			._button{
+				width: 223px;
+				height: 60px;
+				font-size: 20px;
+				font-weight: 400;
+				line-height: 20px;
+				background: #DA0034;
+				color: #ffffff;
+				border-radius: 3px;
+				border: none;
+				&:hover{
+					background-color: #F41349;
+				}
+				&:focus,
+				&:active{
+					background-color: #C6002F;
+				}
+				@include for-pad{
+					width: 200px;
+					height: 50px;
+				}
+			}
+		}
 	}
+}
+.popup_form_recall{
+	.form_block{
+    	width: 70%;
+		@include for-mobile{
+			width: 420px;
+		}
+		@include for-phone{
+			width: 100%;
+			padding: 0 15px;
+		}
+		.form_inputs{
+			@include for-mobile{
+				flex-direction: column;
+			}
+		}
+		.input_wrapper{
+			width: 47%;
+			@include for-mobile{
+				width: 100%;
+			}
+			&._big_width{
+				width: 100%;
+				@include for-desktop{
+					width: 97%;
+				}
+				@include for-mobile{
+					width: 100%;
+				}
+			}
+		}
+		.form_submit{
+			flex-direction: column-reverse;
+			.form_policy{
+				margin-bottom: 20px;
+			}
+			._button{
+				margin-right: 0;
+			}
+		}
+    }
+
 }
 .popup_img{
 	display: none;
@@ -168,14 +391,11 @@
     	justify-content: center;
     	
     }
-
     .slider_arrow {
 	    z-index: 5;
 	    filter: invert(1);
 	    cursor: pointer;
 	}
-    
-
     @include for-pad{
     	width: 100%;
     	.popup_img_slider_wrap{
@@ -218,7 +438,6 @@
 		display: block;
 		&:before, 
 		&:after{
-			//background:$clrBlue;
 		}
 	}
 	.popup_phone{

@@ -29,10 +29,12 @@ class ListingController extends BaseFrontendController
 		'any' => ['dopolnitelno' => 2, 'mesto' => 3, 'vmestimost' => 2, 'chek' => 2]
 	];
 
-	protected $per_page = 36;
+	protected $per_page = 25;
 
 	public $filter_model,
 		$slices_model;
+
+
 
 	public function beforeAction($action)
 	{
@@ -41,6 +43,7 @@ class ListingController extends BaseFrontendController
 		}
 		$this->filter_model = Yii::$app->params['filter_model'];
 		$this->slices_model = Yii::$app->params['slices_model'];
+
 
 		return true;
 	}
@@ -105,6 +108,8 @@ class ListingController extends BaseFrontendController
 		$elastic_model = new ElasticItems;
 		$items = new ItemsFilterElastic($params_filter, $per_page, $page, false, 'restaurants', $elastic_model);
 
+
+
 		$filter = FilterWidget::widget([
 			'filter_active' => $params_filter,
 			'filter_model' => $this->filter_model
@@ -126,7 +131,15 @@ class ListingController extends BaseFrontendController
 			$seo['text_bottom'] = '';
 		}
 
+		\Yii::$app->params['isHome'] = true;
+
 		$main_flag = ($seo_type == 'listing' and count($params_filter) == 0);
+
+		// echo "<pre>";
+		// print_r($items->items);
+		// exit;
+
+
 		return $this->render('index.twig', array(
 			'items' => $items->items,
 			'filter' => $filter,
@@ -192,7 +205,8 @@ class ListingController extends BaseFrontendController
 			'title' => $title,
 			'text_top' => $text_top,
 			'text_bottom' => $text_bottom,
-			'seo_title' => $seo['title']
+			'seo_title' => $seo['title'],
+			'count' => $items->total
 		]);
 	}
 

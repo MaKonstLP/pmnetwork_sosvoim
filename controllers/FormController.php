@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\pmnbd\controllers;
+namespace app\modules\so_svoim\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -12,6 +12,7 @@ class FormController extends Controller
     public function actionSend()
     {
         //$to  = ['kornilov@liderpoiska.ru', 'birthday-place@yandex.ru', 'sites@plusmedia.ru'];
+        /*$to  = ['zlygostev@inbox.ru'];
         $messages = [
             'successTitle' => 'Заявка успешно отправлена',
             'errorTitle' => 'К сожалению, не удалось обработать заявку',
@@ -19,7 +20,7 @@ class FormController extends Controller
             'errorBody' => 'Попробуйте, пожалуйста, позднее или свяжитесь с нами по телефону.',
         ];
 
-        /*if ($_POST['type'] == 'main' || $_POST['type'] == 'header') {
+        if ($_POST['type'] == 'main' || $_POST['type'] == 'header') {
             $subj = "Заявка на подбор зала.";
         } else {
             $subj = "Заявка на бронирование зала.";
@@ -58,33 +59,33 @@ class FormController extends Controller
             ];
         }*/
 
-        $messageApi = $this->sendApi($_POST);
+        //$messageApi = $this->sendApi($_POST);
+//
+        //$log = file_get_contents('/var/www/pmnetwork/log/manual.log');
+        //$log .= json_encode($messageApi);
+        //file_put_contents('/var/www/pmnetwork/log/manual.log', $log);
 
-        $log = file_get_contents('/var/www/pmnetwork/log/manual.log');
-        $log .= json_encode($messageApi);
-        file_put_contents('/var/www/pmnetwork/log/manual.log', $log);
-
-        if ($messageApi) {
-            $resp = [
-                'error' => 0,
-                'title' => $messages['successTitle'],
-                'body' => $messages['successBody'],
-                'name' => isset($_POST['name']) ? $_POST['name'] : '',
-                'phone' => $_POST['phone'],
-                'messageApi' => $messageApi
-            ];
-        } else {
-            $resp = [
-                'error' => 1,
-                'title' => $messages['errorTitle'],
-                'body' => $messages['errorBody'],
-            ];
-        }
+        //if ($messageApi) {
+        //    $resp = [
+        //        'error' => 0,
+        //        'title' => $messages['successTitle'],
+        //        'body' => $messages['successBody'],
+        //        'name' => isset($_POST['name']) ? $_POST['name'] : '',
+        //        'phone' => $_POST['phone'],
+        //        'messageApi' => $messageApi
+        //    ];
+        //} else {
+        //    $resp = [
+        //        'error' => 1,
+        //        'title' => $messages['errorTitle'],
+        //        'body' => $messages['errorBody'],
+        //    ];
+        //}
 
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        return $resp;
+        return ['result' => 1];
     }
 
     public function sendMail($to, $subj, $msg)

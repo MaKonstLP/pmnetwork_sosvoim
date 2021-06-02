@@ -7,7 +7,11 @@
         <div class="item_info"> 
             <div class="item_info_top">
                 <p class="item_name">{{item.restaurant_name}}</p>
-                <p class="item_type">{{item.restaurant_main_type}}</p>
+                <p class="item_type">
+                    {% for item in item.restaurant_types %}
+                        {{ item.name }}{{loop.last ? '' : ','}}
+                    {% endfor %}
+                </p>
             </div> 
             
             <div class="item_meta">
@@ -39,11 +43,15 @@
                     {% endif %}
                     {% if min_price and min_price != 100000000 %}
                         <div class="item_meta_item">
-                            Стоимость:<span class="item_price">от {{min_price}}р на человека</span>
+                            Стоимость: <span class="item_price">от {{min_price}}р на человека</span>
                         </div>
                     {% endif %}
                         <div class="item_meta_item">
-                            Парковочных мест: {{item.restaurant_parking|length}}
+                            {% if item.restaurant_parking != '' %}
+                                Парковочных мест: {{item.restaurant_parking}}
+                            {% else %}
+                                Парковочных мест: нет
+                            {% endif %}
                         </div>
                 </div>
             </div>
@@ -55,7 +63,7 @@
                         <p>Площадка для<br>фейерверка</p>
                     </div>
                 {% endif %} 
-                {% if item.restaurant_own_alcohol %}
+                {% if item.restaurant_own_alcohol != 'Нельзя свой алкоголь' %}
                     <div class="optional">
                         <div class="optional__pic bocal"></div>
                         <p>Можно со своим<br>алкоголем</p>

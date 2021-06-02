@@ -8,16 +8,30 @@ export default class Main {
             $(this).closest('[data-seo-text]').addClass('_active');
         });
 
-        $('body').on('click', '[data-open-popup-form]', function () {
-            $('.popup_wrap').not('.popup_phone_wrap').addClass('_active');
-        });
-
-        $('body').on('click', '[data-close-popup]', function () {
-            $('.popup_wrap').removeClass('_active');
+        $('[data-open-popup-form]').on('click', function () {
+            $('.popup_wrap').addClass('_active');
+            $('.form_main').show();
             $('.popup_wrap .popup_form').show();
             $('.popup_wrap .popup_img').hide();
-            $('.popup_wrap .popup_form .form_main').show();
-            $('.popup_wrap .popup_form .form_success').hide();
+        });
+
+        $('[data-close-popup]').on('click', function () {
+            $('.popup_wrap').removeClass('_active');
+            $('.form_success').hide();
+            $('.form_main').show();
+            $('.popup_wrap_recall .popup_form_recall .form_success_recall').hide();
+        });
+
+        $('[data-open-recall-form]').on('click', function () {
+            $('.popup_wrap_recall').addClass('_active');
+            $('.form_main_recall').show();
+        });
+
+        $('[data-close-recall]').on('click', function () {
+            $('.popup_wrap_recall').removeClass('_active');
+            $('.popup_wrap_recall .popup_form_recall .form_success_recall').hide();
+            $('.form_success').hide();
+            $('.form_main').show();
         });
 
         /*$('body').on('click', '[data-gallery-img-view]', function () {
@@ -241,10 +255,10 @@ export default class Main {
             if ($e_city.length > 0) {
                 if ($('.city_list_wrap').hasClass('__visible')) {
                     $('.city_list_wrap').removeClass('__visible');
-                    $(this).find('.choose').removeClass('_expand');
+                    // $(this).find('.choose').removeClass('_expand');
                 } else {
                     $('.city_list_wrap').addClass('__visible');
-                    $(this).find('.choose').addClass('_expand');
+                    // $(this).find('.choose').addClass('_expand');
                 }
             } else {
                 if (
@@ -252,7 +266,7 @@ export default class Main {
                     $e_city_list.length < 1
                 ) {
                     $('.city_list_wrap').removeClass('__visible');
-                    $(this).find('.choose').removeClass('_expand');
+                    // $(this).find('.choose').removeClass('_expand');
                 }
             }
             if (
@@ -300,47 +314,55 @@ export default class Main {
             }
         });
 
-        $('body').on('click', '.map_close', function () {
-            $(this).closest('.map_data_wrap').hide();
-        });
+        // $('body').on('click', '.map_close', function () {
+        //     $(this).closest('.map_data_wrap').hide();
+        // });
 
-        $('.main_rectangle_1').hover(
-            function () {
-                $(this).css('background-color', '#FFC24A');
-                $(this)
-                    .siblings('.main_rectangle_2')
-                    .css('visibility', 'visible');
-            },
-            function () {
-                $(this).css('background-color', '#FFAD0F');
-                $(this)
-                    .siblings('.main_rectangle_2')
-                    .css('visibility', 'hidden');
-            }
-        );
-        $('.main_rectangle a').hover(
-            function () {
-                $(this)
-                    .siblings('.main_rectangle_1')
-                    .css('background-color', '#FFC24A');
-                $(this)
-                    .siblings('.main_rectangle_2')
-                    .css('visibility', 'visible');
-            },
-            function () {
-                $(this)
-                    .siblings('.main_rectangle_1')
-                    .css('background-color', '#FFAD0F');
-                $(this)
-                    .siblings('.main_rectangle_2')
-                    .css('visibility', 'hidden');
-            }
-        );
+        // $('.main_rectangle_1').hover(
+        //     function () {
+        //         $(this).css('background-color', '#FFC24A');
+        //         $(this)
+        //             .siblings('.main_rectangle_2')
+        //             .css('visibility', 'visible');
+        //     },
+        //     function () {
+        //         $(this).css('background-color', '#FFAD0F');
+        //         $(this)
+        //             .siblings('.main_rectangle_2')
+        //             .css('visibility', 'hidden');
+        //     }
+        // );
+        // $('.main_rectangle a').hover(
+        //     function () {
+        //         $(this)
+        //             .siblings('.main_rectangle_1')
+        //             .css('background-color', '#FFC24A');
+        //         $(this)
+        //             .siblings('.main_rectangle_2')
+        //             .css('visibility', 'visible');
+        //     },
+        //     function () {
+        //         $(this)
+        //             .siblings('.main_rectangle_1')
+        //             .css('background-color', '#FFAD0F');
+        //         $(this)
+        //             .siblings('.main_rectangle_2')
+        //             .css('visibility', 'hidden');
+        //     }
+        // );
 
         // $('body').on('click', '[data-target]', function(){
         //     console.log('reachGoal',$(this).data('target'));
         //     ym('67719148', 'reachGoal', $(this).data('target'));
         //     gtag('event', $(this).data('target'), {'event_category': 'click'});
         // });
+
+
+        // СКРОЛЛ ПО ЯКОРЯМ
+        $("body").on('click', '[href*="#"]', function(e){
+            var fixed_offset = 100;
+            $('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
+            e.preventDefault();
+        });
     }
 }

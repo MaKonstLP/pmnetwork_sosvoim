@@ -6,19 +6,19 @@
 {{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen~'/blog/'})}}
 {{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
 
-<div data-page-type="listing">
-	<div class="content_block" data-listing-title>
-		{#<div class="breadcrumbs">
+<div class="blogs_page">
+	{# <div class="content_block" data-listing-title>
+		<div class="breadcrumbs">
 			{% for link,name in seo.breadcrumbs %}
 				<a class="breadcrumbs_item" href="{{link}}">{{name}}</a>
 			{% endfor %}
-		</div>#}
-		<div class="title">
-			<h1>{{seo.h1}}</h1>
 		</div>
-	</div>
+		<div class="title">
+			<h1>{{seo.h1}}</h1> 
+		</div>
+	</div> #}
 
-	<div class="object_gallery_wrap _blog">
+	{# <div class="object_gallery_wrap _blog">
 		<div class="listing_widget_arrow _prev"></div>
 		<div class="listing_widget_arrow _next"></div>
 		<div class="object_gallery_container swiper-container" data-gallery-blog-swiper>
@@ -28,7 +28,6 @@
 						<div class="fscreen_blog_top_slider">
 							<img loading="lazy" src="{{ post.getFileData('image').src }}" alt="{{seo.media['header-image']|first.alt}}">
 						</div>
-
 						<div class="fscreen_blog_wrap">
 							<div class="fscreen_blog_label">{{ post.blogPostTags|map(t => t.blogTag.name)|join(' • ') }}</div>
 							<div class="fscreen_blog_title">{{ post.name }}</div>
@@ -42,8 +41,13 @@
 				<div class="listing_widget_pagination"></div>
 			</div>
 		</div>
-	</div>
+	</div> #}
 
+	<div class="content_block">
+        <a class="return_btn" onclick="history.back();">Вернуться назад</a>
+    </div>
+	
+	<div class="blogs_page_title">Блог</div>
 	<div class="blogs">
 		<div class="content_block">
 			{{  pjax_begin({'id' : 'blog-listing','enablePushState':false}) }}

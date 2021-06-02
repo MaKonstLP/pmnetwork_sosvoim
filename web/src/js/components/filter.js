@@ -10,24 +10,15 @@ export default class Filter{
 
 		//КЛИК ПО БЛОКУ С СЕЛЕКТОМ
 		this.$filter.find('[data-filter-select-current]').on('click', function(e){
-			let $target = $(e.target);
 			let $parent = $(this).closest('[data-filter-select-block]');
-			if ($target.is('span.choose')) {
-				if ($(this).siblings('.filter_select_list').is(':visible')){
-					self.selectBlockClick($parent);
-				}
-				let $clear = $parent.find('[data-filter-select-item]._active').removeClass('_active');
-				self.selectStateRefresh($parent);
-			} else {
-				self.selectBlockClick($parent);
-			}
-				
+			self.selectBlockClick($parent);
 		});
 
 		//КЛИК ПО СТРОКЕ В СЕЛЕКТЕ
 		this.$filter.find('[data-filter-select-item]').on('click', function(){
+			$(this).siblings('[data-filter-select-item]').removeClass('_active');
 			$(this).toggleClass('_active');
-			//self
+
 			self.selectStateRefresh($(this).closest('[data-filter-select-block]'));
 		});
 
@@ -50,7 +41,7 @@ export default class Filter{
 		});
 
 		//ЗАКРЫТЬ ПОПАП ФИЛЬТРА НА МОБИЛКЕ
-		$('body').on('click', '.popup_filter_close', function(e) {
+		$('body').on('click', '.popup_filter_close', function() {
 		    $(this).closest('.popup_filter_wrap').slideToggle('Fast');
 		});
 	}
@@ -88,7 +79,7 @@ export default class Filter{
             	response = $.parseJSON(response);
                 self.resolve(response);
             },
-            error: function(response) {
+            error: function() {
 
             }
         });
@@ -119,7 +110,7 @@ export default class Filter{
             		self.resolve(self.filterListingHref());
             	}
             },
-            error: function(response) {
+            error: function() {
 
             }
         });
@@ -138,6 +129,10 @@ export default class Filter{
 		$block.removeClass('_active');
 	}
 
+
+
+
+	
 	selectBlockOpen($block){
 		this.selectBlockActiveClose();
 		$block.addClass('_active');
@@ -155,31 +150,25 @@ export default class Filter{
 		let $items = $block.find('[data-filter-select-item]._active');
 		let $filterLabel = $block.siblings('[data-filter-label]');
 		let selectText = $filterLabel.html();
-		let $countItems = $block.find('[data-filter-select-count]');
 		
 		if($items.length > 0){
 			self.state[blockType] = '';
 			$block.find('[data-filter-select-current]').addClass('choosen');
 			selectText = $items[0];
-			$countItems.html($items.length);
 			$filterLabel.show();
 			$items.each(function(){
 				if(self.state[blockType] !== ''){
 					self.state[blockType] += ','+$(this).data('value');
-					//selectText = 'Выбрано ('+$items.length+')';
-					$countItems.show();
 				}
 				else{
 					self.state[blockType] = $(this).data('value');
 					selectText = $(this).text();
-					$countItems.hide();
 				}
 			});
 		}
 		else{
 			delete self.state[blockType];
 			$block.find('[data-filter-select-current]').removeClass('choosen');
-			$countItems.hide();
 			$filterLabel.hide();
 		}
 		$block.find('[data-filter-select-current] p').text(selectText);

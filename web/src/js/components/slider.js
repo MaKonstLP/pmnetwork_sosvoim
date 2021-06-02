@@ -10,9 +10,9 @@ export default class Slider{
 		if ($('[data-gallery-main-swiper]').length >0) self.initSwiperItem($('[data-gallery-main-swiper]'), $('[data-gallery-thumb-swiper]'));	
 		if ($('[data-other-objects-swiper]').length >0) self.initSwiperSameItem($('[data-other-objects-swiper]'));
 		if ($('[data-other-rest-swiper]').length >0) self.initSwiperSameRest($('[data-other-rest-swiper]'));
-		// if ($('[data-other-blogs-swiper]').length >0) self.initSwiperSameBlogs($('[data-other-blogs-swiper]'));	
-		// if ($('[data-gallery-blog-swiper]').length >0) self.initSwiperTitleBlog($('[data-gallery-blog-swiper]'));
-		// if ($('[data-gallery-post-swiper]').length >0) $('[data-gallery-post-swiper]').each(function() { self.initSwiperBlog($(this), $(this).siblings('[data-gallery-post-thumb-swiper]'))});	
+		if ($('[data-other-blogs-swiper]').length >0) self.initSwiperSameBlogs($('[data-other-blogs-swiper]'));	
+		if ($('[data-gallery-blog-swiper]').length >0) self.initSwiperTitleBlog($('[data-gallery-blog-swiper]'));
+		if ($('[data-gallery-post-swiper]').length >0) $('[data-gallery-post-swiper]').each(function() { self.initSwiperBlog($(this), $(this).siblings('[data-gallery-post-thumb-swiper]'))});	
 		//self.initSwiper1($('[data-gallery-main-swiper] [data-gallery-list]'));
 	//}
 		$('body').on('click', '[data-gallery-img-view]', function () {
@@ -26,6 +26,7 @@ export default class Slider{
             slider_popup.find('.swiper-slide').removeClass('swiper-slide-duplicate-active swiper-slide-active');
             slider_popup.find('[data-swiper-slide-index="'+active+'"]').addClass('swiper-slide-active');
             $('.popup_wrap .popup_form').hide();
+            $('.popup_wrap .popup_form_recall').hide();
             $('.popup_wrap .popup_img').show();
             $('.popup_wrap').not('.popup_phone_wrap').addClass('_active');
             self.initSwiperPopup(slider_popup, active);
@@ -121,73 +122,73 @@ export default class Slider{
 		galleryTop.init();
 	}
 
-	// initSwiperBlog($container_main, $container_thumb){
-	// 	let galleryThumbs = new Swiper($container_thumb, {
-	//       	spaceBetween: 4,
-	//       	slidesPerView: 8,
-	//       	watchSlidesVisibility: true,
-    //  		watchSlidesProgress: true,
-	//       	//centerInsufficientSlides: true,
-	//       	//centeredSlides: true,
-	//       	slideToClickedSlide: true,
-	//       	breakpoints: {
-	//         	768:{
-	//         		slidesPerView: 6,
-	//         	}
-	//         }
-	//     });
+	initSwiperBlog($container_main, $container_thumb){
+		let galleryThumbs = new Swiper($container_thumb, {
+	      	spaceBetween: 4,
+	      	slidesPerView: 8,
+	      	watchSlidesVisibility: true,
+     		watchSlidesProgress: true,
+	      	//centerInsufficientSlides: true,
+	      	//centeredSlides: true,
+	      	slideToClickedSlide: true,
+	      	breakpoints: {
+	        	768:{
+	        		slidesPerView: 6,
+	        	}
+	        }
+	    });
 		
 
-	// 	let galleryTop = new Swiper($container_main, {
-	//       spaceBetween: 0,
-	//       slidesPerView: 1,
-	//       centeredSlides: true,
-	//       loop: true,
-	//       init: false,
-	//       /*navigation: {
-	//         nextEl: '.listing_widget_arrow._next',
-    //       	prevEl: '.listing_widget_arrow._prev',
-	//       },*/
-	//       thumbs: {
-	//         swiper: galleryThumbs
-	//       },
-	//       pagination: {
-	// 	              el: '.listing_widget_pagination',
-	// 	              type: 'bullets',
-	// 	            },
+		let galleryTop = new Swiper($container_main, {
+	      spaceBetween: 0,
+	      slidesPerView: 1,
+	      centeredSlides: true,
+	      loop: true,
+	      init: false,
+	      /*navigation: {
+	        nextEl: '.listing_widget_arrow._next',
+          	prevEl: '.listing_widget_arrow._prev',
+	      },*/
+	      thumbs: {
+	        swiper: galleryThumbs
+	      },
+	      pagination: {
+		              el: '.listing_widget_pagination',
+		              type: 'bullets',
+		            },
 
-	//       breakpoints: {
-	//         	1920:{
-	//         		pagination: {
-	// 	              el: '.listing_widget_pagination',
-	// 	              type: 'bullets',
-	// 	            },
-	//         	}
-	//         }
-	//     });
+	      breakpoints: {
+	        	1920:{
+	        		pagination: {
+		              el: '.listing_widget_pagination',
+		              type: 'bullets',
+		            },
+	        	}
+	        }
+	    });
 
-	//     let setActive = function() {
-    //   		let activeIndex = galleryTop.realIndex+1;
-    //    		let slidesCount = $(galleryTop.el).find('.swiper-slide').not('.swiper-slide-duplicate').length;
-	// 		let activeSlide = $('[data-gallery-thumb-swiper] .swiper-slide:nth-child(' + activeIndex + ')');
-    //       	let nextSlide = $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex + 1)+')').length > 0 ? $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex + 1)+')') : $('[data-gallery-thumb-swiper] .swiper-slide:nth-child(1)');
-    //       	let prevSlide = $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex - 1)+')').length > 0 ? $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex - 1)+')') : $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+slidesCount+')');
-    //       	$('[data-gallery-thumb-swiper] .swiper-slide').each(function(){$(this).removeClass('swiper-slide-virtual-active')});
-    //       	nextSlide.addClass('swiper-slide-virtual-active');
-    //       	prevSlide.addClass('swiper-slide-virtual-active');
-    //   	};
+	    let setActive = function() {
+      		let activeIndex = galleryTop.realIndex+1;
+       		let slidesCount = $(galleryTop.el).find('.swiper-slide').not('.swiper-slide-duplicate').length;
+			let activeSlide = $('[data-gallery-thumb-swiper] .swiper-slide:nth-child(' + activeIndex + ')');
+          	let nextSlide = $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex + 1)+')').length > 0 ? $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex + 1)+')') : $('[data-gallery-thumb-swiper] .swiper-slide:nth-child(1)');
+          	let prevSlide = $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex - 1)+')').length > 0 ? $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+(activeIndex - 1)+')') : $('[data-gallery-thumb-swiper] .swiper-slide:nth-child('+slidesCount+')');
+          	$('[data-gallery-thumb-swiper] .swiper-slide').each(function(){$(this).removeClass('swiper-slide-virtual-active')});
+          	nextSlide.addClass('swiper-slide-virtual-active');
+          	prevSlide.addClass('swiper-slide-virtual-active');
+      	};
 
-	// 	galleryTop.on('slideChange', function () {
-    //       	setActive();
-    //       	this.thumbs.swiper.slideTo(this.realIndex, false,false);
-    //     });
+		galleryTop.on('slideChange', function () {
+          	setActive();
+          	this.thumbs.swiper.slideTo(this.realIndex, false,false);
+        });
 
-	// 	galleryTop.on('init', function () {
-	// 		setActive();
-	// 	});
+		galleryTop.on('init', function () {
+			setActive();
+		});
 
-	// 	galleryTop.init();
-	// }
+		galleryTop.init();
+	}
 
 	initSwiperSameItem($container){
 		let swiper = new Swiper($container, {
@@ -237,59 +238,59 @@ export default class Slider{
 	    let swiper_var = $container.swiper;
 	}
 
-	// initSwiperSameBlogs($container){
-	// 	let swiper = new Swiper($container, {
-	//         slidesPerView: 3,
-	//         spaceBetween: 30,
-	//         //loop: true,
-	//         navigation: {
-    //           nextEl: '.listing_widget_arrow._next',
-    //           prevEl: '.listing_widget_arrow._prev',
-    //         },
-    //         pagination: {
-	// 	              el: '.listing_widget_pagination',
-	// 	              type: 'bullets',
-	// 	            },
-	//         breakpoints: {
-	//         	/*1200:{
-	//         		slidesPerView: 3,
-	//         	},*/
-	//         	1000:{
-	//         		slidesPerView: 2.5,
-	// 				pagination: {
-	// 	              el: '.listing_widget_pagination',
-	// 	              type: 'bullets',
-	// 	            },
-	//         		navigation: false,
-	//         		loop: false,
-	//         		//centeredSlides: true,
-	//         		spaceBetween: 20,
-	//         	},
-	//         	767:{
-	//         		slidesPerView: 1,
-	//         		spaceBetween: 20,
-	//         	}
-	//         }
-	//     });
+	initSwiperSameBlogs($container){
+		let swiper = new Swiper($container, {
+	        slidesPerView: 2,
+	        spaceBetween: 20,
+	        //loop: true,
+	        navigation: {
+              nextEl: '.blogs_widget_arrow._next',
+              prevEl: '.blogs_widget_arrow._prev',
+            },
+            pagination: {
+		              el: '.listing_widget_pagination',
+		              type: 'bullets',
+		            },
+	        breakpoints: {
+	        	510:{
+	        		slidesPerView: 1,
+	        	},
+	        	// 1000:{
+	        	// 	slidesPerView: 2.5,
+				// 	pagination: {
+		        //       el: '.listing_widget_pagination',
+		        //       type: 'bullets',
+		        //     },
+	        	// 	navigation: false,
+	        	// 	loop: false,
+	        	// 	//centeredSlides: true,
+	        	// 	spaceBetween: 20,
+	        	// },
+	        	// 767:{
+	        	// 	slidesPerView: 1,
+	        	// 	spaceBetween: 20,
+	        	// }
+	        }
+	    });
 
-	//     let swiper_var = $container.swiper;
-	// }
+	    let swiper_var = $container.swiper;
+	}
 
-	// initSwiperTitleBlog($container){
-	// 	let swiper = new Swiper($container, {
-	//         slidesPerView: 1,
-	//         spaceBetween: 0,
-	//         loop: false,
-	//         navigation: {
-    //           nextEl: '.listing_widget_arrow._next',
-    //           prevEl: '.listing_widget_arrow._prev',
-    //         },
-    //         pagination: {
-    //           el: '.listing_widget_pagination',
-    //           type: 'bullets',
-    //         },
-	//     });
-	// }
+	initSwiperTitleBlog($container){
+		let swiper = new Swiper($container, {
+	        slidesPerView: 1,
+	        spaceBetween: 0,
+	        loop: false,
+	        navigation: {
+              nextEl: '.listing_widget_arrow._next',
+              prevEl: '.listing_widget_arrow._prev',
+            },
+            pagination: {
+              el: '.listing_widget_pagination',
+              type: 'bullets',
+            },
+	    });
+	}
 
 	initSwiperPopup($container, $start){
 		let swiper_popup = new Swiper($container, {

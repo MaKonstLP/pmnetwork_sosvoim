@@ -4,6 +4,7 @@ namespace frontend\modules\so_svoim\models;
 
 use common\models\Restaurants;
 use common\models\RestaurantsTypes;
+use common\models\RestaurantsSpec;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
@@ -34,7 +35,6 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             'restaurant_own_alcohol',
             'restaurant_cuisine',
             'restaurant_parking',
-            'restaurant_extra_services',
             'restaurant_payment',
             'restaurant_special',
             'restaurant_phone',
@@ -43,6 +43,8 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             'restaurant_types',
             'restaurant_main_type',
             'restaurant_location',
+            'restaurant_spec',
+            'restaurant_extra_services',
             'rooms',
         ];
     }
@@ -104,6 +106,10 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                         'subpath'                       => ['type' => 'text'],
                         'waterpath'                     => ['type' => 'text'],
                         'timestamp'                     => ['type' => 'text'],
+                    ]],
+                    'restaurant_spec'                 => ['type' => 'nested', 'properties' => [
+                        'id'                             => ['type' => 'integer'],
+                        'name'                           => ['type' => 'text'],
                     ]],
                     'rooms'                             => ['type' => 'nested', 'properties' => [
                         'id'                            => ['type' => 'integer'],
@@ -200,8 +206,15 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         //echo '<pre>';
         //print_r($restaurants_types);
         //exit;
+        $restaurants_spec = RestaurantsSpec::find()
+            ->limit(100000)
+            ->asArray()
+            ->all();
+
+        $restaurants_spec = ArrayHelper::index($restaurants_spec, 'id');
+
         foreach ($restaurants as $restaurant) {
-            $res = self::addRecord($restaurant, $restaurants_types);
+            $res = self::addRecord($restaurant, $restaurants_types, $restaurants_spec);
             $all_res .= $res . ' | ';
         }
         echo 'Обновление индекса ' . self::index() . ' ' . self::type() . ' завершено<br>' . $all_res;
@@ -228,7 +241,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         );
     }
 
-    public static function addRecord($restaurant, $restaurants_types)
+    public static function addRecord($restaurant, $restaurants_types, $restaurants_spec)
     {
         $isExist = false;
 
@@ -333,6 +346,19 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $record->restaurant_slug = self::getTransliterationForUrl($restaurant->name);
             \Yii::$app->db->createCommand()->insert('restaurant_slug', ['gorko_id' => $restaurant->gorko_id, 'slug' =>  $record->restaurant_slug])->execute();
         }
+
+        //Тип мероприятия
+        $restaurant_spec = [];
+        $restaurant_spec_rest = explode(',', $restaurant->restaurants_spec);
+        
+        foreach ($restaurant_spec_rest as $key => $value) {
+            $restaurant_spec_arr = [];
+            $restaurant_spec_arr['id'] = $value;
+            $restaurant_spec_arr['name'] = isset($restaurants_spec[$value]['name']) ? $restaurants_spec[$value]['name'] : '';
+            array_push($restaurant_spec, $restaurant_spec_arr);
+        }
+
+        $record->restaurant_spec = $restaurant_spec;
 
         //Св-ва залов
         $rooms = [];

@@ -1,32 +1,39 @@
 {% set mnths = ['','января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'] %}
 
 
-<div class="post-blog" data-page-type="index">
-	<div class="fscreen_blog_top_image">
-		<div class="fscreen_blog_top_slider">
-			<img loading="lazy" src="{{ post.getFileData('image').src }}" alt="{{seo.media['header-image']|first.alt}}">
-		</div>
-		<div class="fscreen_blog_wrap">
-			<div class="fscreen_blog_link">
-				<a href="/blog/">Статьи блога</a>
+<div class="post-blog" id="post-wrapper" data-page-type="index">
+	<div class="content_block">
+        <a class="return_btn" onclick="history.back();">Вернуться назад</a>
+    </div>
+	<div class="content_block">
+		<div class="fscreen_blog_top wrapper_size_m">
+			<div class="fscreen_blog_wrap">
+				{# <div class="fscreen_blog_link">
+					<a href="/blog/">Статьи блога</a>
+				</div> 
+				<div class="fscreen_blog_label">{{ post.blogPostTags|map(t => t.blogTag.name)|join(' • ') }}</div> #}
+				<p class="fscreen_blog_title">{{ post.name }}</p>
+				<p class="fscreen_blog_date">{{ post.published_at|date("j") }}
+					{{ mnths[post.published_at|date("n")] }}
+					{{ post.published_at|date("Y") }}</p>
+				<p class="fscreen_blog_description">{{ post.short_intro }}</p>
 			</div>
-			<div class="fscreen_blog_label">{{ post.blogPostTags|map(t => t.blogTag.name)|join(' • ') }}</div>
-			<div class="fscreen_blog_title">{{ post.name }}</div>
-			<div class="fscreen_blog_date">{{ post.published_at|date("j") }}
-				{{ mnths[post.published_at|date("n")] }}
-				{{ post.published_at|date("Y") }}</div>
+			<div class="fscreen_blog_top_slider">
+				<img loading="lazy" src="{{ post.getFileData('image').src }}" alt="{{seo.media['header-image']|first.alt}}">
+			</div>
 		</div>
 	</div>
 
 	<div class="content_block">
 		{{ preview ? post.getBodyHtml()|raw : post.getHtml()|raw }}
 	</div>
+	
 	{% if similarPosts %}
 		<div class="other_objects same_blogs_wrap">
-			<h2>Похожие статьи</h2>
 			<div class="content_block">
-				<div class="listing_widget_arrow _prev"></div>
-				<div class="listing_widget_arrow _next"></div>
+				<div class="same_blogs_title">Возможно будет интересно</div>
+				<div class="blogs_widget_arrow _prev"></div>
+				<div class="blogs_widget_arrow _next"></div>
 				<div class="swiper-container" data-other-blogs-swiper>
 					<div class="swiper-wrapper" data-other-blogs-list>
 						{% for similarPost in similarPosts %}
@@ -35,18 +42,18 @@
 									<a href="{{ similarPost.getUrl() }}"><img src="{{ similarPost.getFileData('image').src }}"></a>
 								</div>
 								<div class="blog_text">
-									<p class="blog_date">{{similarPost.getRusDate()}}</p>
-									<a href="{{ similarPost.getUrl() }}">
-										<p class="blog_title">{{ similarPost.name }}</p>
-									</a>
+									<div class="blog_title">
+										<a href="{{ similarPost.getUrl() }}">{{ similarPost.name }}</a>
+									</div>
 									<p class="blog_description">{{ similarPost.short_intro }}</p>
+									<p class="blog_date">{{similarPost.getRusDate()}}</p>
 								</div>
 							</div>
 						{% endfor %}
 					</div>
-					<div class="listing_widget_controll">
+					{# <div class="listing_widget_controll">
 						<div class="listing_widget_pagination"></div>
-					</div>
+					</div> #}
 				</div>
 			</div>
 		</div>

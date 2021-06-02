@@ -1,11 +1,14 @@
 'use strict';
 import Filter from './filter';
+import YaMapAll from './map_all';
 
 export default class Listing{
 	constructor($block){
 		self = this;
 		this.block = $block;
-		this.filter = new Filter($('[data-filter-wrapper]'));		
+		this.filter = new Filter($('[data-filter-wrapper]'));
+		// console.log(this.filter);
+		this.yaMapAll = new YaMapAll(this.filter);	
 
 		//КЛИК ПО КНОПКЕ "ПОДОБРАТЬ"
 		$('[data-filter-button]').on('click', function(){
@@ -57,9 +60,10 @@ export default class Listing{
 		self.filter.filterListingSubmit(page);
 		self.filter.promise.then(
 			response => {
-				//console.log(response);
+				// console.log(response);
 				$('[data-listing-list]').html(response.listing);
 				$('[data-listing-title]').html(response.title);
+				//$('[data-listing-map]').html(response.map);
 				$('[data-listing-text-top]').html(response.text_top);
 				$('[data-listing-text-bottom]').html(response.text_bottom);
 				$('[data-pagination-wrapper]').html(response.pagination);
@@ -69,6 +73,7 @@ export default class Listing{
 				history.pushState({}, '', '/catalog/'+response.url);
 			}
 		);
+		self.yaMapAll.refresh(self.filter);
 	}
 
 	appendInListing(page = 1){

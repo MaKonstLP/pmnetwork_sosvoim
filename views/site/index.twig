@@ -5,54 +5,85 @@
 {{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
 {% set  mainRestTypes = mainRestTypesCounts|length %}
 <div data-page-type="index" {{mainRestTypes > 0 ? '' : 'class=" _short"'}}>
-	<div class="main_top_image" style="position: relative;">
-		<div class="main_top_slider{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}">
-			<img loading="lazy" src="{{seo.media["header-image"]|first.src}}" alt="{{seo.media['header-image']|first.alt}}">
-		</div>
-		<div class="main_rectangle_wrap{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}">
-			{% for item in mainRestTypesCounts %}
-				<div class="main_rectangle">
-					<div class="main_rectangle_1"></div>
-					<div class="main_rectangle_2"></div>
-					<a href="/catalog/{{item.alias}}/">
-						<div class="main_rectangle_count">{{item.count}}</div>
-						<div class="main_rectangle_type">{{item.plural}}</div>
-					</a>
-				</div>
-			{% endfor %}
+	<div class="main_top_image">
+		<div class="main_top_slider main_page_slider">
+		{# <div class="main_top_slider{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}"> #}
+			
+			{# <img loading="lazy" src="{{seo.media["header-image"]|first.src}}" alt="{{seo.media['header-image']|first.alt}}"> #}
+			<img loading="lazy" src="/img/image-1.jpg" alt="Главная">
 		</div>
 	</div>
 	
 	<div class="main_top">
-		{# <h1>{{seo.h1|raw}}</h1> #}
-		<div class="main_top_desc">
-			Заведения, куда можно со своим алкоголем<br>в ??????
-		</div>
-		<div class="main_search">
-			<div class="main_search_city" data-search-wrap>
-				<input class="main_search_city_input" type="text" placeholder="{{app.params.subdomen_name}}" data-selected-city-id="{{app.params.subdomen_id}}" data-selected-city-alias="{{app.params.subdomen_alias}}" data-search-input>
-				<div class="main_search_city_list">
-					{% for subdomenObject in subdomenObjects %}
-						<p data-city-id="{{subdomenObject.city_id}}" data-city-alias="{{subdomenObject.alias}}" data-search-city>{{subdomenObject.name}}</p>
-					{% endfor %}
-				</div>
+		<div class="content_block">
+			{# <h1>{{seo.h1|raw}}</h1> #}
+			<div class="main_top_desc">
+				Заведения, куда можно со своим алкоголем в 
+				<span class="city">{{app.params.subdomen_dec}}</span>
 			</div>
-			<div class="main_search_type_room">
-				<span class="type_room_choose">Тип площадки</span>
-				<span class="choose" data-selected-filter-item=""></span>
-				<div class="main_search_type_room_list">
-					{{ this.render('//components/filter/homepage_rest-types_list.twig', { 'filters': filters }) | raw }}
+			<div class="main_search">
+				<div class="main_search_city" data-search-wrap>
+					<input class="main_search_city_input" type="text" placeholder="{{app.params.subdomen_name}}" data-selected-city-id="{{app.params.subdomen_id}}" data-selected-city-alias="{{app.params.subdomen_alias}}" data-search-input>
+					<div class="main_search_city_list">
+						{% for subdomenObject in subdomenObjects %}
+							<p data-city-id="{{subdomenObject.city_id}}" data-city-alias="{{subdomenObject.alias}}" data-search-city>{{subdomenObject.name}}</p>
+						{% endfor %}
+					</div>
 				</div>
+				<div class="main_search_type_room">
+					<span class="type_room_choose">Тип площадки</span>
+					<span class="choose" data-selected-filter-item=""></span>
+					<div class="main_search_type_room_list">
+						{{ this.render('//components/filter/homepage_rest-types_list.twig', { 'filters': filters }) | raw }}
+					</div>
+				</div>
+				<div class="main_search_submit" data-target="pdbor_2">Найти</div>
 			</div>
-			<div class="main_search_submit" data-target="pdbor_2">Найти</div>
 		</div>
-
-		
 	</div>
 
+		{# <div class="main_podborki">
+			<p class="podborki_title">Популярные подборки</p>
+			<div class="content_block">
+				{% for alias, slice in mainSlices %}
+					<div class="restaurant_item">
+						<div class="restaurant_img">
+							<a href="/catalog/{{alias}}/">
+								<img loading="lazy" src="/img/restaurants/restaurant_{{alias}}.jpg">
+							</a>
+						</div>
+						<div class="restaurant_text">
+							<a href="/catalog/{{alias}}/">{{slice.name}}</a>
+							<span>{{slice.count}}</span>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div> #}
 
-	<div class="listing_wrap" style="/*height: 550px;*/background: #F8F8F8;">
+	{% if blogPosts %}
+		<div class="main_blog">
+			<p class="main_blog_title">Популярные подборки</p>
+			<div class="content_block">
+				{% for key,post in blogPosts %}
+						<div class="blog_item blog_item_{{key + 1}}">
+							<a href="{{ post.getUrl() }}">
+								<img class="blog_img" loading="lazy" src="{{ post.getFileData('image').src }}">
+								<div class="blog_text">
+									<p class="blog_title">{{ post.name }}</p>
+									<p class="blog_description _main-blog">{{ post.short_intro }}</p>
+									<p class="blog_date _main-blog">{{ post.published_at }}</p>
+								</div>
+							</a>
+						</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="listing_wrap">
 		<div class="content_block">
+			<p class="listing_title">ТОП-10 заведений</p>
 		{# <div class="content_block" data-widget-wrapper> #}
 			{# <div class="listing_widget_arrow _prev"></div> #}
 			<div class="items_list_listing swiper-container">
@@ -69,86 +100,71 @@
 		</div>
 	</div>
 
-	<div class="content_info">
-		<div class="content_info_top">
-			<div class="content_info_block">
-				<img loading="lazy" class="main_girl" src="/img/main_girl.png">
-				<img loading="lazy" class="main_girl_mobile" src="/img/main_girl_mobile.png">
-				<div class="content_info_top_right">
-					<div class="content_info_rectangle_wrap">
-						<div class="content_info_rectangle"></div>
-					</div>
-					<div class="content_info_top_text seo_text" data-seo-text>
-						{{seo.text_1|raw}}
-						<div class="seo_text_control" data-seo-control>
-							<p class="_link">Показать полностью</p>
-						</div>
-					</div>
+	<div class="content_advantages">
+		<div class="content_block">
+			<div class="content_advantages_info">
+				<div class="content_advantages_left">
+					<p class="content_advantages_title">Почему мы?</p>
+					<p class="content_advantages_desc">Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.</p>
+					<p class="content_advantages_desc">Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно.</p>
+					<p class="content_advantages_desc">Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш сервис.</p>
 				</div>
-			</div>
-		</div>
-		<div class="content_info_bottom">
-			{{seo.text_2|raw}}
-			<div class="content_info_slider">
-				<img loading="lazy" src="{{seo.media["advantages"]|first.src}}">
+				<div class="content_advantages_right">
+					<dl class="advantages_items">
+						<dt class="advantages_item_title">Подбор заведений</dt>
+							<dd class="advantages_item_desc">Подберём подходящий ресторан, кафе, бар, паб, ночной клуб и др. Учтём все ваши пожелания используя богатый фильтр и опыт наших операторов.</dd>
+						<dt class="advantages_item_title">Консультация посетителей</dt>
+							<dd class="advantages_item_desc">Консультации с 9:00 до 02:00 в онлайн-чате, по телефону, в соц. сетях и в разделе подобрать заведение. Узнаем свободные места, расскажем об условиях посещения и прочих нюансах.</dd>
+						<dt class="advantages_item_title">Бронирование столиков</dt>
+							<dd class="advantages_item_desc">Осуществляем бесплатный резерв столика. СМС-уведомления о брони в течение 5 минут. Круглосуточный заказ столика через сайт.</dd>
+					</dl>	
+				</div>
 			</div>
 		</div>
 	</div>
 
-	{#% if blogPosts %}
+	{% if blogPosts %}
 		<div class="main_blog">
-			<h3>Последние записи блога</h2>
-			<a class="all_articles" href="/blog/">Все статьи</a>
+			<p class="main_blog_title">Интересное о банкетах</p>
 			<div class="content_block">
 				{% for key,post in blogPosts %}
-					<div class="blog_item blog_item_{{key + 1}}">
-						<div class="blog_img">
-							<a href="{{ post.getUrl() }}"><img loading="lazy" src="{{ post.getFileData('image').src }}"></a>
-						</div>
-						<div class="blog_text">
-							<p class="blog_date">{{ post.published_at }}</p>
+					
+						<div class="blog_item blog_item_{{key + 1}}">
 							<a href="{{ post.getUrl() }}">
-								<p class="blog_title">{{ post.name }}</p>
-							</a>
-							<p class="blog_description">{{ post.short_intro }}</p>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	{% endif %#}
-
-	{% if mainSlices %}
-		<div class="main_podborki">
-			<h3>Подборки заведений</h2>
-			<div class="content_block">
-				{% for alias, slice in mainSlices %}
-					<div class="restaurant_item">
-						<div class="restaurant_img">
-							<a href="/catalog/{{alias}}/">
-								<img loading="lazy" src="/img/restaurants/restaurant_{{alias}}.jpg">
+								<img class="blog_img" loading="lazy" src="{{ post.getFileData('image').src }}">
+								<div class="blog_text">
+									<p class="blog_title">{{ post.name }}</p>
+									<p class="blog_description _main-blog">{{ post.short_intro }}</p>
+									<p class="blog_date _main-blog">{{ post.published_at }}</p>
+								</div>
 							</a>
 						</div>
-						<div class="restaurant_text">
-							<a href="/catalog/{{alias}}/">{{slice.name}}</a>
-							<span>{{slice.count}}</span>
-						</div>
-					</div>
+					
 				{% endfor %}
+				
+				<div class="all_articles">
+					<a href="/blog/">Смотреть все статьи</a>
+				</div>
 			</div>
 		</div>
 	{% endif %}
 
+	{{ this.render('//components/generic/form.twig',{'title': 'Затрудняетесь с выбором?', 'target': 'podval_gl'}) | raw }}
+
 	<div class="bottom_block">
 		<div class="content_block seo_text" data-seo-text>
-			{{seo.text_3|raw}}
+			{# {{seo.text_3|raw}} #}
+			<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
+			Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно.
+			Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
+			<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
+			Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно. Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
+			<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
+			Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно. Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
 			<div class="seo_text_control" data-seo-control>
-				<p class="_link">Показать полностью</p>
+				<p class="_link">Читать полностью</p>
 			</div>
 		</div>
 	</div>
-
-	{{ this.render('//components/generic/form.twig',{'title': 'Поможем выбрать зал на день рождения', 'target': 'podval_gl'}) | raw }}
-
 
 </div>

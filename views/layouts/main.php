@@ -51,19 +51,22 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
         <header>
             <nav class="main_menu">
                 <div class="content_block">
+
+                    <div class="menu_burger"><span></span></div>
                     <ul class="main_menu_items">
                         <li class="main_menu_item"><a href="/catalog/restoran/">Рестораны</a></li>
-                        <li class="main_menu_item"><a href="#">Банкетные залы</a></li>
+                        <li class="main_menu_item"><a href="/catalog/banketniy-zal/">Банкетные залы</a></li>
                         <li class="main_menu_item"><a href="/catalog/loft/">Лофт</a></li>
-                        <li class="main_menu_item"><a href="#">Антикафе</a></li>
+                        <li class="main_menu_item"><a href="/catalog/antikafe/">Антикафе</a></li>
                         <li class="main_menu_item"><a href="/catalog/bar/">Бары</a></li>
-                        <li class="main_menu_item"><a href="#">Статьи</a></li>
+                        <li class="main_menu_item"><a href="/blog/">Статьи</a></li>
                     </ul>
+
                     <div class="header_city<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
                         <span>Ваш город: </span>
                         <span class="city"><?= Yii::$app->params['subdomen_name'] ?></span>
                     </div>
-                    <div class="city_list_wrap" data-search-wrap>
+                    <div class="city_list_wrap  mCustomScrollbar _mCS_2 _mCS_1" data-search-wrap>
                         <div class="city_list_title">Выберите город</div>
                         <!-- <input type="text" name="city" placeholder="Название города" data-search-input> -->
                         <div class="city_list">
@@ -86,21 +89,20 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-
                             <input class="city_btn" type="button" value="Выбрать" onClick="window.location.href = document.querySelectorAll('[name=site]:checked')[0].value">
                         </div>
                     </div>
                 </div>
             </nav>
-            <div class="header_wrap<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
+            <div class="header_wrap<?=\Yii::$app->params['isHome'] ? ' home' : '';?>">
                 <div class="content_block">
                     <div class="content_left_side">
                         <a href="/" class="header_logo">SO-SVOIM.RU</a>
-                        <a class="header_phone" href="tel:+79252380246" data-target="telefon_1"><span>(846) 555-55-00<span></a>
+                        <a class="header_phone" href="tel:+78465555500" data-target="telefon_1"><span>(846) 555-55-00<span></a>
                     </div>
                     <div class="content_right_side">
                         <div class="_link" data-open-popup-form data-target="podbor_1">Подобрать заведение</div>
-                        <div class="_recall">Обратный звонок</div>
+                        <div class="_recall" data-open-recall-form>Обратный звонок</div>
                     </div>
                 </div>
             </div>
@@ -110,54 +112,57 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
             <?= $content ?>
         </div>
 
-        <footer<?=Yii::$app->controller->action->id == 'post' ? ' class="__bgWhite"' : '';?>>
+        <!-- <footer <?=Yii::$app->controller->action->id == 'post' ? ' class="__bgWhite"' : '';?>> -->
+        <footer>
             <div class="footer_wrap">
-                <div class="footer_row">
+                <div class="content_block">
+
                     <div class="footer_block _left">
-                        <a href="/" class="footer_logo">
-                            <div class="footer_logo_img"></div>
-                        </a>
-                        <a href="/" class="footer_logo footer_logo_2">
-                            <div class="footer_logo_text">МОЙ ДЕНЬ</div>
-                        </a>
-                        <div class="footer_info">
-                            <p class="footer_copy">© <?php echo date("Y"); ?> Мой день</p>
-                            <a target="_blank" href="<?= Yii::$app->params['siteProtocol'] . '://' . Yii::$app->params['siteAddress'] ?>/politika/" class="footer_pc _link">Политика конфиденциальности</a>
+                        <div class="block-left-side">
+                            <a href="/" class="footer_logo">SO-SVOIM.RU</a>
+                            <div class="footer_info">
+                                <p class="footer_copy">so-svoim.ru   © <?php echo date("Y"); ?></p>
+                                <a class="footer_pc" target="_blank" href="<?= Yii::$app->params['siteProtocol'] . '://' . Yii::$app->params['siteAddress'] ?>/politika/" >Политика конфиденциальности</a>
+                            </div>
                         </div>
-                        <div class="footer_nav">
-                            <ul class="footer_nav_wrap">
-                                <li>
-                                    <span>Типы заведения</span>
-                                    <ul>
-                                        <?php
-                                        $kindArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
-                                            return $meta['type'] == 'kind';
-                                        });
-                                        foreach ($kindArr as $alias => $meta) { ?>
-                                            <li><a href="/catalog/<?= $alias ?>/"><?= $meta['name'] ?></a></li>
-                                        <?php } ?>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <span>Особенности</span>
-                                    <ul>
-                                        <?php
-                                        $featureArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
-                                            return $meta['type'] == 'feature';
-                                        });
-                                        foreach ($featureArr as $type_alias => $meta) { ?>
-                                            <li><a href="/catalog/<?= $type_alias ?>/"><?= $meta['name'] ?></a></li>
-                                        <?php } ?>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div class="block-right-side">
+                            <div class="footer_city">Ваш город: <span><?= Yii::$app->params['subdomen_name'] ?></span>
+                            </div>
+                            <a class="footer_phone" href="tel:+78465555500" data-target="telefon_1"><span>(846) 555-55-00<span></a>
                         </div>
                     </div>
+
                     <div class="footer_block _right">
-
-                        <a class="footer_ph" href="tel:+79252380246" data-target="telefon_1">8 (925) 238-02-46</a>
-
+                        <div class="_link" data-open-popup-form data-target="podbor_1">Подобрать заведение</div>
+                        <div class="_recall" data-open-recall-form>Обратный звонок</div>
                     </div>
+
+                    <div class="footer_nav">
+                        <ul class="footer_nav_wrap">
+                            <?php
+                            $kindArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
+                                return $meta['type'] == 'kind';
+                            });
+                            foreach ($kindArr as $alias => $meta) { ?>
+                                <li><a href="/catalog/<?= $alias ?>/"><?= $meta['name'] ?></a><span>  <?= $meta['count'] ?></span></li>
+                            <?php } ?>
+                            <?php
+                            $costArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
+                                return $meta['type'] == 'cost';
+                            });
+                            foreach ($costArr as $alias => $meta) { ?>
+                                <li><a href="/catalog/<?= $alias ?>/"><?= $meta['name'] ?></a><span>  <?= $meta['count'] ?></span></li>
+                            <?php } ?>
+                            <?php
+                            $featureArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
+                                return $meta['type'] == 'feature';
+                            });
+                            foreach ($featureArr as $type_alias => $meta) { ?>
+                                <li><a href="/catalog/<?= $type_alias ?>/"><?= $meta['name'] ?></a><span>  <?= $meta['count'] ?></span></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </footer>
@@ -167,26 +172,26 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <div class="popup_wrap">
         <div class="popup_layout" data-close-popup></div>
         <div class="popup_form">
-            <?= $this->render('//components/generic/form.twig', ['title' => 'Помочь подобрать зал?', 'type' => 'header', 'target' => 'podbor_2']) ?>
+            <?= $this->render('//components/generic/form.twig', ['title' => 'Затрудняетесь с выбором?', 'type' => 'header', 'target' => 'podbor_2']) ?>
         </div>
-        <!-- <div class="popup_img">
+
+        <div class="popup_img">
             <div class="popup_img_close" data-close-popup></div>
             <div class="popup_img_slider_wrap">
-                <div class="slider_arrow _prev"></div>
-                <div class="slider_arrow _next"></div>
                 <div class="object_gallery_container swiper-container" data-gallery-img-swiper>
                     <div class="object_gallery_swiper swiper-wrapper" data-gallery-list></div>
                 </div>
             </div>
-        </div> -->
-
+        </div>
+    </div>
+    <div class="popup_wrap_recall">
+        <div class="popup_layout" data-close-recall></div>
+        <div class="popup_form_recall">
+            <?= $this->render('//components/generic/form-recall.twig', ['title' => 'Заказать обратный звонок']) ?>
+        </div>
     </div>
 
-
     <?php $this->endBody() ?>
-    <!--link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap&subset=cyrillic" rel="stylesheet"-->
-
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&display=swap&subset=cyrillic" rel="stylesheet" crossorigin="anonymous"> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link href="//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css" rel="stylesheet" crossorigin="anonymous">

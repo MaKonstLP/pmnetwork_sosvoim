@@ -1,11 +1,12 @@
 
-	<div class="form_wrapper" id="order_form">
+	<div class="form_wrapper_recall">
 		<div class="content_block">
-			<div class="form_main">
-				<div class="form_close" data-close-popup></div>
+			<div class="form_main_recall">
+				<div class="form_close" data-close-recall></div>
+
 				<div class="form_title">
 					<p class="form_title_main">{{ title ? title : 'Затрудняетесь с выбором?'}}</p>
-					<p class="form_title_main"><span class="for-free">Бесплатно </span>{{ title2 ? title2 : 'подберем заведение под ваше мероприятие!'}}</p>
+					<p class="form_title_main">{{ title2 ? title2 : 'Мы перезвоним в ближайшее время'}}</p>
 				</div>
 
 				<form class="form_block" action="/ajax/form/" data-form-target="{{target}}">
@@ -16,14 +17,6 @@
 						</div>
 						<div class="input_wrapper">
 							<input type="text" name="phone" data-required placeholder="+7 (999) 888 88 88" autocomplete="off"/>
-						</div>
-						<div class="input_wrapper">
-							<input type="text" name="email" data-required placeholder="Электронная почта" />
-						</div>
-						<div class="input_wrapper date_wrapper">
-							<input type="text" name="date" readonly  data-required placeholder="Дата" class="not_check_approove"/>
-							<div class="input_wrapper_date_wrapper" style="display: none;">
-							</div>
 						</div>
 						<div class="input_wrapper _big_width">
 							<textarea name="comment" data-required placeholder="Комментарий" rows="2" maxlength="200"></textarea>
@@ -37,7 +30,7 @@
 					<div class="form_submit">
 						<button class="_button">Отправить</button>
 						<div class="form_policy checkbox_item _active" data-action="form_checkbox">
-							<input type="checkbox" name="policy" class="personalData" checked="">
+							<input type="checkbox" name="policy" class="personalData">
 							<p class="checkbox_pseudo" >Я согласен с <a target="_blank" href="{{app.params.siteProtocol}}://{{app.params.siteAddress}}/politika/">политикой конфиденциальности</a></p>
 						</div>
 					</div>
@@ -45,10 +38,10 @@
 				</form>
 
 			</div>
-			<div class="form_success">
+			<div class="form_success_recall">
 				<p class="form_title_main" data-form-result-title>Заявка успешно отправлена</p>
-				<p data-form-result-body>Спасибо за проявленный интерес. Мы свяжемся с вами в течение рабочего дня, чтобы обсудить детали.</p>
-				<p class="form_close_bottom" data-close-popup>Закрыть</p>
+				<p data-form-result-body>Спасибо за обращение. Мы перезвоним Вам в ближайшее время.</p>
+				<p class="form_close_bottom" data-close-recall>Закрыть</p>
 			</div>
 		</div>
 	</div>
