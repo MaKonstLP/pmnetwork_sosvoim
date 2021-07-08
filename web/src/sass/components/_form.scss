@@ -1,5 +1,4 @@
-.form_wrapper,
-.form_wrapper_recall{
+.form_wrapper{
 	width: 100%;
 	margin-bottom: 50px;
 	.content_block{
@@ -13,7 +12,7 @@
 		}
 	}
 }
-.form_wrapper_recall{
+._recall{
 	.content_block{
 		width: 100%;
 		max-width: 900px;
@@ -22,12 +21,10 @@
 		}
 	}
 }
-.form_main,
-.form_main_recall{
+.form_main{
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	padding-top: 63px;
 	background-color: #EAF7FB;
 	border-radius: 3px;
 	@include for-desktop{
@@ -38,18 +35,9 @@
 		width: 100%;
 		max-width: 690px;
 		flex-direction: column;
-		padding-top: 42px;
 	}
 	@include for-mobile{
 		flex-direction: column;
-	}
-	@include for-phone{
-		padding-top: 34px;
-	}
-}
-.form_main_recall{
-	@include for-desktop{
-		width: 100%;
 	}
 }
 .form_close{
@@ -99,7 +87,7 @@
 	align-items: center;
 	text-align: center;
 	margin-bottom: 19px;
-	padding: 0 10px;
+	padding: 0 20px;
     @include for-desktop{
     	margin-bottom: 18px;
     }
@@ -186,36 +174,46 @@
 	display: flex;
     flex-direction: column;
 	width: 100%;
-	max-width: 953px;
+	max-width: 711px;
+	padding-top: 40px;
     margin: 0 auto;
+	@include for-pad{
+		max-width: 630px;
+	}
+	@include for-mobile{
+		max-width: 330px;
+	}
+	@include for-phone{
+		max-width: 250px;
+	}
 	.form_inputs{
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
    		width: 100%;
-		@include for-desktop{
-			justify-content: space-around;
-			padding: 0 20px;
-		}
-		@include for-pad{
-			padding: 0 45px;
-		}
-		@include for-phone{
-			padding: 0;
-		}
+		// @include for-desktop{
+		// 	justify-content: space-around;
+		// 	padding: 0 20px;
+		// }
+		// @include for-pad{
+		// 	padding: 0 30px;
+		// }
+		// @include for-phone{
+		// 	padding: 0;
+		// }
 		.input_wrapper{
-			width: 23%;
+			width: 224px;
 			height: 57px;
 			@include for-pad{
-				width: 45%;
+				width: 197px;
 				height: 55px;
 			}
 			@include for-mobile{
-				width: 270px;
+				width: 100%;
 			}
-			@include for-phone{
-				width: 94%;
-			}
+			// @include for-phone{
+			// 	width: 94%;
+			// }
 			&._big{
 				width: 220px;
 
@@ -233,19 +231,19 @@
 
 			&._big_width{
 				width: 100%;
-				@include for-desktop{
-					width: 98%;
-				}
-				@include for-pad{
-					width: 95%; 
-				}
+				// @include for-desktop{
+				// 	width: 98%;
+				// }
+				// @include for-pad{
+				// 	width: 95%; 
+				// }
 				@include for-mobile{
-					width: 270px;
-					height: 80px;
+					width: 100%;
+					height: 68px;
 				}
-				@include for-phone{
-					width: 94%;
-				}
+				// @include for-phone{
+				// 	width: 94%;
+				// }
 					textarea{
 						width: 100%;
 						padding: 8px 15px 20px;
@@ -338,15 +336,15 @@
 	    align-items: center;
 		margin: 29px auto 60px auto;
 		@include for-pad{
-			margin-top: 25px;
+			margin-top: 30px;
 			margin-bottom: 40px;
 		}
 		@include for-mobile{
 			flex-direction: column-reverse;
-			margin-top: 17px;
+			// margin-top: 17px;
 		}
 		@include for-phone{
-			margin-top: 16px;
+			// margin-top: 16px;
 			margin-bottom: 30px;
 		}
 		button{
@@ -372,7 +370,11 @@
 				height: 50px;
 			}
 			@include for-mobile{
+				width: 330px;
 				margin-right: 0;
+			}
+			@include for-phone{
+				width: 250px;
 			}
 		}
 
@@ -382,13 +384,13 @@
 			@include for-mobile{
 				margin-bottom: 20px;
 			}
-			@include for-phone{
-				width: 56%;
-			}
+			// @include for-phone{
+			// 	width: 56%;
+			// }
 			p{
 				user-select: none;
 				font-weight: 500;
-				font-size: 14px;
+				font-size: 13px;
 				line-height: 16px;
 
 				&:before{
@@ -405,8 +407,12 @@
 			}
 		}
 	}
+	&._hide{
+		display: none;
+	}
 }
 .input_wrapper.date_wrapper{
+	display: none;
 	position: relative;
 }
 .input_wrapper_date_wrapper{
@@ -495,8 +501,7 @@
     	}
 	}
 }
-.form_success,
-.form_success_recall {
+.form_success {
 	display: none;
 	text-align: center;
     margin: 0 auto;
@@ -678,6 +683,13 @@
     }
 }
 
+.popup_form._active,
+.popup_form_recall,
+[data-success] {
+	&._active{
+		display: block;
+	}
+}
 .for-free{
 	text-transform: uppercase;
 	font-weight: bold;

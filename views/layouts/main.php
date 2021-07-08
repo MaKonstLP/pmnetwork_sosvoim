@@ -172,7 +172,10 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <div class="popup_wrap">
         <div class="popup_layout" data-close-popup></div>
         <div class="popup_form">
-            <?= $this->render('//components/generic/form.twig', ['title' => 'Затрудняетесь с выбором?', 'type' => 'header', 'target' => 'podbor_2']) ?>
+            <?= $this->render('//components/generic/form-popup.twig', ['title' => 'Затрудняетесь с выбором?', 'target' => 'podbor_popup']) ?>
+        </div>
+        <div class="popup_form_recall">
+            <?= $this->render('//components/generic/form-recall.twig', ['title' => 'Заказать обратный звонок', 'target' => 'recall']) ?>
         </div>
 
         <div class="popup_img">
@@ -182,12 +185,6 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                     <div class="object_gallery_swiper swiper-wrapper" data-gallery-list></div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="popup_wrap_recall">
-        <div class="popup_layout" data-close-recall></div>
-        <div class="popup_form_recall">
-            <?= $this->render('//components/generic/form-recall.twig', ['title' => 'Заказать обратный звонок']) ?>
         </div>
     </div>
 

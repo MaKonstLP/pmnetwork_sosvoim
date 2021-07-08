@@ -8,30 +8,43 @@ export default class Main {
             $(this).closest('[data-seo-text]').addClass('_active');
         });
 
-        $('[data-open-popup-form]').on('click', function () {
-            $('.popup_wrap').addClass('_active');
-            $('.form_main').show();
-            $('.popup_wrap .popup_form').show();
-            $('.popup_wrap .popup_img').hide();
-        });
+
+		this.$selectorPopupLayout = '[data-close-popup]';
+		this.$selectorOpenPopup = '[data-open-popup-form]';
+		this.$selectorOpenPopupRecall = '[data-open-recall-form]';
+		this.$selectorCloseFormPopup = '.form_close';
+		this.$popup = document.querySelector('.popup_wrap');
+		this.$formRequestCall = document.querySelector('.popup_form_recall');
+		this.$formReservationHall = document.querySelector('.popup_form');
+
+		document.querySelector('body').addEventListener('click', event => this.handlerClick(event));
+
+		this.handlerClick = this.handlerClick.bind(this);
+	}
+
+	handlerClick(event) {
+		if (event.target.closest(this.$selectorPopupLayout)) {
+			this.$popup.classList.remove('_active');
+			this.$formRequestCall.classList.remove('_active');
+			this.$formReservationHall.classList.remove('_active');
+		};
+		if (event.target.closest(this.$selectorOpenPopup)) {
+			this.$popup.classList.add('_active');
+			this.$formReservationHall.classList.add('_active');
+		};
+		if (event.target.closest(this.$selectorOpenPopupRecall)) {
+			this.$popup.classList.add('_active');
+			this.$formRequestCall.classList.add('_active');
+		};
+		if (event.target === this.$popup || event.target.closest(this.$selectorCloseFormPopup)) {
+			this.$popup.classList.remove('_active');
+			if (this.$formRequestCall.classList.contains('_active')) this.$formRequestCall.classList.remove('_active');
+			if (this.$formReservationHall.classList.contains('_active')) this.$formReservationHall.classList.remove('_active');
+		};
+
 
         $('[data-close-popup]').on('click', function () {
-            $('.popup_wrap').removeClass('_active');
-            $('.form_success').hide();
-            $('.form_main').show();
-            $('.popup_wrap_recall .popup_form_recall .form_success_recall').hide();
-        });
-
-        $('[data-open-recall-form]').on('click', function () {
-            $('.popup_wrap_recall').addClass('_active');
-            $('.form_main_recall').show();
-        });
-
-        $('[data-close-recall]').on('click', function () {
-            $('.popup_wrap_recall').removeClass('_active');
-            $('.popup_wrap_recall .popup_form_recall .form_success_recall').hide();
-            $('.form_success').hide();
-            $('.form_main').show();
+            $('.popup_wrap .popup_img').hide();
         });
 
         /*$('body').on('click', '[data-gallery-img-view]', function () {

@@ -1,4 +1,4 @@
-import Animation from './animation.js';
+// import Animation from './animation.js';
 //import modal from './modal';
 import {status, json} from './utilities';
 import Inputmask from 'inputmask';
@@ -7,45 +7,19 @@ var animation = new Animation;
 export default class Form {
 	constructor(form) {
 		this.$form = $(form);
-		// this.$formWrap = this.$form.parents('.form_main');
+		this.$formWrap = this.$form.parents('.form_wrapper');
 		this.$submitButton = this.$form.find('button[type="submit"]');
 		this.$policy = this.$form.find('[name="policy"]');
 		this.$policy_checkbox = this.$form.find('[data-action="form_checkbox"]');
+
 		this.to = (this.$form.attr('action') == undefined || this.$form.attr('action') == '') ? this.to : this.$form.attr('action');
-		this.$formModal = this.$form.parents('body').find('.form_wrapper');
-		this.$formModalRecall = this.$form.parents('body').find('.popup_wrap_recall');
-		this.$formModalMain = this.$formModal.find('.form_main');
-		this.$formModalMainRecall = this.$formModalRecall.find('.form_main_recall');
-		this.$formSuccess = this.$formModal.find('.form_success');
-		this.$formSuccessRecall = this.$formModalRecall.find('.form_success_recall');
+
 		this.target = this.$form.data('form-target');
 		
-		let im_phone = new Inputmask('+7 (999) 999-99-99', {
-			clearIncomplete: true,
-	    });
-
+		let im_phone = new Inputmask('+7 (999) 999-99-99', { clearIncomplete: true });
 	    im_phone.mask($(this.$form).find('[name="phone"]'));
 
 		this.bind();
-	}
-
-	success(data) {
-		//modal.append(data);
-		// modal.show();
-		this.$formModalMain.hide();
-		this.$formModalMainRecall.hide();
-		data.title && this.$formSuccess.find('[data-form-result-title]').text(data.title);
-		data.body && this.$formSuccess.find('[data-form-result-body]').text(data.body);
-		data.title && this.$formSuccessRecall.find('[data-form-result-title]').text(data.title);
-		data.body && this.$formSuccessRecall.find('[data-form-result-body]').text(data.body);
-		this.$formSuccess.show();
-		this.$formSuccessRecall.show();
-
-		this.reset();
-		console.log('reachGoal', this.target);
-		ym('67719148', 'reachGoal', this.target);
-		gtag('event', $(this).data('target'), {'event_category': 'click'});
-		// this.$submitButton.removeClass('button__pending');
 	}
 
 	bind() {
@@ -63,10 +37,8 @@ export default class Form {
 				this.checkValid();
 			});
 			$(el).on('change', (e) => {
-			  // console.log('input change');
 			  this.checkValid();
 			  // this.checkField($(e.currentTarget));
-			  // this.checkValid();
 			});
 		});
 		this.$form.on('submit', (e) => {
@@ -97,6 +69,11 @@ export default class Form {
 			}
 			$input.prop("checked", !$input.prop("checked"));
 		})
+
+		this.$formWrap.find('[data-close-popup]').on('click', (e) => {
+			this.$formWrap.find('[data-success]').removeClass('_active');
+			this.$form.removeClass('_hide');
+		});
 
 		this.calendarInit();
 
@@ -195,6 +172,29 @@ export default class Form {
 		return valid;
 	}
 
+	success(data) {
+		//modal.append(data);
+		// modal.show();
+		data.title && this.$formSuccess.find('[data-form-result-title]').text(data.title);
+		data.body && this.$formSuccess.find('[data-form-result-body]').text(data.body);
+		data.title && this.$formSuccessRecall.find('[data-form-result-title]').text(data.title);
+		data.body && this.$formSuccessRecall.find('[data-form-result-body]').text(data.body);
+
+		// this.$formModalMain.hide();
+		// this.$formModalMainRecall.hide();
+		// this.$formSuccess.show();
+		// this.$formSuccessRecall.show();
+
+		this.$formWrap.find('[data-success]').addClass('_active');
+		this.$form.addClass('_hide');
+		this.$form[0].reset();
+
+		console.log('reachGoal', this.target);
+		ym('67719148', 'reachGoal', this.target);
+		gtag('event', $(this).data('target'), {'event_category': 'click'});
+		// this.$submitButton.removeClass('button__pending');
+	}
+
 	reset() {
 		this.$form[0].reset();
 		this.$form.find('input').removeClass('form_input_valid form_input_filled check_approove');
@@ -221,6 +221,7 @@ export default class Form {
 		formData.append($('[name="csrf-param"]').attr('content'), $('[name="csrf-token"]').attr('content'));
 		var formUrl = window.location.href;
 	    formData.append('url', formUrl);
+
 	    fetch(this.to,{
 			method: 'POST',
 			body: formData
@@ -237,6 +238,7 @@ export default class Form {
 			this.disabled = false;
 	    });
 	}
+
 
 	calendarInit($chooseDate = '') {
 		if ($chooseDate == '') {

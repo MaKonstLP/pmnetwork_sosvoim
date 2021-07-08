@@ -25,9 +25,9 @@
 }
 .popup_form,
 .popup_form_recall{
+	display: none;
 	width: 100%;
-    .form_wrapper,
-	.form_wrapper_recall{
+    .form_wrapper{
     	border-radius: 4px;
     }
     .form_close{
@@ -112,35 +112,45 @@
 	}
 	.form_block{
     	width: 100%;
+		@include for-pad{
+			max-width: 630px;
+		}
+		@include for-mobile{
+			max-width: 330px;
+		}
+		@include for-phone{
+			max-width: 250px;
+		}
+	
     }
 	.form_inputs{
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
    		width: 100%;
-		@include for-desktop{
-			justify-content: space-around;
-			padding: 0 20px;
-		}
-		@include for-pad{
-			padding: 0 45px;
-		}
-		@include for-phone{
-			padding: 0;
-		}
+		// @include for-desktop{
+		// 	justify-content: space-around;
+		// 	padding: 0 20px;
+		// }
+		// @include for-pad{
+		// 	padding: 0 45px;
+		// }
+		// @include for-phone{
+		// 	padding: 0;
+		// }
 		.input_wrapper{
-			width: 23%;
+			width: 224px;
 			height: 57px;
 			@include for-pad{
-				width: 45%;
+				width: 197px;
 				height: 55px;
 			}
 			@include for-mobile{
-				width: 270px;
+				width: 100%;
 			}
-			@include for-phone{
-				width: 94%;
-			}
+			// @include for-phone{
+			// 	width: 94%;
+			// }
 			&._big{
 				width: 220px;
 
@@ -157,19 +167,19 @@
 			}
 			&._big_width{
 				width: 100%;
-				@include for-desktop{
-					width: 98%;
-				}
-				@include for-pad{
-					width: 95%; 
-				}
+				// @include for-desktop{
+				// 	width: 98%;
+				// }
+				// @include for-pad{
+				// 	width: 95%; 
+				// }
 				@include for-mobile{
-					width: 270px;
-					height: 80px;
+					width: 100%;
+					height: 68px;
 				}
-				@include for-phone{
-					width: 94%;
-				}
+				// @include for-phone{
+				// 	width: 94%;
+				// }
 				textarea{
 					width: 100%;
 					padding: 8px 15px 20px;
@@ -255,9 +265,9 @@
     .form_submit{
     	.form_policy{
     		margin-top: 0px;
-			@include for-phone{
-				width: 56%;
-			}
+			// @include for-phone{
+			// 	width: 56%;
+			// }
 
     	}
     }
@@ -271,8 +281,7 @@
     	}
 	}
 	@include for-phone{
-    	.form_wrapper,
-		.form_wrapper_recall{
+    	.form_wrapper{
     		background-size: 43%,35%;
     	}
     	.form_title{
@@ -297,7 +306,7 @@
 					background-color: #C6002F;
 				}
 				@include for-pad{
-					width: 200px;
+					width: 250px;
 					height: 50px;
 				}
 			}
@@ -312,7 +321,7 @@
 		}
 		@include for-phone{
 			width: 100%;
-			padding: 0 15px;
+			// padding: 0 15px;
 		}
 		.form_inputs{
 			@include for-mobile{
@@ -326,12 +335,12 @@
 			}
 			&._big_width{
 				width: 100%;
-				@include for-desktop{
-					width: 97%;
-				}
-				@include for-mobile{
-					width: 100%;
-				}
+				// @include for-desktop{
+				// 	width: 97%;
+				// }
+				// @include for-mobile{
+				// 	width: 100%;
+				// }
 			}
 		}
 		.form_submit{

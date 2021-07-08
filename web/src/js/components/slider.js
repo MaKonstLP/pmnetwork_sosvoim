@@ -25,8 +25,8 @@ export default class Slider{
             slider_popup.find('[data-gallery-img-view]').each(function(){$(this).removeAttr('data-gallery-img-view')});
             slider_popup.find('.swiper-slide').removeClass('swiper-slide-duplicate-active swiper-slide-active');
             slider_popup.find('[data-swiper-slide-index="'+active+'"]').addClass('swiper-slide-active');
-            $('.popup_wrap .popup_form').hide();
-            $('.popup_wrap .popup_form_recall').hide();
+            // $('.popup_wrap .popup_form').hide();
+            // $('.popup_wrap .popup_form_recall').hide();
             $('.popup_wrap .popup_img').show();
             $('.popup_wrap').not('.popup_phone_wrap').addClass('_active');
             self.initSwiperPopup(slider_popup, active);

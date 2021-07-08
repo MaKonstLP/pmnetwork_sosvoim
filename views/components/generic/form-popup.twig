@@ -3,12 +3,13 @@
 		<div class="content_block">
 			<div class="form_main">
 				<div class="form_close" data-close-popup></div>
-				<div class="form_title">
-					<p class="form_title_main">{{ title ? title : 'Затрудняетесь с выбором?'}}</p>
-					<p class="form_title_main"><span class="for-free">Бесплатно </span>{{ title2 ? title2 : 'подберем заведение под ваше мероприятие!'}}</p>
-				</div>
 
 				<form class="form_block" action="/ajax/form/" data-form-target="{{target}}">
+					<div class="form_title">
+						<p class="form_title_main">{{ title ? title : 'Затрудняетесь с выбором?'}}</p>
+						<p class="form_title_main"><span class="for-free">Бесплатно </span>{{ title2 ? title2 : 'подберем заведение под ваше мероприятие!'}}</p>
+					</div>
+
 					<input type="hidden" name="type" value="{{ type ? type : 'main'}}" />
 					<div class="form_inputs">
 						<div class="input_wrapper">
@@ -20,13 +21,13 @@
 						<div class="input_wrapper">
 							<input type="text" name="email" data-required placeholder="Электронная почта" />
 						</div>
-						<div class="input_wrapper date_wrapper">
+						{# <div class="input_wrapper date_wrapper">
 							<input type="text" name="date" readonly  data-required placeholder="Дата" class="not_check_approove"/>
 							<div class="input_wrapper_date_wrapper" style="display: none;">
 							</div>
-						</div>
+						</div> #}
 						<div class="input_wrapper _big_width">
-							<textarea name="comment" data-required placeholder="Комментарий" rows="2" maxlength="200"></textarea>
+							<textarea name="comment" data-required placeholder="Сообщение" rows="2" maxlength="200"></textarea>
 						</div>
 					</div>
 
@@ -35,20 +36,19 @@
 					{% endif %}
 
 					<div class="form_submit">
-						<button class="_button">Отправить</button>
+						<button class="_button" type="submit">Отправить</button>
 						<div class="form_policy checkbox_item _active" data-action="form_checkbox">
 							<input type="checkbox" name="policy" class="personalData" checked="">
 							<p class="checkbox_pseudo" >Я согласен с <a target="_blank" href="{{app.params.siteProtocol}}://{{app.params.siteAddress}}/politika/">политикой конфиденциальности</a></p>
 						</div>
 					</div>
-						
 				</form>
 
-			</div>
-			<div class="form_success">
-				<p class="form_title_main" data-form-result-title>Заявка успешно отправлена</p>
-				<p data-form-result-body>Спасибо за проявленный интерес. Мы свяжемся с вами в течение рабочего дня, чтобы обсудить детали.</p>
-				<p class="form_close_bottom" data-close-popup>Закрыть</p>
+				<div class="form_success" data-success>
+					<p class="form_title_main" data-form-result-title>Заявка успешно отправлена</p>
+					<p data-form-result-body>Спасибо за проявленный интерес. Мы свяжемся с вами в течение рабочего дня, чтобы обсудить детали.</p>
+					<p class="form_close_bottom" data-close-popup>Закрыть</p>
+				</div>
 			</div>
 		</div>
 	</div>

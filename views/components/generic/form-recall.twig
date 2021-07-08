@@ -1,15 +1,15 @@
 
-	<div class="form_wrapper_recall">
+	<div class="form_wrapper _recall">
 		<div class="content_block">
-			<div class="form_main_recall">
-				<div class="form_close" data-close-recall></div>
-
-				<div class="form_title">
-					<p class="form_title_main">{{ title ? title : 'Затрудняетесь с выбором?'}}</p>
-					<p class="form_title_main">{{ title2 ? title2 : 'Мы перезвоним в ближайшее время'}}</p>
-				</div>
+			<div class="form_main">
+				<div class="form_close" data-close-popup></div>
 
 				<form class="form_block" action="/ajax/form/" data-form-target="{{target}}">
+					<div class="form_title">
+						<p class="form_title_main">{{ title ? title : 'Затрудняетесь с выбором?'}}</p>
+						<p class="form_title_main">{{ title2 ? title2 : 'Мы перезвоним в ближайшее время'}}</p>
+					</div>
+
 					<input type="hidden" name="type" value="{{ type ? type : 'main'}}" />
 					<div class="form_inputs">
 						<div class="input_wrapper">
@@ -19,7 +19,7 @@
 							<input type="text" name="phone" data-required placeholder="+7 (999) 888 88 88" autocomplete="off"/>
 						</div>
 						<div class="input_wrapper _big_width">
-							<textarea name="comment" data-required placeholder="Комментарий" rows="2" maxlength="200"></textarea>
+							<textarea name="comment" data-required placeholder="Сообщение" rows="2" maxlength="200"></textarea>
 						</div>
 					</div>
 
@@ -36,12 +36,11 @@
 					</div>
 						
 				</form>
-
-			</div>
-			<div class="form_success_recall">
-				<p class="form_title_main" data-form-result-title>Заявка успешно отправлена</p>
-				<p data-form-result-body>Спасибо за обращение. Мы перезвоним Вам в ближайшее время.</p>
-				<p class="form_close_bottom" data-close-recall>Закрыть</p>
+				<div class="form_success" data-success>
+					<p class="form_title_main" data-form-result-title>Заявка успешно отправлена</p>
+					<p data-form-result-body>Спасибо за обращение. Мы перезвоним Вам в ближайшее время.</p>
+					<p class="form_close_bottom" data-close-popup>Закрыть</p>
+				</div>
 			</div>
 		</div>
 	</div>
