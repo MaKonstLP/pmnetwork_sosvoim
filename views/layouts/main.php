@@ -48,6 +48,7 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <?php $this->beginBody() ?>
 
     <div class="main_wrap">
+        <header <?=Yii::$app->controller->action->id == 'index' ? ' class="header_index"' : ''; ?> >
         <header>
             <nav class="main_menu">
                 <div class="content_block">
@@ -60,6 +61,7 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                         <li class="main_menu_item"><a href="/catalog/antikafe/">Антикафе</a></li>
                         <li class="main_menu_item"><a href="/catalog/bar/">Бары</a></li>
                         <li class="main_menu_item"><a href="/blog/">Статьи</a></li>
+                        <li class="main_menu_item"><a href="/">О нас</a></li>
                     </ul>
 
                     <div class="header_city<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">

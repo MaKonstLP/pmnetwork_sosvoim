@@ -663,9 +663,9 @@ div[data-page-type="listing"] {
     }
 }
 .main_top_image{
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     @include for-desktop{
-        margin-bottom: 55px;
+        margin-bottom: 65px;
     }
     @include for-pad{
         margin-bottom: 53px;
