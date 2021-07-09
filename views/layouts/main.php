@@ -48,7 +48,6 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <?php $this->beginBody() ?>
 
     <div class="main_wrap">
-        <header <?=Yii::$app->controller->action->id == 'index' ? ' class="header_index"' : ''; ?> >
         <header>
             <nav class="main_menu">
                 <div class="content_block">

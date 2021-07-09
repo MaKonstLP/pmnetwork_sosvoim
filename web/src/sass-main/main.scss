@@ -135,12 +135,6 @@ body._overflow .main_wrap{
     @include for-desktop{
         margin-top: 40px;
     }
-    @include for-pad{
-        margin-top: 90px;
-    }
-    @include for-mobile{
-        margin-top: 55px;
-    }
 }
 .content_wrap.index_first_page{
     // margin-top: 40px;

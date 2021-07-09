@@ -3,6 +3,9 @@
     @include for-desktop{
         margin-bottom: 46px;
     }
+    @include for-pad{
+        margin-bottom: 33px;
+    }
     @include for-phone{
         margin-bottom: 20px;
     }
@@ -25,8 +28,11 @@
         margin-bottom: 22px;
     }
     @include for-pad{
-        margin-bottom: 0;
+        margin-bottom: 5px;
         font-size: 24px;
+    }
+    @include for-phone{
+        margin-bottom: 0;
     }
 }
 .items_list_listing{
@@ -49,8 +55,8 @@
             @include for-pad{
                 margin-bottom: 20px;
             }
-            @include for-mobile{
-                margin-bottom: 30px;
+            @include for-phone{
+                margin-bottom: 15px;
             }
         }
         &:nth-last-child(2){
@@ -78,7 +84,7 @@
         @include for-mobile{
             position: unset;
             flex-direction: column;
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
         }
     }
     .item_img{
@@ -91,15 +97,18 @@
         @include for-desktop {
             width: 450px;
         }
+        @include for-pad {
+            width: 300px;
+        }
         @include for-mobile{
             position: unset;
             width: 100%;
-            height: 290px;
+            height: 270px;
             border-radius: 3px 3px 0 0;
         }
         @include for-phone{
             position: unset;
-            height: 179px;
+            height: 170px;
         }
         img{
             width: 100%;
@@ -114,9 +123,12 @@
         @include for-desktop {
             margin-left: 480px;
         }
+        @include for-pad {
+            margin-left: 330px;
+        }
         @include for-mobile {
             margin-left: 0;
-            padding: 0 15px;
+            padding: 0 25px;
         }
         .item_info_top{
             margin: 40px 0 26px 0;
@@ -127,13 +139,13 @@
                 margin: 27px 0 10px 0;
             }
             @include for-pad {
-                margin: 26px 0 11px 0;
+                margin: 17px 0 22px 0;
             }
             @include for-mobile{
-                margin: 16px 0 8px 0;
+                margin: 22px 0 17px 0;
             }
             @include for-phone {
-                margin: 15px 0 10px 0;
+                margin: 19px 0 10px 0;
             }
             .item_name{
                 margin-right: 5px;
@@ -142,8 +154,9 @@
                 line-height: 1.2;
                 font-size: 24px;
                 color: #272727;
-                @include for-desktop {
-                    // font-size: 18px;
+                @include for-pad {
+                    font-size: 20px;
+                    margin-bottom: 6px;
                 }
                 @include for-mobile {
                     font-size: 24px;
@@ -194,7 +207,10 @@
                 margin-bottom: 21px;
             }
             @include for-mobile{
-                margin-bottom: 18px;
+                margin-bottom: 24px;
+            }
+            @include for-phone{
+                margin-bottom: 17px;
             }
             .item_meta_items {
                 display: flex;
@@ -206,15 +222,13 @@
                 }
                 @include for-pad{
                     width: 100%;
+                    font-size: 16px;
                 }
                 .item_address{
                     padding-left: 15px;
                     font-size: 16px;
                     line-height: 17px;
                     color: #272727;
-                    @include for-pad{
-                        margin-bottom: 13px;
-                    }
                     &:before{
                         content: url(/img/geo_icon.svg);
                         margin-right: 6px;
@@ -225,10 +239,15 @@
                         font-size: 14px;
                     }
                     @include for-pad{
-                        font-size: 12px;
+                        margin-bottom: 22px;
+                        font-size: 16px;
                     }
                     @include for-mobile{
                         font-size: 16px;
+                    }
+                    @include for-phone{
+                        margin-bottom: 9px;
+                        font-size: 14px;
                     }
                 }
                 &:first-child{
@@ -237,9 +256,10 @@
                         margin-right: 30px;
                     }
                     @include for-pad{
-                        margin-bottom: 14px;
+                        margin-bottom: 22px;
                     }
                     @include for-mobile{
+                        margin-bottom: 12px;
                         margin-right: 0;
                     }
                 }
@@ -261,6 +281,7 @@
                 color: #272727;
                 &:last-child{
                     margin-bottom: 0px;
+                    font-size: 14px;
                 }
                 .item_price {
                     color: #DA0034;
@@ -269,8 +290,11 @@
                     line-height: 18px;
                 }
                 @include for-pad{
-                    font-size: 14px;
+                    font-size: 16px;
                     line-height: 17px;
+                }
+                @include for-phone{
+                    font-size: 14px;
                 }
             }
         }

@@ -2,7 +2,7 @@
     width: 100%;
     margin-bottom: 90px;
     @include for-desktop{
-        margin-bottom: 53px;
+        margin-bottom: 62px;
         // background-color: #EAF7FB;
         .content_block{
             @include for-mobile{
@@ -21,10 +21,9 @@
     }
     .content_advantages_info{
         display: flex;
+        justify-content: space-between;
         width: 100%;
-        min-height: 380px;
-        padding-top: 57px;
-        padding-left: 55px;
+        padding: 57px 55px 50px 55px;
         background-color: #EAF7FB;
         border-radius: 3px;
         @include for-desktop{
@@ -33,32 +32,34 @@
         }
         @include for-pad{
             flex-direction: column;
-            min-height: 570px;
             align-items: center;
-            padding-top: 43px;
+            padding: 33px 30px 38px 30px;
         }
         @include for-mobile{
-            min-height: 627px;
+            padding-bottom: 18px;
+        }
+        @include for-phone{
+            padding: 23px 20px 23px 20px;
         }
     }
     .content_advantages_left{
         width: 47%;
-        margin-right: 47px;
+        margin-right: 20px;
         @include for-desktop{
             // width: 48%;
             margin-right: 33px;
             // padding-top: 12px;
         }
         @include for-pad{
-            padding-top: 0;
-        }
-        @include for-pad{
             width: 100%;
             margin-right: 0;
-            margin-bottom: 5px;
+            margin-bottom: 25px;
         }
         @include for-mobile{
-            margin-bottom: 7px;
+            margin-bottom: 30px;
+        }
+        @include for-phone{
+            margin-bottom: 33px;
         }
         .content_advantages_title{
             margin-bottom: 21px;
@@ -71,40 +72,49 @@
                 // font-size: 26px;
             }
             @include for-pad{
-                margin-bottom: 17px;
+                margin-bottom: 19px;
+                font-size: 24px;
             }
             @include for-phone{
                 font-size: 24px;
             }
         }
         .content_advantages_desc{
-            margin-bottom: 23px;
-            line-height: 20px;
+            line-height: 21px;
             color: #272727;
+            @include for-mobile{
+                font-size: 14px;
+                line-height: 16px;
+            }
+        }
+        .content_advantages_desc:not(:last-child){
+            margin-bottom: 23px;
+            @include for-pad{
+                margin-bottom: 14px;
+            }
             @include for-phone{
-                margin-bottom: 21px;
-                line-height: 21px;
+                margin-bottom: 11px;
             }
         }
     }
     .content_advantages_right{
-        width: 45%;
+        width: 47%;
         @include for-desktop{
-            width: 46%;
+            width: 45%;
         }
         @include for-pad{
-            width: 84%;
+            width: 100%;
         }
         @include for-mobile{
             width: 100%;
         }
         .advantages_items{
-            padding-left: 64px;
-            @include for-mobile{
-                padding-left: 64px;
+            padding-left: 58px;
+            @include for-pad{
+                padding-left: 50px;
             }
             @include for-phone{
-                padding-left: 62px;
+                padding-left: 39px;
             }
         }
         .advantages_item_title{
@@ -112,7 +122,7 @@
             margin-bottom: 8px;
             font-size: 16px;
             font-weight: bold;
-            line-height: 1;
+            line-height: 20px;
             color: #0C8CD4;
             @include for-desktop{
                 margin-bottom: 6px;
@@ -131,6 +141,14 @@
                 background-repeat: no-repeat;
                 background-size: contain;
                 background-position: center center;
+                @include for-pad{
+                    width: 32px;
+                    height: 30px;
+                    left: -50px;
+                }
+                @include for-pad{
+                    left: -40px;
+                }
             }
             &:first-child{
                 &::before{
@@ -149,18 +167,26 @@
             }
         }
         .advantages_item_desc{
-            margin-bottom: 35px;
             font-size: 14px;
             line-height: 19px;
             color: #272727;
+            @include for-phone{
+                line-height: 17px;
+            }
+        }
+        .advantages_item_desc:not(:last-child){
+            margin-bottom: 35px;
             @include for-desktop{
                 margin-bottom: 20px;
             }
             @include for-pad{
                 margin-bottom: 28px;
             }
+            @include for-mobile{
+                margin-bottom: 20px;
+            }
             @include for-phone{
-                line-height: 18px;
+                margin-bottom: 22px;
             }
         }
     }
@@ -260,7 +286,10 @@
     margin-bottom: 80px;
     text-align: center;
     @include for-desktop{
-        margin-bottom: 50px;
+        margin-bottom: 33px;
+    }
+    @include for-pad{
+        margin-bottom: 45px;
     }
     .main_blog_title{
         margin-bottom: 38px;
@@ -272,8 +301,8 @@
             font-size: 32px;
         }
         @include for-pad{
-            margin-bottom: 17px;
-            font-size: 22px;
+            margin-bottom: 22px;
+            font-size: 24px;
         }
         @include for-mobile{
             font-size: 24px;
@@ -321,7 +350,7 @@
         }
         @include for-pad{
             width: 210px;
-            height: 123px;
+            height: 150px;
             margin-bottom: 21px;
         }
         @include for-mobile{
