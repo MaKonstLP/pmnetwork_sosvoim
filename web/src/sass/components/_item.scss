@@ -28,19 +28,19 @@
     }
     p{
         font-size: 16px;
-        line-height: 18px;
+        line-height: 1;
         @include for-pad{
             font-size: 14px;
         }
     }
     .object_meta_item{
         &:first-child{
-            margin-bottom: 26px;
+            margin-bottom: 18px;
             @include for-desktop{
                 width: 100%;
             }
             @include for-pad{
-                margin-bottom: 21px;
+                margin-bottom: 16px;
             }
         }
         &:not(:first-child){
@@ -71,12 +71,14 @@
             }
         }
         .object_name{
-            margin-bottom: 16px;
+            margin-bottom: 13px;
             font-weight: 700;
-            font-size: 30px;
+            font-size: 36px;
             color: #272727;
+            @include for-desktop{
+                font-size: 32px;
+            }
             @include for-pad{
-                margin-bottom: 9px;
                 font-size: 24px;
             }
             span{
@@ -119,13 +121,14 @@
             }
         }
         .item_desc{
-            margin-bottom: 3px;
+            margin-bottom: 5px;
             font-size: 16px;
             font-weight: 400;
             color: #272727;
         }
         .item_wrap{
             display: flex;
+            align-items: flex-end;
             margin-bottom: 6px;
         }
     }
@@ -139,18 +142,13 @@
                     font-weight: 400;
                     font-size: 16px;
                     color: #4F4F4F;
-                    white-space: nowrap;
                     @include for-pad{
                         font-size: 14px;
                     }
-                    & + div{
-                        width: 100%;  
-                    }
-                    & + div > p {
-                        width: 100%;
-                        height: 18px;
-                        border-bottom: 1px dotted #C2C2C2;
-                    }
+                }
+                .dotted {
+                    width: 100%;
+                    border-bottom: 1px dotted #C2C2C2;
                 }
             }
             .object_meta_value{
@@ -165,27 +163,13 @@
             }
             &:nth-child(2) {
                 margin-bottom: 3px;
-                .item_wrap{
-                    &:last-child{
-                        .object_meta_title{
-                            @include for-pad{
-                                flex: 0 0 85%;
-                                white-space: pre-wrap;
-                            }
-                            @include for-mobile{
-                                // flex: unset;
-                                // white-space: unset;
-                            }
-                        }
-                    }
-                }
                 @include for-desktop{
                     margin-right: 30px;
                     .item_left_side{
                         width: 55%;
                     }
                     .object_meta_value{
-                        width: 45%;
+                        width: 57%;
                     }
                 }
                 @include for-pad{
@@ -228,13 +212,14 @@
             background-color: #EAF7FB;
             @include for-desktop{
                 max-width: 450px;
-                height: 100px;
+                height: 130px;
             }
             @include for-pad{
                 width: 330px;
             }
             @include for-mobile{
                 width: 240px;
+                height: 100px;
             }
             @include for-phone{
                 width: 290px;
@@ -552,7 +537,7 @@ button{
     display: block;
     width: 195px;
     height: 40px;
-    margin-bottom: 37px;
+    margin-bottom: 41px;
     margin-left: 15px;
     line-height: 40px;
     text-align: center;
@@ -565,12 +550,23 @@ button{
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
+    @include for-desktop{
+        margin-bottom: 33px;
+    }
     @include for-pad{
         width: 154px;
         height: 34px;
-        margin-bottom: 16px;
+        margin-bottom: 22px;
         line-height: 34px;
         font-size: 14px;
+    }
+    @include for-mobile{
+        width: 118px;
+        height: 24px;
+        margin-bottom: 33px;
+        margin-left: 10px;
+        line-height: 22px;
+        font-size: 12px;
     }
     &::before{
         content: '';
@@ -586,6 +582,12 @@ button{
             width: 25px;
             height: 26px;
             left: -10px;
+            top: 4px;
+        }
+        @include for-mobile{
+            width: 16px;
+            height: 16px;
+            left: -7px;
             top: 4px;
         }
     }
@@ -605,7 +607,6 @@ button{
     }
 }
 .rest_top_wrap{
-    background-color: $clrBackground;
     .content_block{
         @include for-mobile{
             padding: 0 45px;
@@ -625,10 +626,13 @@ button{
             @include for-desktop{
                 width: 100%;
                 margin-right: 0;
-                margin-bottom: 60px;
+                margin-bottom: 30px;
             }
             @include for-pad{
-                margin-bottom: 50px;
+                margin-bottom: 30px;
+            }
+            @include for-mobile{
+                margin-bottom: 25px;
             }
             @include for-phone{
                 margin-bottom: 40px;
@@ -639,7 +643,7 @@ button{
             @include for-desktop{
                 align-self: center;
                 width: 100%;
-                max-width: 773px;
+                max-width: 710px;
             }
             @include for-pad{
                 width: 100%;
@@ -735,7 +739,6 @@ button{
         }
         @include for-mobile{
             width: 100%;
-            // max-width: 510px;
             margin: 0 auto;
             margin-bottom: 40px;
         }
@@ -752,7 +755,6 @@ button{
     }
     @include for-mobile{
         width: 100%;
-        // max-width: 510px;
         margin: 0 auto;
         margin-bottom: 40px;
     }
@@ -802,22 +804,27 @@ button{
 .rest_optional_wrap{
     margin-bottom: 50px;
     @include for-desktop{
-        margin-bottom: 60px;
+        margin-bottom: 40px;
     }
     @include for-pad{
         margin-bottom: 50px;
     }
     @include for-mobile{
         width: 100%;
-        // max-width: 510px;
         margin: 0 auto;
-        margin-bottom: 37px;
+        margin-bottom: 50px;
     }
     .rest_optional{
-        margin-bottom: 13px;
-        font-size: 26px;
+        margin-bottom: 18px;
+        font-size: 32px;
         font-weight: 700;
         color: #272727;
+        @include for-pad{
+            font-size: 24px;
+        }
+        @include for-mobile{
+            margin-bottom: 14px;
+        }
     }
     .item_optional{
         display: flex;
@@ -918,12 +925,10 @@ button{
     }
 }
 
-
 .rest_rooms_wrap{
     margin-bottom: 50px;
-    background-color: $clrBackground;
     @include for-desktop{
-        margin-bottom: 60px;
+        margin-bottom: 40px;
     }
     @include for-pad{
         margin-bottom: 50px;
@@ -932,7 +937,6 @@ button{
         margin-bottom: 40px;
     }
     @include for-phone{
-        // width: 290px;
         margin: 0 auto;
         margin-bottom: 40px;
     }
@@ -941,7 +945,6 @@ button{
         @include for-mobile{
             padding: 0 45px;
             width: 100%;
-            // max-width: 510px;
             margin: 0 auto;
         }
         @include for-phone{
@@ -1001,10 +1004,11 @@ button{
     }
     .rest_rooms_list{
         margin-bottom: 13px;
-        font-size: 26px;
+        font-size: 32px;
         font-weight: 700;
         color: #272727;
         @include for-pad{
+            font-size: 24px;
             margin-bottom: 13px;
         }
     }
@@ -1013,13 +1017,11 @@ button{
         flex-wrap: wrap;
         @include for-mobile{
             width: 100%;
-            // max-width: 450px;
             margin: 0 auto;
         }
     }
     .rest_room{
         display: flex;
-        // width: 467px;
         flex-direction: column;
         border-radius: 3px 3px 0 0;
         overflow: hidden;
@@ -1030,109 +1032,79 @@ button{
         p{
             line-height: 16px;
         }
+        .rest_room_desc{
+            padding: 18px 20px 20px 29px;
+            @include for-pad{
+                padding: 18px 20px 20px 15px;
+            }
+        }
         .rest_room_name{
-            margin-bottom: 10px;
-            margin-left: 16px;
-            font-size: 20px;
+            margin-bottom: 6px;
+            font-size: 24px;
             font-weight: 700;
             color: #272727;
             @include for-desktop{
-                margin-left: 24px;
                 margin-bottom: 3px;
             }
             @include for-pad{
-                margin-left: 15px;
-            }
-            @include for-mobile{
-                margin-left: 24px;
-            }
-            @include for-phone{
-                margin-left: 15px;
+                font-size: 20px;
             }
             a{
                 color: inherit;
             }
         }
         .rest_room_price{
-            margin-bottom: 15px;
-            margin-left: 16px;
+            margin-bottom: 12px;
             font-size: 18px;
             font-weight: 700;
             color: #272727;
             @include for-desktop{
-                margin-left: 24px;
-                margin-bottom: 10px;
+                margin-bottom: 14px;
             }
-            @include for-pad{
-                margin-left: 15px;
-            }
-            @include for-mobile{
-                margin-left: 24px;
-            }
-            @include for-phone{
-                margin-left: 15px;
+            span{
+                font-size: 20px;
+                @include for-pad{
+                    font-size: 18px;
+                }
             }
         }
         .rest_room_item{
-            margin-left: 16px;
-            @include for-desktop{
-                margin-left: 24px;
-            }
-            @include for-pad{
-                margin-left: 15px;
-            }
-            @include for-mobile{
-                margin-left: 24px;
-            }
-            @include for-phone{
-                margin-left: 15px;
+            &:not(:last-child){
+                margin-bottom: 10px;
+                @include for-pad{
+                    margin-bottom: 7px;
+                }
             }
             p{
                 display: inline-block;
             }
-            &:last-child{
-                margin-bottom: 15px;
-                @include for-desktop{
-                    margin-bottom: 20px;
-                }
-                @include for-pad{
-                    margin-bottom: 17px;
-                }
-                @include for-mobile{
-                    margin-bottom: 20px;
-                }
-            }
         }
         .rest_room_title{
-            width: 170px;
-            font-size: 14px;
+            width: 50%;
+            font-size: 16px;
             font-weight: 400;
             color: #4F4F4F;
             @include for-pad{
-                width: 165px;
+                font-size: 14px;
+                width: 52%;
             }
             @include for-mobile{
                 width: 170px;
             }
         }
         .rest_room_value{
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
             color: #272727;
+            @include for-pad{
+                font-size: 14px;
+            }
         }
     }
 }
 
 .rest_room_img{
-    height: 311px;
-    margin-bottom: 17px;
-    @include for-desktop{
-        height: 303px;
-        margin-bottom: 18px;
-    }
-    @include for-pad{
-        height: 225px;
-    }
+    height: 270px;
     @include for-mobile{
         width: 266px;
     }
@@ -1141,7 +1113,6 @@ button{
     }
     @include for-mobile{
         width: 100%;
-        // max-width: 450px;
         height: 303px;
     }
     @include for-phone{
@@ -1154,7 +1125,7 @@ button{
     }
 }
 .other_objects{
-    background: #F8F8F8;
+    // background: #F8F8F8;
     padding: 32px 0 48px;
     h2{
         margin: 0 auto 24px;
@@ -1320,9 +1291,9 @@ button{
     }
     &.listing_wrap{
         padding: 0;
-        margin-bottom: 21px;
+        margin-bottom: 10px;
         @include for-desktop{
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
         @include for-pad{
             margin-bottom: 30px;
@@ -1331,17 +1302,18 @@ button{
             margin-bottom: 10px;
         }
         @include for-phone{
-            // width: 290px;
             margin: 0 auto;
             margin-bottom: 10px;
         }
     }
     .same_rest_list{
-        margin-bottom: 13px;
-        // text-align: center;
-        font-size: 26px;
+        margin-bottom: 15px;
+        font-size: 32px;
         font-weight: 700;
         color: #272727;
+        @include for-pad{
+            font-size: 24px;
+        }
         @include for-mobile{
             margin-bottom: 15px;
         }
@@ -1354,7 +1326,6 @@ button{
         padding: 0;
         @include for-mobile{
             width: 100%;
-            // max-width: 450px;
         }
         @include for-phone{
             width: 100%;
@@ -1367,10 +1338,7 @@ button{
                 .item_img{
                     position: unset;
                     width: 100%;
-                    height: 290px;
-                    @include for-pad{
-                        height: 213px;
-                    }
+                    height: 270px;
                     @include for-mobile{
                         height: 290px;
                     }
@@ -1384,26 +1352,21 @@ button{
             }
             .item_info{
                 margin-left: 0;
-                padding: 0 22px;
-                @include for-pad{
-                    padding: 0 15px;
-                }
+                padding: 24px 29px 20px 29px;
                 @include for-mobile{
-                    padding: 0 22px;
+                    padding: 22px;
                 }
                 @include for-phone{
-                    padding: 0 15px; 
+                    padding: 15px;
                 }
                 .item_info_top{
-                    margin: 17px 0 0 0;
-                    @include for-pad{
-                        margin-bottom: 15px;
-                    }
+                    margin: 0;
+                    margin-bottom: 12px;
                     @include for-phone{
-                        margin-top: 21px;
+                        // margin-top: 21px;
                     }
                     .item_name{
-                        font-size: 20px;
+                        font-size: 24px;
                         line-height: 1;
                     }
                     .item_parent_name{
@@ -1415,50 +1378,27 @@ button{
                     }
                 }
                 .item_meta{
-                    margin-bottom: 9px;
+                    margin-bottom: 0;
                     flex-direction: column;
-                    @include for-pad{
-                        margin-bottom: 16px;
-                    }
-                    @include for-phone{
-                        margin-bottom: 11px;
-                    }
                     .item_meta_items{
                         margin-right: 0;
                         width: 100%;
                         &:first-child{
                             margin-bottom: 13px;
+                            @include for-desktop{
+                                margin-bottom: 18px;
+                            }
                             @include for-pad{
                                 margin-bottom: 8px;
                             }
                             @include for-phone{
                                 margin-bottom: 12px;
                             }
-                            .item_meta_item{
-                                display: none;
-                            }
-                        }
-                        &:last-child{
-                            padding-top: 8px;
-                            border-top: 1px solid #D0E1E7;
-                            @include for-pad{
-                                padding-top: 6px;
-                            }
-                            .item_meta_item{
-                                &:first-child{
-                                    display: none;
-                                }
-                                &:nth-child(3){
-                                    order: -1;
-                                }
-                                &:last-child{
-                                    display: block;
-                                }
-                            }
                         }
                         .item_address{
+                            margin-bottom: 13px;
                             @include for-pad{
-                                margin-bottom: 0;
+                                margin-bottom: 4px;
                                 font-size: 14px;
                             }
                         }
@@ -1470,28 +1410,19 @@ button{
 }
 
 div[data-page-type='item']{
-    // &>.content_block{
-    //     @include for-phone{
-    //         margin-top: 212px;
-    //         margin-bottom: 30px;
-    //     }
-    // }
     .for-free{
         display: none;
     }
+    .map_wrap{
+        margin-bottom: 45px;
+        @include for-pad{
+            margin-bottom: 50px;
+        }
+    }
+    .map{
+        height: 500px;
+        @include for-mobile{
+            height: 363px;
+        }
+    }
 }
-
-
-
-// .rest_desc_value {
-//     &._check{
-//         &:before{
-//             content: url(/img/checkbox_pin.svg);
-//             width: 10px;
-//             height: 24px;
-//             margin-right: 6px;
-//         }
-//     }
-// }
-
-

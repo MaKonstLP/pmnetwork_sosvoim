@@ -1,0 +1,44 @@
+[data-page-type=aboutus]{
+    margin-top: 143px;
+    @include for-desktop{
+        margin-top: 100px;
+    }
+    @include for-pad{
+        margin-top: 89px;
+    }
+    @include for-mobile{
+        margin-top: 136px;
+    }
+    @include for-phone{
+        margin-top: 180px;
+    }
+    .form_wrapper{
+        margin-top: 30px;
+    }
+    .form_title{
+        .form_title_main{
+            &:nth-child(2){
+                display: none;
+            }
+        }
+    }
+    .form_block{
+        .form_inputs{
+            .input_wrapper{
+                width: 340px;
+                @include for-pad{
+                    width: 300px;
+                }
+                @include for-mobile{
+                    width: 100%;
+                }
+                &:nth-child(2){
+                    display: none;
+                    input{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

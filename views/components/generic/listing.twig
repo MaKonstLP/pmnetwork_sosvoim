@@ -20,7 +20,7 @@
                         <p class="item_address">{{item.restaurant_address}}</p>
                     {% endif %}
                     <div class="item_meta_item">
-                        {{item.restaurant_cuisine}}
+                        <p class="object_meta_title">Кухня: {{item.restaurant_cuisine}}</p>
                     </div>
                 </div>
 
@@ -62,29 +62,49 @@
                         <div class="optional__pic fire"></div>
                         <p>Площадка для<br>фейерверка</p>
                     </div>
-                {% endif %} 
+                {% endif %}
                 {% if item.restaurant_own_alcohol != 'Нельзя свой алкоголь' %}
                     <div class="optional">
                         <div class="optional__pic bocal"></div>
                         <p>Можно со своим<br>алкоголем</p>
                     </div>
-                {% endif %}    
+                {% endif %}
+
+                {% for specials in item.restaurant_specials %}
+                {% if specials.id == '41' %}
                 <div class="optional">
                     <div class="optional__pic outdoor"></div>
                     <p>Выездная<br>регистрация</p>
                 </div>
+                {% endif %}
+                {% endfor %}
+
+                {% for specials in item.restaurant_specials %}
+                {% if specials.id == '10' %}
                 <div class="optional">
                     <div class="optional__pic light"></div>
                     <p>Световое<br>оборудование</p>
                 </div>
+                {% endif %}
+                {% endfor %}
+
+                {% for extra in item.restaurant_extra %}
+                {% if extra.id == '6' %}
                 <div class="optional">
                     <div class="optional__pic music"></div>
                     <p>Живая<br>музыка</p>
                 </div>
+                {% endif %}
+                {% endfor %}
+
+                {% for specials in item.restaurant_specials %}
+                {% if specials.id == '9' %}
                 <div class="optional">
                     <div class="optional__pic disco"></div>
                     <p>Дискотека</p>
                 </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </a>

@@ -2,11 +2,18 @@
 
 namespace frontend\modules\so_svoim\models;
 
+use Yii;
 use common\models\Restaurants;
+use common\models\RestaurantsModule;
 use common\models\RestaurantsTypes;
-use common\models\RestaurantsSpec;
-use yii\db\Query;
 use yii\helpers\ArrayHelper;
+use common\models\Subdomen;
+use common\models\RestaurantsSpec;
+use common\models\RestaurantsSpecial;
+use common\models\RestaurantsExtra;
+use common\models\RestaurantsLocation;
+use common\models\ImagesModule;
+use common\components\AsyncRenewImages;
 
 class ElasticItems extends \yii\elasticsearch\ActiveRecord
 {
@@ -27,24 +34,27 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             'restaurant_alcohol',
             'restaurant_firework',
             'restaurant_name',
-            'restaurant_slug',
             'restaurant_address',
             'restaurant_cover_url',
             'restaurant_latitude',
             'restaurant_longitude',
             'restaurant_own_alcohol',
+            'restaurant_own_alcohol_id',
             'restaurant_cuisine',
             'restaurant_parking',
+            'restaurant_extra_services',
             'restaurant_payment',
             'restaurant_special',
             'restaurant_phone',
             'restaurant_images',
             'restaurant_commission',
             'restaurant_types',
-            'restaurant_main_type',
             'restaurant_location',
+            'restaurant_price',
             'restaurant_spec',
-            'restaurant_extra_services',
+            'restaurant_specials',
+            'restaurant_extra',
+            'restaurant_slug',
             'rooms',
         ];
     }
@@ -77,29 +87,43 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                     'restaurant_city_id'            => ['type' => 'integer'],
                     'restaurant_alcohol'            => ['type' => 'integer'],
                     'restaurant_firework'           => ['type' => 'integer'],
+                    'restaurant_price'              => ['type' => 'integer'],
                     'restaurant_name'               => ['type' => 'text'],
-                    'restaurant_slug'               => ['type' => 'keyword'],
                     'restaurant_address'            => ['type' => 'text'],
                     'restaurant_cover_url'          => ['type' => 'text'],
                     'restaurant_latitude'           => ['type' => 'text'],
                     'restaurant_longitude'          => ['type' => 'text'],
                     'restaurant_own_alcohol'        => ['type' => 'text'],
+                    'restaurant_own_alcohol_id'     => ['type' => 'integer'],
                     'restaurant_cuisine'            => ['type' => 'text'],
-                    'restaurant_parking'            => ['type' => 'text'],
+                    'restaurant_parking'            => ['type' => 'integer'],
                     'restaurant_extra_services'     => ['type' => 'text'],
                     'restaurant_payment'            => ['type' => 'text'],
                     'restaurant_special'            => ['type' => 'text'],
                     'restaurant_phone'              => ['type' => 'text'],
-                    'restaurant_main_type'          => ['type' => 'text'],
                     'restaurant_commission'         => ['type' => 'integer'],
-                    'restaurant_types'              => ['type' => 'nested', 'properties' => [
+                    'restaurant_slug'               => ['type' => 'keyword'],
+                    'restaurant_types'              => ['type' => 'nested', 'properties' =>[
                         'id'                            => ['type' => 'integer'],
                         'name'                          => ['type' => 'text'],
                     ]],
-                    'restaurant_location'              => ['type' => 'nested', 'properties' => [
+                    'restaurant_spec'               => ['type' => 'nested', 'properties' => [
                         'id'                            => ['type' => 'integer'],
+                        'name'                          => ['type' => 'text'],
                     ]],
-                    'restaurant_images'             => ['type' => 'nested', 'properties' => [
+                    'restaurant_specials'           => ['type' => 'nested', 'properties' =>[
+                        'id'                            => ['type' => 'integer'],
+                        'name'                          => ['type' => 'text'],
+                    ]],
+                    'restaurant_extra'           => ['type' => 'nested', 'properties' =>[
+                        'id'                            => ['type' => 'integer'],
+                        'name'                          => ['type' => 'text'],
+                    ]],
+                    'restaurant_location'           => ['type' => 'nested', 'properties' =>[
+                        'id'                            => ['type' => 'integer'],
+                        'name'                          => ['type' => 'text'],
+                    ]],
+                    'restaurant_images'             => ['type' => 'nested', 'properties' =>[
                         'id'                            => ['type' => 'integer'],
                         'sort'                          => ['type' => 'integer'],
                         'realpath'                      => ['type' => 'text'],
@@ -107,11 +131,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                         'waterpath'                     => ['type' => 'text'],
                         'timestamp'                     => ['type' => 'text'],
                     ]],
-                    'restaurant_spec'                 => ['type' => 'nested', 'properties' => [
-                        'id'                             => ['type' => 'integer'],
-                        'name'                           => ['type' => 'text'],
-                    ]],
-                    'rooms'                             => ['type' => 'nested', 'properties' => [
+                    'rooms'                             => ['type' => 'nested', 'properties' =>[
                         'id'                            => ['type' => 'integer'],
                         'gorko_id'                      => ['type' => 'integer'],
                         'restaurant_id'                 => ['type' => 'integer'],
@@ -125,12 +145,9 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                         'separate_entrance'             => ['type' => 'integer'],
                         'type_name'                     => ['type' => 'text'],
                         'name'                          => ['type' => 'text'],
-                        'slug'                          => ['type' => 'text'],
-                        'restaurant_slug'               => ['type' => 'text'],
-                        'restaurant_name'               => ['type' => 'text'],
                         'features'                      => ['type' => 'text'],
                         'cover_url'                     => ['type' => 'text'],
-                        'images'                        => ['type' => 'nested', 'properties' => [
+                        'images'                        => ['type' => 'nested', 'properties' =>[
                             'id'                            => ['type' => 'integer'],
                             'sort'                          => ['type' => 'integer'],
                             'realpath'                      => ['type' => 'text'],
@@ -183,42 +200,71 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $command->deleteIndex(static::index(), static::type());
     }
 
-    public static function refreshIndex()
-    {
+    public static function refreshIndex($params) {
         $res = self::deleteIndex();
         $res = self::updateMapping();
         $res = self::createIndex();
-        $restaurants = Restaurants::find()
-            ->with('rooms')
-            ->with('images')
-            ->with('subdomen')
-            ->where(['active' => 1])
-            ->limit(100000)
-            ->all();
+        $res = self::updateIndex($params);
+    }
 
-        $all_res = '';
+    public static function updateIndex($params) {
+        $connection = new \yii\db\Connection($params['main_connection_config']);
+        $connection->open();
+        Yii::$app->set('db', $connection);
+
         $restaurants_types = RestaurantsTypes::find()
             ->limit(100000)
             ->asArray()
             ->all();
-        //$subdomens = Subdomen::find()->all();
         $restaurants_types = ArrayHelper::index($restaurants_types, 'value');
-        //echo '<pre>';
-        //print_r($restaurants_types);
-        //exit;
+
+        $restaurants_specials = RestaurantsSpecial::find()
+            ->limit(100000)
+            ->asArray()
+            ->all();
+        $restaurants_specials = ArrayHelper::index($restaurants_specials, 'value');
+
+        $restaurants_extra = RestaurantsExtra::find()
+            ->limit(100000)
+            ->asArray()
+            ->all();
+        $restaurants_extra = ArrayHelper::index($restaurants_extra, 'value');
+
         $restaurants_spec = RestaurantsSpec::find()
             ->limit(100000)
             ->asArray()
             ->all();
-
         $restaurants_spec = ArrayHelper::index($restaurants_spec, 'id');
 
+        $restaurants_location = RestaurantsLocation::find()
+            ->limit(100000)
+            ->asArray()
+            ->all();
+        $restaurants_location = ArrayHelper::index($restaurants_location, 'value');
+
+        $restaurants = Restaurants::find()
+            ->with('rooms')
+            ->with('rooms.images')
+            ->with('images')
+            ->with('subdomen')
+            ->limit(100000)
+            ->all();
+
+        $connection = new \yii\db\Connection($params['site_connection_config']);
+        $connection->open();
+        Yii::$app->set('db', $connection);
+
+        $images_module = ImagesModule::find()
+            ->limit(100000)
+            ->asArray()
+            ->all();
+        $images_module = ArrayHelper::index($images_module, 'gorko_id');
+
         foreach ($restaurants as $restaurant) {
-            $res = self::addRecord($restaurant, $restaurants_types, $restaurants_spec);
-            $all_res .= $res . ' | ';
+            $res = self::addRecord($restaurant, $restaurants_types, $restaurants_spec, $restaurants_specials ,$restaurants_extra, $restaurants_location, $images_module, $params);
+            echo $res;
         }
-        echo 'Обновление индекса ' . self::index() . ' ' . self::type() . ' завершено<br>' . $all_res;
-        return true;
+        echo 'Обновление индекса '. self::index().' '. self::type() .' завершено'."\n";
     }
 
     public static function getTransliterationForUrl($name)
@@ -258,13 +304,13 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $record->setPrimaryKey($restaurant->id);
         }
 
-        if (!$restaurant->commission) {
-            return 'Не платный';
-        }
-
-        if (!$restaurant->subdomen->active) {
-            return 'Мало ресторанов';
-        }
+        //if (!$restaurant->commission) {
+        //    return 'Не платный';
+        //}
+//
+        //if (!$restaurant->subdomen->active) {
+        //    return 'Мало ресторанов';
+        //}
 
         //Св-ва ресторана
         $record->id = $restaurant->id;
@@ -295,12 +341,25 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $images = [];
         foreach ($restaurant->images as $key => $image) {
             $image_arr = [];
-            $image_arr['id'] = $image->id;
+            $image_arr['id'] = $image->gorko_id;
             $image_arr['sort'] = $image->sort;
             $image_arr['realpath'] = $image->realpath;
-            $image_arr['subpath'] = $image->subpath ? $image->subpath : $image->realpath;
-            $image_arr['waterpath'] = $image->waterpath ? $image->waterpath : $image->realpath;
-            $image_arr['timestamp'] = $image->timestamp;
+            if(isset($images_module[$image->gorko_id])){
+                $image_arr['subpath']   = $images_module[$image->gorko_id]['subpath'];
+                $image_arr['waterpath'] = $images_module[$image->gorko_id]['waterpath'];
+                $image_arr['timestamp'] = $images_module[$image->gorko_id]['timestamp'];
+            }
+            else{
+                //$queue_id = Yii::$app->queue->push(new AsyncRenewImages([
+                //    'gorko_id'      => $image->gorko_id,
+                //    'params'        => $params,
+                //    'rest_flag'     => true,
+                //    'rest_gorko_id' => $restaurant->gorko_id,
+                //    'room_gorko_id' => false,
+                //    'elastic_index' => 'pmn_prirodadr_restaurants',
+                //    'elastic_type'  => 'rest',
+                //]));
+            }                
             array_push($images, $image_arr);
         }
         $record->restaurant_images = $images;
@@ -316,19 +375,19 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         }
         $record->restaurant_types = $restaurant_types;
 
-        $restMainTypeIdsOrder = array_combine(self::MAIN_REST_TYPE_ORDER, self::MAIN_REST_TYPE_ORDER);
-
-        foreach ($record->restaurant_types as $key => $type) {
-            if (in_array($type['id'], $restMainTypeIdsOrder)) {
-                $restMainTypeIdsOrder[intval($type['id'])] = $type;
-            } else {
-                $restMainTypeIdsOrder[] = $type;
-            }
-        }
-
-        $record->restaurant_main_type = array_reduce($restMainTypeIdsOrder, function ($acc, $type) {
-            return (empty($acc) && isset($type['name']) ? $type['name'] : $acc);
-        }, '') ?: 'Ресторан';
+        //$restMainTypeIdsOrder = array_combine(self::MAIN_REST_TYPE_ORDER, self::MAIN_REST_TYPE_ORDER);
+//
+        //foreach ($record->restaurant_types as $key => $type) {
+        //    if (in_array($type['id'], $restMainTypeIdsOrder)) {
+        //        $restMainTypeIdsOrder[intval($type['id'])] = $type;
+        //    } else {
+        //        $restMainTypeIdsOrder[] = $type;
+        //    }
+        //}
+//
+        //$record->restaurant_main_type = array_reduce($restMainTypeIdsOrder, function ($acc, $type) {
+        //    return (empty($acc) && isset($type['name']) ? $type['name'] : $acc);
+        //}, '') ?: 'Ресторан';
 
         //Тип локации
         $restaurant_location = [];
@@ -346,6 +405,28 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $record->restaurant_slug = self::getTransliterationForUrl($restaurant->name);
             \Yii::$app->db->createCommand()->insert('restaurant_slug', ['gorko_id' => $restaurant->gorko_id, 'slug' =>  $record->restaurant_slug])->execute();
         }
+
+        //Особенности
+        $restaurant_specials = [];
+        $restaurant_specials_rest = explode(',', $restaurant->special_ids);
+        foreach ($restaurant_specials_rest as $key => $value) {
+            $restaurant_specials_arr = [];
+            $restaurant_specials_arr['id'] = $value;
+            $restaurant_specials_arr['name'] = isset($restaurants_specials[$value]['text']) ? $restaurants_specials[$value]['text'] : '';
+            array_push($restaurant_specials, $restaurant_specials_arr);
+        }
+        $record->restaurant_specials = $restaurant_specials;
+
+        //Extra
+        $restaurant_extra = [];
+        $restaurant_extra_rest = explode(',', $restaurant->extra_services_ids);
+        foreach ($restaurant_extra_rest as $key => $value) {
+            $restaurant_extra_arr = [];
+            $restaurant_extra_arr['id'] = $value;
+            $restaurant_extra_arr['name'] = isset($restaurants_extra[$value]['text']) ? $restaurants_extra[$value]['text'] : '';
+            array_push($restaurant_extra, $restaurant_extra_arr);
+        }
+        $record->restaurant_extra = $restaurant_extra;
 
         //Тип мероприятия
         $restaurant_spec = [];
@@ -395,7 +476,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $room_arr['name'] = $room->name;
             $room_arr['restaurant_slug'] = $record->restaurant_slug;
             $room_arr['restaurant_name'] = $restaurant->name;
-            $room_arr['restaurant_main_type'] = $record->restaurant_main_type;
+            //$room_arr['restaurant_main_type'] = $record->restaurant_main_type;
             $room_arr['features'] = $room->features;
             $room_arr['cover_url'] = $room->cover_url;
 
@@ -403,12 +484,25 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $images = [];
             foreach ($room->images as $key => $image) {
                 $image_arr = [];
-                $image_arr['id'] = $image->id;
+                $image_arr['id'] = $image->gorko_id;
                 $image_arr['sort'] = $image->sort;
                 $image_arr['realpath'] = $image->realpath;
-                $image_arr['subpath'] = $image->subpath ? $image->subpath : $image->realpath;
-                $image_arr['waterpath'] = $image->waterpath ? $image->waterpath : $image->realpath;
-                $image_arr['timestamp'] = $image->timestamp;
+                if(isset($images_module[$image->gorko_id])){
+                    $image_arr['subpath']   = $images_module[$image->gorko_id]['subpath'];
+                    $image_arr['waterpath'] = $images_module[$image->gorko_id]['waterpath'];
+                    $image_arr['timestamp'] = $images_module[$image->gorko_id]['timestamp'];
+                }
+                else{
+                    //$queue_id = Yii::$app->queue->push(new AsyncRenewImages([
+                    //    'gorko_id'      => $image->gorko_id,
+                    //    'params'        => $params,
+                    //    'rest_flag'     => false,
+                    //    'rest_gorko_id' => $restaurant->gorko_id,
+                    //    'room_gorko_id' => $room->gorko_id,
+                    //    'elastic_index' => 'pmn_prirodadr_restaurants',
+                    //    'elastic_type'  => 'rest',
+                    //]));
+                }                
                 array_push($images, $image_arr);
             }
             $room_arr['images'] = $images;
@@ -428,6 +522,6 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $result = $e;
         }
 
-        return $result;
+        return 1;
     }
 }

@@ -24,6 +24,26 @@
             padding: 0 15px;
         }
     }
+    .header_city{
+        margin-bottom: 5px;
+        color: #fff;
+        cursor: pointer;
+        &:hover{
+            & > .city{
+                border-bottom: none;
+            }
+        }
+        @include for-mobile{
+            right: 42px;
+        }
+        @include for-phone{
+            right: 12px;
+        }
+    }
+    .city{
+        border-bottom: 1px dashed #ffffff;
+        margin-left: 4px;
+    }
 
     .footer_block{
         display: flex;

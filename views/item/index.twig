@@ -20,7 +20,6 @@
                             <p class="object_name">{{item.name}} <span>в </span><a class="object_parent_name" href="/catalog/restoran-{{item.restaurant_slug}}/">«{{item.restaurant_name}}»</a></p>
                             {% if type != 'other' %}
 
-                            {# ЯКОРЬ ЗАМЕНИТЬ НА СКРИПТ #}
                             <p class="object_address"><a href="#map"><span>{{rest_item.restaurant_address}}</span></a></p>
                             {% endif %}
                             <p class="item_desc">Вместимость: {{item.capacity}} человек</p>
@@ -31,10 +30,10 @@
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Тип заведения</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">
-                                {% for type in rest_item.restaurant_types%}
+                                {% for type in rest_item.restaurant_types %}
                                     {{loop.first ? type.name : type.name|lower}}{{loop.last ? '' : ', '}}
                                 {% endfor %}
                                 </p>
@@ -44,10 +43,10 @@
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Расположение</p>
                                     {% set location = {'1':'Около моря','2':'Около реки','7':'Около озера','3':'В горах','4':'В городе','5':'В центре города','6':'За городом'} %}
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">
-                                {% for type in rest_item.restaurant_location%}
+                                {% for type in rest_item.restaurant_location %}
                                 {{loop.first ? location[type.id] : location[type.id]|lower}}{{loop.last ? '' : ', '}}
                                 {% endfor %}
                                 </p>
@@ -57,7 +56,7 @@
                                 {% if rest_item.restaurant_cuisine %}
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Кухня</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">{{rest_item.restaurant_cuisine}}</p>
                                 {% endif %}
@@ -66,7 +65,7 @@
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Сервисы за отдельную плату</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">{{rest_item.restaurant_payment}}</p>
                             </div>
@@ -78,10 +77,10 @@
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Особенности</p>
                                     {% set specials = rest_item.restaurant_special | split(' ') %}
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <div class="object_meta_value">
-                                    {% for special in specials%}
+                                    {% for special in specials %}
                                     {{special}}
                                     {% endfor %}
                                 </div>
@@ -92,7 +91,7 @@
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Способы оплаты</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <div class="object_meta_value">
                                     {% for extra in extras%}
@@ -119,8 +118,6 @@
                             </div>
                         </div>
                         <div class="object_meta_item">
-                            
-                            {# ЯКОРЬ ЗАМЕНИТЬ НА СКРИПТ #}
                             <a class="free_order" href="#order_form">Забронировать бесплатно</a>
                         </div>
                     </div>
@@ -134,7 +131,8 @@
                                 {% for image in item.images %}
                                     <div class="object swiper-slide">
                                         <div class="object_img">
-                                            <img loading="lazy" src="{{ Declension.get_image_src(image.waterpath~'=w800-h600-l100') }}" data-gallery-img-view/>
+                                            <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w800-h600-l100') }}" alt="{{item.name}}" data-gallery-img-view/>
+                                            {# <img loading="lazy" src="{{ Declension.get_image_src(image.waterpath~'=w800-h600-l100') }}" data-gallery-img-view/> #}
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -145,7 +143,7 @@
                                 <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
                                     {% for image in item.images %}
                                         <div class="object swiper-slide">
-                                        <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w150-h90-l80') }}"/>
+                                        <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w150-h90-l80') }}" alt="{{item.name}}-mini"/>
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -176,18 +174,18 @@
             </div>
 
             <div class="rest_desc_wrap">
-                {# {% if seo.text_1 %} #}
+                {% if seo.text_1 %}
                 <div class="rest_desc_text">
-                    <div class="rest_desc_item seo_text" data-seo-text>
-                        <div class="object_meta_value"><p>Понтон на воде 400 м2 с белым шатром 260 м2. Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые «Пары».</p>
-                        {# {{seo.text_1|raw}} #}
+                    <div class="rest_desc_item">
+                        <div class="object_meta_value seo_text" data-seo-text>
+                            {{seo.text_1|raw}}
                         </div>
                         <div class="seo_text_control" data-seo-control>
                             <p class="_link">Подробнее</p>
                         </div>
                     </div>
                 </div>
-                {# {% endif %} #}
+                {% endif %}
             </div>
             
             <div class="rest_optional_wrap">
@@ -206,23 +204,35 @@
                         </div>
                     {% endif %}
 
-                    {# в эластике нет следующих ниже 4х элементов поэтому пока без проверки #}
+                    {% for specials in rest_item.restaurant_specials %}
+                    {% if specials.id == '41' %}
                     <div class="optional">
                         <div class="optional__pic outdoor"></div>
                         <p>Выездная регистрация</p>
                     </div>
+                    {% endif %}
+                    {% if specials.id == '10' %}
                     <div class="optional">
                         <div class="optional__pic light"></div>
                         <p>Световое оборудование</p>
                     </div>
-                    <div class="optional">
-                        <div class="optional__pic music"></div>
-                        <p>Живая музыка</p>
-                    </div>
+                    {% endif %}
+                    {% if specials.id == '9' %}
                     <div class="optional">
                         <div class="optional__pic disco"></div>
                         <p>Дискотека</p>
                     </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% for extra in rest_item.restaurant_extra %}
+                    {% if extra.id == '6' %}
+                    <div class="optional">
+                        <div class="optional__pic music"></div>
+                        <p>Живая музыка</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -283,7 +293,7 @@
     <div class="map_wrap">
         <div class="content_block">
             <div class="map" name="map">
-                <div class="map_data_wrap">
+                {# <div class="map_data_wrap">
                     <div class="map_data">
                         <div class="map_img_wrap">
                             <img loading="lazy" class="map_img" src="{{ Declension.get_image_src(rest_item.restaurant_cover_url|replace({'w445-h302-n-l95': 'w710-h472-n-l95'})) }}">
@@ -293,7 +303,7 @@
                         <p class="map_rest_address">{{ rest_item.restaurant_address }}</p>
                         <p class="map_close">Спасибо, закрыть</p>
                     </div>
-                </div>
+                </div> #}
                 <div id="map" data-mapDotX="{{rest_item.restaurant_latitude}}" data-mapDotY="{{rest_item.restaurant_longitude}}" data-balloon="" data-hint="">
                 </div>
             </div>
@@ -313,7 +323,7 @@
                         <div class="other_object swiper-slide">
                             <a href="/catalog/restoran-{{other_room.restaurant_slug}}/{{other_room.slug}}/">
                                 <div class="other_object_img">
-                                    <img loading="lazy" src="{{ Declension.get_image_src(other_room.cover_url|replace({'w445-h302-n-l95': 'w305-h200-s-l95'})) }}">
+                                    <img loading="lazy" src="{{ Declension.get_image_src(other_room.cover_url|replace({'w445-h302-n-l95': 'w305-h200-s-l95'})) }}" alt="{{other_room.name}}">
                                 </div>
 
                                 <div class="item_info">

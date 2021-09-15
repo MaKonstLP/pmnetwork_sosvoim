@@ -15,6 +15,8 @@ use common\models\Seo;
 use common\models\Slices;
 use frontend\modules\so_svoim\models\ElasticItems;
 use yii\helpers\ArrayHelper;
+use frontend\modules\so_svoim\models\MediaEnum;
+
 
 class ListingController extends BaseFrontendController
 {
@@ -294,7 +296,7 @@ class ListingController extends BaseFrontendController
 
 	private function getSeo($type, $page, $count = 0)
 	{
-		$seo = new Seo($type, $page, $count);
+        $seo = (new Seo($type, $page, $count))->withMedia([MediaEnum::HEADER_IMAGE, MediaEnum::ADVANTAGES]);
 
 		return $seo->seo;
 	}

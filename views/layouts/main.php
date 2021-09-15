@@ -18,15 +18,26 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="/img/bd/favicon.ico">
-    <link type="image/x-icon" rel="shortcut icon" href="/img/bd/favicon.ico">
-    <link type="image/png" sizes="16x16" rel="icon" href="/img/bd/favicon-16x16.png">
-    <link type="image/png" sizes="32x32" rel="icon" href="/img/bd/favicon-32x32.png">
-    <link type="image/png" sizes="192x192" rel="icon" href="/img/bd/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="/img/bd/apple-touch-icon.png">
-    <meta name="msapplication-square150x150logo" content="/img/bd/mstile-150x150.png">
-    <meta name="msapplication-config" content="/img/bd/browserconfig.xml">
-    <link rel="manifest" href="/img/bd/webmanifest.json">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg" sizes="120x120 | any">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="/img/favicon/favicon.ico"> -->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/img/favicon/android-icon-192x192.png">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"> -->
+    <link rel="manifest" href="/img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     <title><?php echo $this->title ?></title>
 
@@ -60,9 +71,8 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                         <li class="main_menu_item"><a href="/catalog/antikafe/">Антикафе</a></li>
                         <li class="main_menu_item"><a href="/catalog/bar/">Бары</a></li>
                         <li class="main_menu_item"><a href="/blog/">Статьи</a></li>
-                        <li class="main_menu_item"><a href="/">О нас</a></li>
+                        <li class="main_menu_item"><a href="/about-us/">О нас</a></li>
                     </ul>
-
                     <div class="header_city<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
                         <span>Ваш город: </span>
                         <span class="city"><?= Yii::$app->params['subdomen_name'] ?></span>
@@ -75,7 +85,7 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                             $address = \Yii::$app->params['siteAddress'];
                             $activeSubdomenRecords = \Yii::$app->params['activeSubdomenRecords'];
                             $reduced = array_reduce($activeSubdomenRecords, function ($acc, $subdomen) use ($address) {
-                                // $firstLetter = mb_substr($subdomen->name, 0, 1);
+                                $firstLetter = mb_substr($subdomen->name, 0, 1);
                                 $alias = $subdomen->city_id == 4400 ? '' : $subdomen->alias . '.';
                                 $link = "<div class='city_block'><input id='$alias' type='radio' name='site' value='http://$alias$address'><label for='$alias'>$subdomen->name</label></div>";
                                 // $link = "<a href='http://$alias$address' data-search-city>$subdomen->name</a>";
@@ -99,7 +109,7 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                 <div class="content_block">
                     <div class="content_left_side">
                         <a href="/" class="header_logo">SO-SVOIM.RU</a>
-                        <a class="header_phone" href="tel:+78465555500" data-target="telefon_1"><span>(846) 555-55-00<span></a>
+                        <a class="header_phone" href="tel:+78465555500" data-target="telefon_1"><span>(846) 555-55-00</span></a>
                     </div>
                     <div class="content_right_side">
                         <div class="_link" data-open-popup-form data-target="podbor_1">Подобрать заведение</div>
@@ -127,9 +137,11 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                             </div>
                         </div>
                         <div class="block-right-side">
-                            <div class="footer_city">Ваш город: <span><?= Yii::$app->params['subdomen_name'] ?></span>
+                            <div class="header_city<?=(Yii::$app->controller->action->id == 'post' || Yii::$app->request->url == '/') ? ' home' : '';?>">
+                                <span>Ваш город: </span>
+                                <span class="city"><?= Yii::$app->params['subdomen_name'] ?></span>
                             </div>
-                            <a class="footer_phone" href="tel:+78465555500" data-target="telefon_1"><span>(846) 555-55-00<span></a>
+                            <a class="footer_phone" href="tel:+78465555500" data-target="telefon_1"><span>(846) 555-55-00</span></a>
                         </div>
                     </div>
 
@@ -139,8 +151,8 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                     </div>
 
                     <div class="footer_nav">
-                        <ul class="footer_nav_wrap">
-                            <?php
+                        <!-- <ul class="footer_nav_wrap">
+                        <?php
                             $kindArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
                                 return $meta['type'] == 'kind';
                             });
@@ -160,6 +172,29 @@ frontend\modules\so_svoim\assets\AppAsset::register($this);
                             });
                             foreach ($featureArr as $type_alias => $meta) { ?>
                                 <li><a href="/catalog/<?= $type_alias ?>/"><?= $meta['name'] ?></a><span>  <?= $meta['count'] ?></span></li>
+                            <?php } ?>
+                        </ul> -->
+                        <ul class="footer_nav_wrap">
+                            <?php
+                            $kindArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
+                                return $meta['type'] == 'kind';
+                            });
+                            foreach ($kindArr as $alias => $meta) { ?>
+                                <li><a href="/catalog/<?= $alias ?>/"><?= $meta['name'] ?></a></span></li>
+                            <?php } ?>
+                            <?php
+                            $costArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
+                                return $meta['type'] == 'cost';
+                            });
+                            foreach ($costArr as $alias => $meta) { ?>
+                                <li><a href="/catalog/<?= $alias ?>/"><?= $meta['name'] ?></a></li>
+                            <?php } ?>
+                            <?php
+                            $featureArr = array_filter(Yii::$app->params['footer_slices'], function ($meta) {
+                                return $meta['type'] == 'feature';
+                            });
+                            foreach ($featureArr as $type_alias => $meta) { ?>
+                                <li><a href="/catalog/<?= $type_alias ?>/"><?= $meta['name'] ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>

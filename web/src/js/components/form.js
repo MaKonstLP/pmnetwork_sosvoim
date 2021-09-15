@@ -7,6 +7,8 @@ var animation = new Animation;
 export default class Form {
 	constructor(form) {
 		this.$form = $(form);
+		this.$formOrderWrap = this.$form.parents('.order_recall_block');
+		this.$formOrderSuccessWrap = this.$form.parents('.order_recall_block').next('.order_succes_block');
 		this.$formWrap = this.$form.parents('.form_wrapper');
 		this.$submitButton = this.$form.find('button[type="submit"]');
 		this.$policy = this.$form.find('[name="policy"]');
@@ -106,13 +108,13 @@ export default class Form {
 	}
 
 	checkField($field) {
-			var valid = true;
-			var name = $field.attr('name');
-			var pattern_email = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
-			var time_cur = Date.parse($field.val());
-			var date_now = new Date();
-			var time_now = new Date(date_now.getFullYear(), date_now.getMonth(), date_now.getDate()).getTime();
-
+		var valid = true;
+		var name = $field.attr('name');
+		var pattern_email = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
+		var time_cur = Date.parse($field.val());
+		var date_now = new Date();
+		var time_now = new Date(date_now.getFullYear(), date_now.getMonth(), date_now.getDate()).getTime();
+		if( $field.css('display') != 'none' ) {
 			if ($field.val() == '') {
 				valid = false;
 			} else {
@@ -151,6 +153,7 @@ export default class Form {
 					$field.siblings('.input_error').html(error_message);
 				}
 			}
+		}
 	}
 
 	checkFields() {
@@ -187,6 +190,8 @@ export default class Form {
 
 		this.$formWrap.find('[data-success]').addClass('_active');
 		this.$form.addClass('_hide');
+		this.$formOrderWrap.hide();
+		this.$formOrderSuccessWrap.show();
 		this.$form[0].reset();
 
 		console.log('reachGoal', this.target);

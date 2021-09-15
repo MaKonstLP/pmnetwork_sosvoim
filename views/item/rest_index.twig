@@ -18,8 +18,8 @@
                     <div class="object_meta">
                         <div class="object_meta_item">
                             <p class="object_name">{{item.restaurant_name}}</p>
+                            
                             {% if type != 'other' %}
-
                             <p class="object_address"><a href="#map"><span>{{item.restaurant_address}}</span></a></p>
                             {% endif %}
 
@@ -38,15 +38,16 @@
                             {% endif %}
 
                             {% if min_price and min_price != 100000000 %}
-                            <p class="item_desc">Стоимость:<span class="object_price">от {{min_price}}р на человека</span></p>
+                            <p class="item_desc">Стоимость: <span class="object_price">от {{min_price}}р на человека</span></p>
                             {% endif %}
                         </div>
 
                         <div class="object_meta_item">
+                            {% if item.restaurant_types %}
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Тип заведения</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">
                                 {% for type in item.restaurant_types %}
@@ -54,37 +55,43 @@
                                 {% endfor %}
                                 </p>
                             </div>
+                            {% endif %}
 
+                            {% if item.restaurant_location %}
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Расположение</p>
                                     {% set location = {'1':'Около моря','2':'Около реки','7':'Около озера','3':'В горах','4':'В городе','5':'В центре города','6':'За городом'} %}
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">
-                                {% for type in item.restaurant_location%}
+                                {% for type in item.restaurant_location %}
                                 {{loop.first ? location[type.id] : location[type.id]|lower}}{{loop.last ? '' : ', '}}
                                 {% endfor %}
                                 </p>
                             </div>
+                            {% endif %}
 
+                            {% if item.restaurant_cuisine %}
                             <div class="item_wrap">
-                                {% if item.restaurant_cuisine %}
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Кухня</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <p class="object_meta_value">{{item.restaurant_cuisine}}</p>
-                                {% endif %}
                             </div>
+                            {% endif %}
 
+                            {% if item.restaurant_extra_services %}
+                            {% set extras = item.restaurant_extra_services|split(', ') %}
                             <div class="item_wrap">
                                 <div class="item_left_side">
-                                    <p class="object_meta_title">Сервисы за отдельную плату</p>
-                                    <div><p></p></div>
+                                    <p class="object_meta_title">Способы оплаты</p>
+                                    <p class="dotted"></p>
                                 </div>
-                                <p class="object_meta_value">{{item.restaurant_payment}}</p>
+                                <div class="object_meta_value">{{item.restaurant_payment}}</div>
                             </div>
+                            {% endif %}
                         </div>
 
                         <div class="object_meta_item">
@@ -93,35 +100,35 @@
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Особенности</p>
                                     {% set specials = item.restaurant_special | split(' ') %}
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <div class="object_meta_value">
-                                    {% for special in specials%}
+                                    {% for special in specials %}
                                     {{special}}
                                     {% endfor %}
                                 </div>
                             </div>
                             {% endif %}
-                            {% if item.restaurant_extra_services %}
-                            {% set extras = item.restaurant_extra_services|split(', ') %}
+
+                            {% if extras %} 
                             <div class="item_wrap">
                                 <div class="item_left_side">
-                                    <p class="object_meta_title">Способы оплаты</p>
-                                    <div><p></p></div>
+                                    <p class="object_meta_title">Сервисы за отдельную плату</p>
+                                    <p class="dotted"></p>
                                 </div>
                                 <div class="object_meta_value">
-                                    {% for extra in extras%}
+                                    {% for extra in extras %}
                                     <span class="object_meta_value">{{extra}}</span>
                                     {% endfor %}
                                 </div>
                             </div>
                             {% endif %}
 
-                            {% if item.restaurant_parking != '' %} 
+                            {# {% if item.restaurant_parking != '' %} 
                             <div class="item_wrap">
                                 <div class="item_left_side">
-                                    <p class="object_meta_title">Парковочных мест</p>
-                                    <div><p></p></div>
+                                    <div class="object_meta_title"><span>Парковочных мест</span><span></span></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <div class="object_meta_value">
                                     {{item.restaurant_parking}}
@@ -131,13 +138,13 @@
                             <div class="item_wrap">
                                 <div class="item_left_side">
                                     <p class="object_meta_title">Парковочных мест</p>
-                                    <div><p></p></div>
+                                    <p class="dotted"></p>
                                 </div>
                                 <div class="object_meta_value">
                                     нет
                                 </div>
                             </div>
-                            {% endif %}
+                            {% endif %} #}
 
                         </div>
                     </div>
@@ -170,10 +177,11 @@
                         <div class="listing_widget_arrow _next"></div> #}
                         <div class="object_gallery_container swiper-container" data-gallery-main-swiper data-gallery-swiper> 
                             <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
-                                {% for image in item.restaurant_images%}
+                                {% for image in item.restaurant_images %}
                                     <div class="object swiper-slide">
                                         <div class="object_img">
-                                            <img loading="lazy" src="{{ Declension.get_image_src(image.waterpath~'=w800-h600-l100') }}" data-gallery-img-view/>
+                                            <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w800-h600-l100') }}" alt="{{item.restaurant_name}}" data-gallery-img-view/>
+                                            {# <img loading="lazy" src="{{ Declension.get_image_src(image.waterpath~'=w800-h600-l100') }}" data-gallery-img-view/> #}
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -185,9 +193,9 @@
                         <div class="object_gallery_block">
                             <div class="object_gallery_container swiper-container" data-gallery-thumb-swiper style="">
                                 <div class="object_gallery_swiper swiper-wrapper" data-gallery-list>
-                                    {% for image in item.restaurant_images%}
+                                    {% for image in item.restaurant_images %}
                                         <div class="object swiper-slide">
-                                        <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w150-h90-l80') }}"/>
+                                        <img loading="lazy" src="{{ Declension.get_image_src(image.realpath~'=w150-h90-l80') }}" alt="{{item.restaurant_name}}-mini"/>
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -218,18 +226,18 @@
             </div>
 
             <div class="rest_desc_wrap">
-                {# {% if seo.text_1 %} #}
+                {% if seo.text_1 %}
                 <div class="rest_desc_text">
-                    <div class="rest_desc_item seo_text" data-seo-text>
-                        <div class="object_meta_value"><p>Понтон на воде 400 м2 с белым шатром 260 м2. Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые «Пары».</p>
-                        {# {{seo.text_1|raw}} #}
+                    <div class="rest_desc_item">
+                        <div class="object_meta_value seo_text" data-seo-text>
+                            {{seo.text_1|raw}}
                         </div>
                         <div class="seo_text_control" data-seo-control>
                             <p class="_link">Подробнее</p>
                         </div>
                     </div>
                 </div>
-                {# {% endif %} #}
+                {% endif %}
             </div>
             
             <div class="rest_optional_wrap">
@@ -247,24 +255,35 @@
                             <p>Можно со своим алкоголем</p>
                         </div>
                     {% endif %}
-
-                    {# в эластике нет следующих ниже 4х элементов поэтому пока без проверки #}
+                    {% for specials in item.restaurant_specials %}
+                    {% if specials.id == '41' %}
                     <div class="optional">
                         <div class="optional__pic outdoor"></div>
                         <p>Выездная регистрация</p>
                     </div>
+                    {% endif %}
+                    {% if specials.id == '10' %}
                     <div class="optional">
                         <div class="optional__pic light"></div>
                         <p>Световое оборудование</p>
                     </div>
-                    <div class="optional">
-                        <div class="optional__pic music"></div>
-                        <p>Живая музыка</p>
-                    </div>
+                    {% endif %}
+                    {% if specials.id == '9' %}
                     <div class="optional">
                         <div class="optional__pic disco"></div>
                         <p>Дискотека</p>
                     </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% for extra in item.restaurant_extra %}
+                    {% if extra.id == '6' %}
+                    <div class="optional">
+                        <div class="optional__pic music"></div>
+                        <p>Живая музыка</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -283,34 +302,35 @@
                         <a class="swiper-slide" href="/catalog/restoran-{{item.restaurant_slug}}/{{same_object.slug}}/">
                             <div class="rest_room">
                                 <div class="rest_room_img">
-                                    <img loading="lazy" src="{{ Declension.get_image_src(same_object.images[0].realpath ? (same_object.images[0].realpath~'=w250-h170-l90') : same_object.cover_url|replace({'w445-h302-n-l95':'w250-h170-l90'})) }}">
+                                    <img loading="lazy" src="{{ Declension.get_image_src(same_object.images[0].realpath ? (same_object.images[0].realpath~'=w250-h170-l90') : same_object.cover_url|replace({'w445-h302-n-l95':'w250-h170-l90'})) }}" alt="{{same_object.name}}">
                                 </div>
-                                <div class="rest_room_name">{{same_object.name}}</div>
-
-                                {% if min_price and min_price != 100000000 %}
-                                <p class="rest_room_price"><span>от {{min_price}} руб./чел</span></p>
-                                {% endif %}
-                                <div class="rest_room_item">
-                                    <p class="rest_room_title">Тип</p>
-                                    <p class="rest_room_value">
-                                    {{same_object.type_name}}
-                                    </p>
-                                </div>
-                                <div class="rest_room_item">
-                                    <p class="rest_room_title">Вместимость</p>
-                                    <p class="rest_room_value">{{same_object.capacity}} человек</p>
-                                </div>
-                                <div class="rest_room_item">
-                                    <p class="rest_room_title">Вместимость на фуршет</p>
-                                    <p class="rest_room_value">{{same_object.capacity}} человек</p>
-                                </div>
-                                <div class="rest_room_item">
-                                    <p class="rest_room_title">Светлый зал</p>
-                                    <p class="rest_room_value">{{same_object.bright_room==0 ? 'нет' : 'да' }}</p>
-                                </div>
-                                <div class="rest_room_item">
-                                    <p class="rest_room_title">Отдельный вход</p>
-                                    <p class="rest_room_value">{{same_object.separate_entrance==0 ? 'нет' : 'да' }}</p>
+                                <div class="rest_room_desc">
+                                    <div class="rest_room_name">{{same_object.name}}</div>
+                                    {% if min_price and min_price != 100000000 %}
+                                    <p class="rest_room_price"><span>от {{min_price}} руб./чел</span></p>
+                                    {% endif %}
+                                    <div class="rest_room_item">
+                                        <p class="rest_room_title">Тип</p>
+                                        <p class="rest_room_value">
+                                        {{same_object.type_name}}
+                                        </p>
+                                    </div>
+                                    <div class="rest_room_item">
+                                        <p class="rest_room_title">Вместимость</p>
+                                        <p class="rest_room_value">{{same_object.capacity}} человек</p>
+                                    </div>
+                                    <div class="rest_room_item">
+                                        <p class="rest_room_title">Вместимость на фуршет</p>
+                                        <p class="rest_room_value">{{same_object.capacity}} человек</p>
+                                    </div>
+                                    <div class="rest_room_item">
+                                        <p class="rest_room_title">Светлый зал</p>
+                                        <p class="rest_room_value">{{same_object.bright_room==0 ? 'нет' : 'да' }}</p>
+                                    </div>
+                                    <div class="rest_room_item">
+                                        <p class="rest_room_title">Отдельный вход</p>
+                                        <p class="rest_room_value">{{same_object.separate_entrance==0 ? 'нет' : 'да' }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -325,7 +345,7 @@
     <div class="map_wrap">
         <div class="content_block">
             <div class="map" name="map">
-                <div class="map_data_wrap">
+                {# <div class="map_data_wrap">
                     <div class="map_data">
                         <div class="map_img_wrap">
                             <img loading="lazy" class="map_img" src="{{ Declension.get_image_src(item.restaurant_cover_url|replace({'w445-h302-n-l95': 'w710-h472-n-l95'})) }}">
@@ -335,7 +355,7 @@
                         <p class="map_rest_address">{{ item.restaurant_address }}</p>
                         <p class="map_close">Спасибо, закрыть</p>
                     </div>
-                </div>
+                </div> #}
                 <div id="map" data-mapDotX="{{item.restaurant_latitude}}" data-mapDotY="{{item.restaurant_longitude}}" data-balloon="" data-hint="">
                 </div>
             </div>

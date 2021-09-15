@@ -4,9 +4,9 @@ import scrollbar from 'malihu-custom-scrollbar-plugin';
 
 export default class Main {
     constructor() {
-        $('body').on('click', '[data-seo-control]', function () {
-            $(this).closest('[data-seo-text]').addClass('_active');
-        });
+        // $('body').on('click', '[data-seo-control]', function () {
+        //     $(this).closest('[data-seo-text]').addClass('_active');
+        // });
 
 
 		this.$selectorPopupLayout = '[data-close-popup]';
@@ -94,11 +94,11 @@ export default class Main {
             }
         });
 
-        $('[data-seo-text]').each(function () {
-            if ($(this).height() > 200 && $(window).width() < 600) {
-                $(this).addClass('_hidden');
-            }
-        });
+        // $('[data-seo-text]').each(function () {
+        //     if ($(this).height() > 200 && $(window).width() < 600) {
+        //         $(this).addClass('_hidden');
+        //     }
+        // });
 
         //НЕ ПОКАЗЫВАТЬ ЕЩЕ ЕСЛИ НЕТ РЕСТОРАНОВ
         if ($('body').find('[data-page-increase="1"]').length == 0) {
@@ -106,11 +106,11 @@ export default class Main {
         }
 
         $(window).on('resize', function () {
-            $('[data-seo-text]').each(function () {
-                if ($(this).height() > 200 && $(window).width() < 600) {
-                    $(this).addClass('_hidden');
-                }
-            });
+            // $('[data-seo-text]').each(function () {
+            //     if ($(this).height() > 200 && $(window).width() < 600) {
+            //         $(this).addClass('_hidden');
+            //     }
+            // });
             if ($(window).width() <= 768) {
                 $('.fast_filters').each(function () {
                     if (!$(this).hasClass('mCustomScrollbar')) {
@@ -259,7 +259,7 @@ export default class Main {
             });
         });
 
-        $('body').on('click', function (e) {
+        $('body').one('click', function (e) {
             var $el = $(e.target);
             var $parent_scroll = $el.parents('#mCSB_2_scrollbar_vertical');
             var $e_city = $el.closest('.header_city');
@@ -273,7 +273,8 @@ export default class Main {
                     $('.city_list_wrap').addClass('__visible');
                     // $(this).find('.choose').addClass('_expand');
                 }
-            } else {
+            } 
+            else {
                 if (
                     $('.city_list_wrap').hasClass('__visible') &&
                     $e_city_list.length < 1
@@ -377,5 +378,18 @@ export default class Main {
             $('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
             e.preventDefault();
         });
+
+        // SEO тексты читать полностью
+        $('[data-seo-control]').on('click', function(){
+            $('[data-seo-text]').css({
+                height : 'auto',
+                maxHeight : 'none',
+                background : 'unset',
+                color: '#000',
+                overflow: 'unset'
+            });
+            $(this).css('display','none');
+        })
+
     }
 }

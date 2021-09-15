@@ -191,9 +191,10 @@ export default class Slider{
 	}
 
 	initSwiperSameItem($container){
+
 		let swiper = new Swiper($container, {
 	        slidesPerView: 3,
-	        spaceBetween: 19,
+	        spaceBetween: 30,
 	        loop: false,
 	        navigation: {
               nextEl: '.rooms_widget_arrow._next',
@@ -217,7 +218,7 @@ export default class Slider{
 	initSwiperSameRest($container){
 		let swiper = new Swiper($container, {
 	        slidesPerView: 3,
-	        spaceBetween: 19,
+	        spaceBetween: 30,
 	        loop: false,
 	        navigation: {
               nextEl: '.other_widget_arrow._next',
@@ -240,36 +241,24 @@ export default class Slider{
 
 	initSwiperSameBlogs($container){
 		let swiper = new Swiper($container, {
-	        slidesPerView: 2,
-	        spaceBetween: 20,
-	        //loop: true,
+	        slidesPerView: 3,
+	        spaceBetween: 30,
+	        loop: false,
 	        navigation: {
               nextEl: '.blogs_widget_arrow._next',
               prevEl: '.blogs_widget_arrow._prev',
             },
-            pagination: {
-		              el: '.listing_widget_pagination',
-		              type: 'bullets',
-		            },
 	        breakpoints: {
-	        	510:{
-	        		slidesPerView: 1,
+				1470:{
+					slidesPerView: 3,
+				},
+	        	600:{
+	        		slidesPerView: 2,
 	        	},
-	        	// 1000:{
-	        	// 	slidesPerView: 2.5,
-				// 	pagination: {
-		        //       el: '.listing_widget_pagination',
-		        //       type: 'bullets',
-		        //     },
-	        	// 	navigation: false,
-	        	// 	loop: false,
-	        	// 	//centeredSlides: true,
-	        	// 	spaceBetween: 20,
-	        	// },
-	        	// 767:{
-	        	// 	slidesPerView: 1,
-	        	// 	spaceBetween: 20,
-	        	// }
+	        	450:{
+	        		slidesPerView: 1.15,
+					spaceBetween: 10,
+	        	},
 	        }
 	    });
 
@@ -278,17 +267,25 @@ export default class Slider{
 
 	initSwiperTitleBlog($container){
 		let swiper = new Swiper($container, {
-	        slidesPerView: 1,
-	        spaceBetween: 0,
+	        slidesPerView: 3,
+	        spaceBetween: 30,
 	        loop: false,
 	        navigation: {
               nextEl: '.listing_widget_arrow._next',
               prevEl: '.listing_widget_arrow._prev',
             },
-            pagination: {
-              el: '.listing_widget_pagination',
-              type: 'bullets',
-            },
+	        breakpoints: {
+				1470:{
+					slidesPerView: 3,
+				},
+	        	600:{
+	        		slidesPerView: 2,
+	        	},
+	        	450:{
+	        		slidesPerView: 1.15,
+					spaceBetween: 10,
+	        	},
+	        }
 	    });
 	}
 

@@ -8,7 +8,7 @@ abstract class BaseFrontendController extends Controller
 {
     public function beforeAction($action)
     {
-        
+        \Yii::$app->params['isHome'] = false;
         /* if (\Yii::$app->request->cookies->get('basic_auth')) {
             return parent::beforeAction($action);
         }

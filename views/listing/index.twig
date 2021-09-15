@@ -2,7 +2,7 @@
 {{this.registerMetaTag({'property':'og:description','content':(this.params['desc'] ? this.params['desc'] : seo.h1|raw)})}}
 {{this.registerMetaTag({'property':'og:type','content':'website'})}}
 {{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen~'/'~app.request.pathinfo})}}
-{{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
+{{this.registerMetaTag({'property':'og:image','content':'https://so-svoim.ru/img/favicon/favicon-96x96.png'})}}
 
 <div data-page-type="listing">
 	{# <div class="content_block" data-listing-title>
@@ -10,9 +10,10 @@
 	</div> #}
 
 	<div class="main_top_image">
-		<div class="main_top_slider">
-		{# <div class="main_top_slider{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}"> #}
-			<img loading="lazy" src="/img/image-1.jpg" alt="Главная">
+		{# <div class="main_top_slider"> #}
+		<div class="main_top_slider{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}">
+			<img loading="lazy" src="{{seo.media["header-image"]|first.src}}" alt="{{seo.media['header-image']|first.alt}}">
+			{# <img loading="lazy" src="/img/image-1.jpg" alt="Главная"> #}
 		</div>
 		{# <div class="main_rectangle_wrap{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}">
 			{% for item in mainRestTypesCounts %}
@@ -29,10 +30,8 @@
 	</div>
 	
 	<div class="main_top">
-		{# <h1>{{seo.h1|raw}}</h1> #}
 		<div class="main_top_desc">
-			Заведения, куда можно со своим алкоголем в 
-			<span class="city">{{app.params.subdomen_dec}}</span>
+			<h1>{{seo.h1|raw}} <span class="city">в {{app.params.subdomen_dec}}</span></h1>
 		</div>
 		<div class="main_search">
 			{{filter | raw }}
@@ -66,7 +65,7 @@
 	<div class="map_wrap" id="tabMap">
 		<div class="content_block">
 
-			<div class="map_data_wrap">
+			{# <div class="map_data_wrap">
 				<div class="map_data">
 					<div class="map_img_wrap">
 						<img loading="lazy" class="map_img" src="{{ Declension.get_image_src(item.restaurant_cover_url|replace({'w445-h302-n-l95': 'w710-h472-n-l95'})) }}">
@@ -76,8 +75,7 @@
 					<p class="map_rest_address">{{ item.restaurant_address }}</p>
 					<p class="map_close">Спасибо, закрыть</p>
 				</div>
-			</div>
-
+			</div> #}
 
 			<div class="map-all" id="map_on" data-listing-map data-map-api-subid="2" data-map></div>
 						
@@ -94,7 +92,7 @@
 				<div class="order_wrap">
 					<p class="order_block_title">Заказать обратный<br>звонок</p>
 					<p class="order_block_desc">наш менеджер перезвонит через 30 минут</p>
-					<form class="form_block" action="/ajax/form/" data-form-target="{{target}}">
+					<form class="form_block order_form_block" action="/ajax/form/" data-form-target="{{target}}">
 						<input type="hidden" name="type" value="{{ type ? type : 'main'}}" />
 						<div class="form_inputs">
 							<div class="input_wrapper">
@@ -145,16 +143,34 @@
 		{# <div data-append-items>Показать еще</div> #}
 	</div>
 
-	{# <div class="content_block">
-		<div class="seo_text text_bottom" data-seo-text>
-			<div data-listing-text-bottom>{{seo.text_bottom | raw }}</div>
+	{{ this.render('//components/generic/form.twig', {'title': 'Остались вопросы?', 'target': 'podval_list'}) | raw }}
+
+
+	{% if seo.text_3 %}\
+	<div class="bottom_block">
+		<div class="content_block">
+			<div class="seo_text" data-seo-text>
+				{{seo.text_3|raw}}
+			</div>
 			<div class="seo_text_control" data-seo-control>
-				<p class="_link">Показать полностью</p>
+				<p class="_link">Читать полностью</p>
 			</div>
 		</div>
-	</div> #}
+	</div>
+	{% endif %}
 
-	{{ this.render('//components/generic/form.twig', {'title': 'Остались вопросы?', 'target': 'podval_list'}) | raw }}
+
+	<div class="listing_slice_block">
+		<div class="content_block">
+			<h3 style="text-align:center">Также ищут</h3>
+			<div>
+				<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
+				Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно.
+				Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
+			</div>
+		</div>
+	</div>
+
 
 	<div class="content_loading"></div>
 </div>

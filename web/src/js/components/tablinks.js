@@ -19,8 +19,9 @@ export default class TabLinks{
             $('.order_help_block').css({'display': 'none'});
         })
         $('.order_succes_block .retype_call').click( function(){
-            $('.order_recall_block').css({'display': 'block'});
-            $('.order_succes_block').css({'display': 'none'});
+            $('.order_recall_block').show();
+            $('.form_block').show();
+            $('.order_succes_block').hide();
         })
     }
 }

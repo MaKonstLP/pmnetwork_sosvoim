@@ -28,6 +28,8 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
+
+
         $currentSubdomenAlias = explode('.', $_SERVER['HTTP_HOST'])[0];
         $siteName = explode(".", \Yii::$app->params['siteAddress'])[0];
         Yii::$app->params['domen'] = $_SERVER['HTTP_HOST'];

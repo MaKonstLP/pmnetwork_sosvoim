@@ -2,24 +2,22 @@
 {{this.registerMetaTag({'property':'og:description','content':(this.params['desc'] ? this.params['desc'] : seo.h1|raw)})}}
 {{this.registerMetaTag({'property':'og:type','content':'website'})}}
 {{this.registerMetaTag({'property':'og:url','content':app.params.siteProtocol~'://'~app.params.domen})}}
-{{this.registerMetaTag({'property':'og:image','content':'https://birthday-place.ru/img/bd/mstile-150x150.png'})}}
+{{this.registerMetaTag({'property':'og:image','content':'https://so-svoim.ru/img/favicon/favicon-96x96.png'})}}
+
 {% set  mainRestTypes = mainRestTypesCounts|length %}
 <div data-page-type="index" {{mainRestTypes > 0 ? '' : 'class=" _short"'}}>
 	<div class="main_top_image">
-		<div class="main_top_slider main_page_slider">
-		{# <div class="main_top_slider{{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}"> #}
-			
-			{# <img loading="lazy" src="{{seo.media["header-image"]|first.src}}" alt="{{seo.media['header-image']|first.alt}}"> #}
-			<img loading="lazy" src="/img/image-1.jpg" alt="Главная">
+		{# <div class="main_top_slider main_page_slider"> #}
+		<div class="main_top_slider {{mainRestTypes > 0 ? '' : ' _short'}}{{mainRestTypes < 4 ? ' __short_3' : ''}}">
+			<img loading="lazy" src="{{seo.media["header-image"]|first.src}}" alt="{{seo.media['header-image']|first.alt}}">
+			{# <img loading="lazy" src="/img/image-1.jpg" alt="Главная"> #}
 		</div>
 	</div>
 	
 	<div class="main_top">
 		<div class="content_block">
-			{# <h1>{{seo.h1|raw}}</h1> #}
 			<div class="main_top_desc">
-				Заведения, куда можно со своим алкоголем в 
-				<span class="city">{{app.params.subdomen_dec}}</span>
+				<h1>{{seo.h1|raw}} <span class="city">в {{app.params.subdomen_dec}}</span></h1>
 			</div>
 			<div class="main_search">
 				<div class="main_search_city" data-search-wrap>
@@ -42,41 +40,47 @@
 		</div>
 	</div>
 
-		{# <div class="main_podborki">
-			<p class="podborki_title">Популярные подборки</p>
-			<div class="content_block">
-				{% for alias, slice in mainSlices %}
-					<div class="restaurant_item">
-						<div class="restaurant_img">
-							<a href="/catalog/{{alias}}/">
-								<img loading="lazy" src="/img/restaurants/restaurant_{{alias}}.jpg">
-							</a>
-						</div>
-						<div class="restaurant_text">
-							<a href="/catalog/{{alias}}/">{{slice.name}}</a>
-							<span>{{slice.count}}</span>
-						</div>
+	{# <div class="main_podborki">
+		<p class="podborki_title">Популярные подборки</p>
+		<div class="content_block">
+			{% for alias, slice in mainSlices %}
+				<div class="restaurant_item">
+					<div class="restaurant_img">
+						<a href="/catalog/{{alias}}/">
+							<img loading="lazy" src="/img/restaurants/restaurant_{{alias}}.jpg">
+						</a>
 					</div>
-				{% endfor %}
-			</div>
-		</div> #}
+					<div class="restaurant_text">
+						<a href="/catalog/{{alias}}/">{{slice.name}}</a>
+						<span>{{slice.count}}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div> #}
 
-	{% if blogPosts %}
-		<div class="main_blog">
-			<p class="main_blog_title">Популярные подборки</p>
+	{% if popularBlogPosts %}
+		<div class="main_blog  other_rests_wrap">
 			<div class="content_block">
-				{% for key,post in blogPosts %}
-						<div class="blog_item blog_item_{{key + 1}}">
-							<a href="{{ post.getUrl() }}">
-								<img class="blog_img" loading="lazy" src="{{ post.getFileData('image').src }}">
-								<div class="blog_text">
-									<p class="blog_title">{{ post.name }}</p>
-									<p class="blog_description _main-blog">{{ post.short_intro }}</p>
-									<p class="blog_date _main-blog">{{ post.published_at }}</p>
-								</div>
-							</a>
-						</div>
-				{% endfor %}
+				<div class="listing_widget_arrow _prev"></div>
+				<div class="listing_widget_arrow _next"></div>  
+				<div class="main_blog_title">Популярные подборки</div>
+				<div class="items_list_listing swiper-container" data-gallery-blog-swiper>
+					<div class="items_list swiper-wrapper">
+						{% for key,post in popularBlogPosts %}
+							<div class="swiper-slide blog_item blog_item_{{key + 1}}">
+								<a href="{{ post.getUrl() }}">
+									<img class="blog_img" loading="lazy" src="{{ post.getFileData('image').src }}" alt="{{ post.name }}">
+									<div class="blog_text">
+										<p class="blog_title">{{ post.name }}</p>
+										<p class="blog_description _main-blog">{{ post.short_intro }}</p>
+										<p class="blog_date _main-blog">{{ post.published_at }}</p>
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 		</div>
 	{% endif %}
@@ -123,48 +127,47 @@
 		</div>
 	</div>
 
-	{% if blogPosts %}
-		<div class="main_blog">
-			<p class="main_blog_title">Интересное о банкетах</p>
+
+	{% if interestingBlogPosts %}
+		<div class="main_blog other_rests_wrap">
 			<div class="content_block">
-				{% for key,post in blogPosts %}
-					
-						<div class="blog_item blog_item_{{key + 1}}">
-							<a href="{{ post.getUrl() }}">
-								<img class="blog_img" loading="lazy" src="{{ post.getFileData('image').src }}">
-								<div class="blog_text">
-									<p class="blog_title">{{ post.name }}</p>
-									<p class="blog_description _main-blog">{{ post.short_intro }}</p>
-									<p class="blog_date _main-blog">{{ post.published_at }}</p>
-								</div>
-							</a>
-						</div>
-					
-				{% endfor %}
-				
-				<div class="all_articles">
-					<a href="/blog/">Смотреть все статьи</a>
+				<div class="blogs_widget_arrow _prev"></div>
+				<div class="blogs_widget_arrow _next"></div>
+				<div class="main_blog_title">Интересное о банкетах</div>
+				<div class="items_list_listing swiper-container" data-other-blogs-swiper>
+					<div class="items_list swiper-wrapper">
+						{% for key,post in interestingBlogPosts %}
+							<div class="swiper-slide blog_item blog_item_{{key + 1}}">
+								<a href="{{ post.getUrl() }}">
+									<img class="blog_img" loading="lazy" src="{{ post.getFileData('image').src }}" alt="{{ post.name }}">
+									<div class="blog_text">
+										<p class="blog_title">{{ post.name }}</p>
+										<p class="blog_description _main-blog">{{ post.short_intro }}</p>
+										<p class="blog_date _main-blog">{{ post.published_at }}</p>
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+					</div>
 				</div>
 			</div>
 		</div>
 	{% endif %}
 
+
 	{{ this.render('//components/generic/form.twig',{'title': 'Остались вопросы?', 'target': 'podval_gl'}) | raw }}
 
+	{% if seo.text_3 %}\
 	<div class="bottom_block">
-		<div class="content_block seo_text" data-seo-text>
-			{# {{seo.text_3|raw}} #}
-			<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
-			Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно.
-			Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
-			<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
-			Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно. Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
-			<p>Каждое заведение закладывает в стоимость банкета сумму которую ему необходимо потратить на рекламу и привлечение клиентов.
-			Мы же избавляем их от этого, и сами находим для них клиентов, за это заведения платят нам, для них это очень удобно. Получается что клиент платит абсолютно одну и ту же сумму если обращается напрямую в заведение или в наш.</p>
+		<div class="content_block">
+			<div class="seo_text" data-seo-text>
+				{{seo.text_3|raw}}
+			</div>
 			<div class="seo_text_control" data-seo-control>
 				<p class="_link">Читать полностью</p>
 			</div>
 		</div>
 	</div>
+	{% endif %}
 
 </div>

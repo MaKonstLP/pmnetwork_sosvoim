@@ -3,6 +3,7 @@
 namespace app\modules\so_svoim\controllers;
 
 use common\models\blog\BlogPost;
+use common\models\blog\BlogTag;
 use Yii;
 use yii\web\Controller;
 use common\models\Filter;
@@ -32,6 +33,7 @@ class SiteController extends BaseFrontendController
 
     public function beforeAction($action)
     {
+
         if (!parent::beforeAction($action)) {
             return false;
         }
@@ -44,6 +46,9 @@ class SiteController extends BaseFrontendController
 
     public function actionIndex()
     {
+        //$items = new ElasticItems();
+        //$items::createIndex();
+        //BlogPost::createSiteObjects();
         $aggs = ElasticItems::find()->limit(0)->query(
             ['bool' => ['must' => ['match' => ['restaurant_city_id' => Yii::$app->params['subdomen_id']]]]]
         )
@@ -113,15 +118,24 @@ class SiteController extends BaseFrontendController
             return $slice['count'] > 0;
         });
 
-
-        $blogPosts = BlogPost::findWithMedia()
-            ->limit(5)->where(['published' => 1])
+        // вывод статей на главную в два блока по тегу
+        $popularBlogPosts = BlogPost::findWithMedia()
+            ->joinWith('blogTags')
+            ->where(['published' => 1])
+            ->andWhere(['blog_tag.id' => 6])
             ->orderBy(['featured' => SORT_DESC, 'published_at' => SORT_DESC])->all();
+        $interestingBlogPosts = BlogPost::findWithMedia()
+            ->joinWith('blogTags')
+            ->where(['published' => 1])
+            ->andWhere(['blog_tag.id' => 7])
+            ->orderBy(['featured' => SORT_DESC, 'published_at' => SORT_DESC])->all();
+
 
         $totalRests = $items->total;
 
         $seo = $this->getSeo('index', 1,  $totalRests);
         $this->setSeo($seo);
+
 
         \Yii::$app->params['isHome'] = true;
 
@@ -132,7 +146,8 @@ class SiteController extends BaseFrontendController
             'count' => $totalRests,
             'mainRestTypesCounts' => $mainRestTypesCounts,
             'mainSlices' => $mainSlices,
-            'blogPosts' => $blogPosts,
+            'popularBlogPosts' => $popularBlogPosts,
+            'interestingBlogPosts' => $interestingBlogPosts,
             'subdomenObjects' => Yii::$app->params['activeSubdomenRecords']
         ]);
     }

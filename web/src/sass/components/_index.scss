@@ -1,552 +1,600 @@
-.content_advantages{
+.content_advantages {
+  width: 100%;
+  margin-bottom: 90px;
+  @include for-desktop {
+    margin-bottom: 62px;
+    // background-color: #EAF7FB;
+    .content_block {
+      @include for-mobile {
+        padding: 0 45px;
+      }
+      @include for-phone {
+        padding: 0 15px;
+      }
+    }
+  }
+  @include for-pad {
+    margin-bottom: 51px;
+  }
+  @include for-phone {
+    margin-bottom: 55px;
+  }
+  .content_advantages_info {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    margin-bottom: 90px;
-    @include for-desktop{
-        margin-bottom: 62px;
-        // background-color: #EAF7FB;
-        .content_block{
-            @include for-mobile{
-                padding: 0 45px;
-            }
-            @include for-phone{
-                padding: 0 15px;
-            }
-        }
+    padding: 57px 55px 50px 55px;
+    background-color: #eaf7fb;
+    border-radius: 3px;
+    @include for-desktop {
+      // padding-top: 56px;
+      // padding-left: 0;
     }
-    @include for-pad{
-        margin-bottom: 51px;
+    @include for-pad {
+      flex-direction: column;
+      align-items: center;
+      padding: 33px 30px 38px 30px;
     }
-    @include for-phone{
-        margin-bottom: 55px;
+    @include for-mobile {
+      padding-bottom: 18px;
     }
-    .content_advantages_info{
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 57px 55px 50px 55px;
-        background-color: #EAF7FB;
-        border-radius: 3px;
-        @include for-desktop{
-            // padding-top: 56px;
-            // padding-left: 0;
-        }
-        @include for-pad{
-            flex-direction: column;
-            align-items: center;
-            padding: 33px 30px 38px 30px;
-        }
-        @include for-mobile{
-            padding-bottom: 18px;
-        }
-        @include for-phone{
-            padding: 23px 20px 23px 20px;
-        }
+    @include for-phone {
+      padding: 23px 20px 23px 20px;
     }
-    .content_advantages_left{
-        width: 47%;
-        margin-right: 20px;
-        @include for-desktop{
-            // width: 48%;
-            margin-right: 33px;
-            // padding-top: 12px;
-        }
-        @include for-pad{
-            width: 100%;
-            margin-right: 0;
-            margin-bottom: 25px;
-        }
-        @include for-mobile{
-            margin-bottom: 30px;
-        }
-        @include for-phone{
-            margin-bottom: 33px;
-        }
-        .content_advantages_title{
-            margin-bottom: 21px;
-            font-size: 36px;
-            font-weight: bold;
-            line-height: 1;
-            color: #272727;
-            @include for-desktop{
-                // margin-bottom: 18px;
-                // font-size: 26px;
-            }
-            @include for-pad{
-                margin-bottom: 19px;
-                font-size: 24px;
-            }
-            @include for-phone{
-                font-size: 24px;
-            }
-        }
-        .content_advantages_desc{
-            line-height: 21px;
-            color: #272727;
-            @include for-mobile{
-                font-size: 14px;
-                line-height: 16px;
-            }
-        }
-        .content_advantages_desc:not(:last-child){
-            margin-bottom: 23px;
-            @include for-pad{
-                margin-bottom: 14px;
-            }
-            @include for-phone{
-                margin-bottom: 11px;
-            }
-        }
+  }
+  .content_advantages_left {
+    width: 47%;
+    margin-right: 20px;
+    @include for-desktop {
+      // width: 48%;
+      margin-right: 33px;
+      // padding-top: 12px;
     }
-    .content_advantages_right{
-        width: 47%;
-        @include for-desktop{
-            width: 45%;
-        }
-        @include for-pad{
-            width: 100%;
-        }
-        @include for-mobile{
-            width: 100%;
-        }
-        .advantages_items{
-            padding-left: 58px;
-            @include for-pad{
-                padding-left: 50px;
-            }
-            @include for-phone{
-                padding-left: 39px;
-            }
-        }
-        .advantages_item_title{
-            position: relative;
-            margin-bottom: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 20px;
-            color: #0C8CD4;
-            @include for-desktop{
-                margin-bottom: 6px;
-            }
-            @include for-phone{
-                margin-bottom: 7px;
-            }
-            &::before{
-                position: absolute;
-                top: -4px;
-                left: -61px;
-                content: '';
-                display: block;
-                width: 44px;
-                height: 40px;
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center center;
-                @include for-pad{
-                    width: 32px;
-                    height: 30px;
-                    left: -50px;
-                }
-                @include for-pad{
-                    left: -40px;
-                }
-            }
-            &:first-child{
-                &::before{
-                    background-image: url(/img/podbor.svg);
-                }
-            }
-            &:nth-child(3){
-                &::before{
-                    background-image: url(/img/consul.svg);
-                }
-            }
-            &:nth-child(5){
-                &::before{
-                    background-image: url(/img/bron.svg);
-                }
-            }
-        }
-        .advantages_item_desc{
-            font-size: 14px;
-            line-height: 19px;
-            color: #272727;
-            @include for-phone{
-                line-height: 17px;
-            }
-        }
-        .advantages_item_desc:not(:last-child){
-            margin-bottom: 35px;
-            @include for-desktop{
-                margin-bottom: 20px;
-            }
-            @include for-pad{
-                margin-bottom: 28px;
-            }
-            @include for-mobile{
-                margin-bottom: 20px;
-            }
-            @include for-phone{
-                margin-bottom: 22px;
-            }
-        }
+    @include for-pad {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 25px;
     }
-    // .content_info_adv_title{
-    //     font-weight: bold;
-    //     font-size: 32px;
-    //     line-height: 40px;
-    //     color: #fff;
-    //     text-align: center;
-    //     margin: 0;
-    //     width: 1200px;
-    // }
-    // .content_info_adv{
-    //    height: auto;
-    //    justify-content: center;
-    //    position: relative;
-    //    top: auto;
-    // }
-    // .content_info_wrap{
-    //     width: 352px;
-    //     margin: 0 20px;
-    //     @include for-mobile{
-    //         margin: 0 10px;
-    //     }
-    //     @include for-phone{
-    //         display: flex;
-    //         flex-direction: column;
-    //         width: auto;
-    //         margin: 6px 10px 6px 80px;
-    //         position: relative;
-    //         .main_rectangle{
-    //             width: 64px;
-    //             height: 64px;
-    //             position: absolute;
-    //             top: -14px;
-    //             left: -69px;
-    //         }
-            
-
-    //     }
-    // }
-    // .content_info_adv_h{
-    //     font-weight: bold;
-    //     font-size: 20px;
-    //     line-height: 24px;
-    //     color: #FFFFFF;
-    //     margin-top: 50px;
-    //     @include for-mobile{
-    //         font-size: 17px;
-    //     }
-    //     @include for-phone{
-    //         margin-top: 0;
-    //         margin-left: -5px;
-    //     }
-    // }
-    // .content_info_adv_p{
-    //     font-size: 14px;
-    //     line-height: 20px;
-    //     color: #FFFFFF;
-    //     @include for-phone{
-    //         margin-left: -5px;
-    //     }
-    // }
-    // .main_rectangle{
-    //     margin: 0 auto;
-    //     @include for-phone{
-    //         width: 64px;
-    //         height: 64px;
-    //         position: relative;
-    //         top: auto;
-    //         left: auto;
-    //         .main_rectangle_1{
-    //             position: absolute;
-    //             left: 0%;
-    //             right: 26.79%;
-    //             top: 36.6%;
-    //             bottom: -9.81%;
-
-    //             /* Base Color */
-
-    //             background: linear-gradient(0deg, #FFC24A, #FFC24A), linear-gradient(0deg, #B1C86F, #B1C86F), linear-gradient(0deg, #D64582, #D64582), linear-gradient(97.87deg, #A70C72 -6.24%, #E50799 104.4%), #29EDB2;
-    //             border-radius: 16px;
-    //             transform: rotate(-30deg);
-    //         }
-    //         .main_rectangle_icon{
-    //             width: 40px;
-    //             height: 40px;
-    //             position: absolute;
-    //             top: -26px;
-    //             left: -4px;
-    //         }
-    //     }
-    // }
-}
-
-.main_blog{
-    margin-bottom: 80px;
-    text-align: center;
-    @include for-desktop{
-        margin-bottom: 33px;
+    @include for-mobile {
+      margin-bottom: 30px;
     }
-    @include for-pad{
-        margin-bottom: 45px;
+    @include for-phone {
+      margin-bottom: 33px;
     }
-    .main_blog_title{
-        margin-bottom: 38px;
-        font-size: 36px;
-        font-weight: bold;
-        color: #272727;
-        @include for-desktop{
-            margin-bottom: 37px;
-            font-size: 32px;
-        }
-        @include for-pad{
-            margin-bottom: 22px;
-            font-size: 24px;
-        }
-        @include for-mobile{
-            font-size: 24px;
-        }
-        @include for-phone{
-            margin-bottom: 16px;
-        }
+    .content_advantages_title {
+      margin-bottom: 21px;
+      font-size: 36px;
+      font-weight: bold;
+      line-height: 1;
+      color: #272727;
+      @include for-desktop {
+        // margin-bottom: 18px;
+        // font-size: 26px;
+      }
+      @include for-pad {
+        margin-bottom: 19px;
+        font-size: 24px;
+      }
+      @include for-phone {
+        font-size: 24px;
+      }
     }
-    .all_articles{
-        width: 100%;
-        a{
-            font-size: 16px;
-            color: #DA0034;
-            border-bottom: 1px solid #DA0034;
-            &:hover{
-                border-bottom: none;
-            }
-        }
+    .content_advantages_desc {
+      line-height: 21px;
+      color: #272727;
+      @include for-mobile {
+        font-size: 14px;
+        line-height: 16px;
+      }
     }
-    .content_block{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        @include for-mobile{
-            flex-direction: column;
-            align-items: center;
-            padding: 0 45px;
-        }
-        @include for-phone{
-            padding: 0 15px;
-        }
-    }
-    .blog_item{
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        width: 460px;
-        height: 300px;
-        margin-bottom: 20px;
-        background-color: #888480;
-        @include for-desktop{
-            width: 290px;
-            height: 205px;
-            margin-bottom: 16px;
-        }
-        @include for-pad{
-            width: 210px;
-            height: 150px;
-            margin-bottom: 21px;
-        }
-        @include for-mobile{
-            width: 65%;
-            min-width: 330px;
-            height: 193px;
-        }
-        @include for-phone{
-            min-width: 289px;
-            height: 169px;
-        }
-        @include for-phone{
-            margin-bottom: 18px;
-        }
-        a{
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-    }
-    .blog_item_4, .blog_item_5{
-        display: none;
-    }
-    .blog_img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .blog_text{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-    }
-    .blog_title{
-        padding: 0 40px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #FFFFFF;
-        @include for-desktop{
-            padding: 0 30px;
-            font-size: 16px;
-        }
-        @include for-pad{
-            padding: 0 10px;
-        }
-    }
-    .blog_description{
-        font-size: 18px;
-        font-weight: bold;
-        color: #FFFFFF;
-        &._main-blog{
-            display: none;
-        }
-    }
-    .blog_date{
-        font-size: 18px;
-        font-weight: bold;
-        color: #FFFFFF;
-        &._main-blog{
-            display: none;
-        }
-    }
-}
-.main_podborki{
-    @include for-phone{
-    }
-    .podborki_title{
-        font-size: 36px;
-        font-weight: bold;
-        text-align: center;
-        color: #272727;
-        @include for-desktop{
-            font-size: 26px;
-        }
-        @include for-pad{
-            font-size: 24px;
-        }
-    }
-    .content_block{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 370px;
-        @include for-desktop{
-            margin-bottom: 256px;
-        }
-        @include for-pad{
-            margin-bottom: 193px;
-        }
-        @include for-mobile{
-            margin-bottom: 213px;
-        }
-        @include for-phone{
-            margin-bottom: 265px;
-        }
-    }
-    .restaurant_item{
-        width: 272px;
-        height: 164px;
-        background: #FFFFFF;
-        border: 1px solid #F8F8F8;
-        box-shadow: 0px 5px 20px rgba(34, 36, 28, 0.1);
-        border-radius: 4px;
-        margin: 12px;
-        @include for-mobile{
-            width: 240px;
-            margin: 4px;
-        }
-        @include for-phone{
-            margin: 8px;
-            width: 142px;
-            height: auto;
-        }
-    }
-    .restaurant_img{
-        height: 120px;
-        @include for-phone{
-            overflow: hidden;
-        }
-        img{
-            width: 100%;
-            @include for-phone{
-                width: auto;
-                height: 100%;
-            }
-        }
-    }
-    .restaurant_text{
-        text-align: center;
-        padding: 9px;
-
-        a{
-            font-size: 15px;
-            line-height: 24px;
-            @include for-phone{
-                line-height: 18px;
-            }
-        }
-        span{
-            font-size: 11px;
-            line-height: 24px;
-            color: #848484;
-            margin-left: 5px;
-            @include for-phone{
-                display: none;
-            }
-        }
-    }
-}
-.bottom_block{
-    margin-top: 80px;
-    margin-bottom: 70px;
-    @include for-desktop{
-        margin-top: 0;
+    .content_advantages_desc:not(:last-child) {
+      margin-bottom: 23px;
+      @include for-pad {
         margin-bottom: 14px;
+      }
+      @include for-phone {
+        margin-bottom: 11px;
+      }
     }
-    @include for-pad{
-        margin-bottom: 34px;
+  }
+  .content_advantages_right {
+    width: 47%;
+    @include for-desktop {
+      width: 45%;
     }
-    .content_block{
-        position: relative;
-        max-height: 250px;
-        padding-bottom: 60px;
-        @include for-pad{
-            padding: 0 30px;
-        }
-        @include for-mobile{
-            padding: 0 45px;
-        }
-        @include for-phone{
-            padding: 0 15px;
-        }
-        p{
-            margin: 0;
-            line-height: 21px;
-            &:first-child{
-                margin-bottom: 20px;
-            }
-        }
-        .seo_text_control{
-            position: absolute;
-            bottom: -5px;
-            height: 150px;
-            cursor: pointer;
-            ._link{
-                width: 140px;
-                color: #DA0034;
-                border-bottom: 1px dashed #DA0034;
-            }
-        }
-        @include for-phone{
-            &._hidden{
-                max-height: 240px;
-            }
-        }
+    @include for-pad {
+      width: 100%;
     }
+    @include for-mobile {
+      width: 100%;
+    }
+    .advantages_items {
+      padding-left: 58px;
+      @include for-pad {
+        padding-left: 50px;
+      }
+      @include for-phone {
+        padding-left: 39px;
+      }
+    }
+    .advantages_item_title {
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 20px;
+      color: #0c8cd4;
+      @include for-desktop {
+        margin-bottom: 6px;
+      }
+      @include for-phone {
+        margin-bottom: 7px;
+      }
+      &::before {
+        position: absolute;
+        top: -4px;
+        left: -61px;
+        content: "";
+        display: block;
+        width: 44px;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        @include for-pad {
+          width: 32px;
+          height: 30px;
+          left: -50px;
+        }
+        @include for-pad {
+          left: -40px;
+        }
+      }
+      &:first-child {
+        &::before {
+          background-image: url(/img/podbor.svg);
+        }
+      }
+      &:nth-child(3) {
+        &::before {
+          background-image: url(/img/consul.svg);
+        }
+      }
+      &:nth-child(5) {
+        &::before {
+          background-image: url(/img/bron.svg);
+        }
+      }
+    }
+    .advantages_item_desc {
+      font-size: 14px;
+      line-height: 19px;
+      color: #272727;
+      @include for-phone {
+        line-height: 17px;
+      }
+    }
+    .advantages_item_desc:not(:last-child) {
+      margin-bottom: 35px;
+      @include for-desktop {
+        margin-bottom: 20px;
+      }
+      @include for-pad {
+        margin-bottom: 28px;
+      }
+      @include for-mobile {
+        margin-bottom: 20px;
+      }
+      @include for-phone {
+        margin-bottom: 22px;
+      }
+    }
+  }
+  // .content_info_adv_title{
+  //     font-weight: bold;
+  //     font-size: 32px;
+  //     line-height: 40px;
+  //     color: #fff;
+  //     text-align: center;
+  //     margin: 0;
+  //     width: 1200px;
+  // }
+  // .content_info_adv{
+  //    height: auto;
+  //    justify-content: center;
+  //    position: relative;
+  //    top: auto;
+  // }
+  // .content_info_wrap{
+  //     width: 352px;
+  //     margin: 0 20px;
+  //     @include for-mobile{
+  //         margin: 0 10px;
+  //     }
+  //     @include for-phone{
+  //         display: flex;
+  //         flex-direction: column;
+  //         width: auto;
+  //         margin: 6px 10px 6px 80px;
+  //         position: relative;
+  //         .main_rectangle{
+  //             width: 64px;
+  //             height: 64px;
+  //             position: absolute;
+  //             top: -14px;
+  //             left: -69px;
+  //         }
+
+  //     }
+  // }
+  // .content_info_adv_h{
+  //     font-weight: bold;
+  //     font-size: 20px;
+  //     line-height: 24px;
+  //     color: #FFFFFF;
+  //     margin-top: 50px;
+  //     @include for-mobile{
+  //         font-size: 17px;
+  //     }
+  //     @include for-phone{
+  //         margin-top: 0;
+  //         margin-left: -5px;
+  //     }
+  // }
+  // .content_info_adv_p{
+  //     font-size: 14px;
+  //     line-height: 20px;
+  //     color: #FFFFFF;
+  //     @include for-phone{
+  //         margin-left: -5px;
+  //     }
+  // }
+  // .main_rectangle{
+  //     margin: 0 auto;
+  //     @include for-phone{
+  //         width: 64px;
+  //         height: 64px;
+  //         position: relative;
+  //         top: auto;
+  //         left: auto;
+  //         .main_rectangle_1{
+  //             position: absolute;
+  //             left: 0%;
+  //             right: 26.79%;
+  //             top: 36.6%;
+  //             bottom: -9.81%;
+
+  //             /* Base Color */
+
+  //             background: linear-gradient(0deg, #FFC24A, #FFC24A), linear-gradient(0deg, #B1C86F, #B1C86F), linear-gradient(0deg, #D64582, #D64582), linear-gradient(97.87deg, #A70C72 -6.24%, #E50799 104.4%), #29EDB2;
+  //             border-radius: 16px;
+  //             transform: rotate(-30deg);
+  //         }
+  //         .main_rectangle_icon{
+  //             width: 40px;
+  //             height: 40px;
+  //             position: absolute;
+  //             top: -26px;
+  //             left: -4px;
+  //         }
+  //     }
+  // }
+}
+.main_blog {
+  margin-bottom: 80px;
+  text-align: center;
+  @include for-desktop {
+    margin-bottom: 33px;
+  }
+  @include for-pad {
+    margin-bottom: 45px;
+  }
+  .main_blog_title {
+    margin: 0 auto;
+    margin-bottom: 38px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #272727;
+    @include for-desktop {
+      margin-bottom: 37px;
+      font-size: 32px;
+    }
+    @include for-pad {
+      margin-bottom: 22px;
+      font-size: 24px;
+    }
+    @include for-mobile {
+      font-size: 24px;
+    }
+    @include for-phone {
+      margin-bottom: 16px;
+    }
+  }
+  .all_articles {
+    width: 100%;
+    a {
+      font-size: 16px;
+      color: #da0034;
+      border-bottom: 1px solid #da0034;
+      &:hover {
+        border-bottom: none;
+      }
+    }
+  }
+  .content_block {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include for-mobile {
+      flex-direction: column;
+      align-items: center;
+      padding: 0 45px;
+    }
+    @include for-phone {
+      padding: 0 15px;
+    }
+    .listing_widget_arrow {
+      position: absolute;
+      display: block;
+      top: unset;
+      left: unset;
+      width: 31px;
+      height: 31px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      &:hover {
+        filter: brightness(150%);
+      }
+      &:focus,
+      &:active {
+        filter: brightness(90%);
+      }
+      @include for-pad {
+        top: 5px;
+        width: 24px;
+        height: 24px;
+      }
+      @media (max-width: 450px) {
+        display: none;
+      }
+    }
+    & > ._prev {
+      right: 60px;
+      background-image: url(/img/prev-arr.svg);
+      @include for-pad {
+        right: 55px;
+      }
+      @include for-mobile {
+        right: 84px;
+      }
+      @include for-phone {
+        right: 55px;
+      }
+    }
+    & > ._next {
+      right: 16px;
+      transform: unset;
+      background-image: url(/img/next-arr.svg);
+      @include for-mobile {
+        right: 45px;
+      }
+      @include for-phone {
+        right: 16px;
+      }
+    }
+    .blogs_widget_arrow {
+      position: absolute;
+      display: block;
+      top: unset;
+      left: unset;
+      width: 31px;
+      height: 31px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(150%);
+      }
+      &:focus,
+      &:active {
+        filter: brightness(90%);
+      }
+      @include for-pad {
+        top: 5px;
+        width: 24px;
+        height: 24px;
+      }
+      @media (max-width: 450px) {
+        display: none;
+      }
+    }
+  }
+  .blog_item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    height: 300px;
+    margin-bottom: 20px;
+    background-color: #888480;
+    @include for-desktop {
+      width: 290px;
+      height: 205px;
+      margin-bottom: 16px;
+    }
+    @include for-pad {
+      width: 210px;
+      height: 150px;
+      margin-bottom: 21px;
+    }
+    @include for-mobile {
+      width: 65%;
+    }
+    @include for-phone {
+      margin-bottom: 18px;
+      height: 170px;
+    }
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .blog_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .blog_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+  .blog_title {
+    padding: 0 40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    @include for-desktop {
+      padding: 0 30px;
+      font-size: 16px;
+    }
+    @include for-pad {
+      padding: 0 10px;
+    }
+  }
+  .blog_description {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    &._main-blog {
+      display: none;
+    }
+  }
+  .blog_date {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    &._main-blog {
+      display: none;
+    }
+  }
+}
+.main_podborki {
+  @include for-phone {
+  }
+  .podborki_title {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    color: #272727;
+    @include for-desktop {
+      font-size: 26px;
+    }
+    @include for-pad {
+      font-size: 24px;
+    }
+  }
+  .content_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 370px;
+    @include for-desktop {
+      margin-bottom: 256px;
+    }
+    @include for-pad {
+      margin-bottom: 193px;
+    }
+    @include for-mobile {
+      margin-bottom: 213px;
+    }
+    @include for-phone {
+      margin-bottom: 265px;
+    }
+  }
+  .restaurant_item {
+    width: 272px;
+    height: 164px;
+    background: #ffffff;
+    border: 1px solid #f8f8f8;
+    box-shadow: 0px 5px 20px rgba(34, 36, 28, 0.1);
+    border-radius: 4px;
+    margin: 12px;
+    @include for-mobile {
+      width: 240px;
+      margin: 4px;
+    }
+    @include for-phone {
+      margin: 8px;
+      width: 142px;
+      height: auto;
+    }
+  }
+  .restaurant_img {
+    height: 120px;
+    @include for-phone {
+      overflow: hidden;
+    }
+    img {
+      width: 100%;
+      @include for-phone {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+  .restaurant_text {
+    text-align: center;
+    padding: 9px;
+
+    a {
+      font-size: 15px;
+      line-height: 24px;
+      @include for-phone {
+        line-height: 18px;
+      }
+    }
+    span {
+      font-size: 11px;
+      line-height: 24px;
+      color: #848484;
+      margin-left: 5px;
+      @include for-phone {
+        display: none;
+      }
+    }
+  }
+}
+.bottom_block {
+  margin-top: 80px;
+  margin-bottom: 70px;
+  @include for-desktop {
+    margin-top: 0;
+    margin-bottom: 50px;
+  }
+  @include for-pad {
+    margin-bottom: 34px;
+  }
+  .content_block {
+    @include for-pad {
+      padding: 0 30px;
+    }
+    @include for-mobile {
+      padding: 0 45px;
+    }
+    @include for-phone {
+      padding: 0 15px;
+    }
+    @include for-phone {
+      &._hidden {
+        max-height: 240px;
+      }
+    }
+  }
 }

@@ -89,7 +89,7 @@ header{
             .main_menu_item{
                 margin-right: 35px;
                 @include for-pad{
-                    margin-right: 26px;
+                    margin-right: 16px;
                 }
                 @include for-mobile{
                     margin: 0 auto;
@@ -454,25 +454,31 @@ header{
     }
 }
 .city_list_wrap{
-    z-index: 1;
-    position: absolute;
+    z-index: 9999;
+    position: fixed;
     top: 40px;
-    right: 15px;
+    right: 0;
     display: none;
     width: 600px;
     height: 500px;
     background: #fff;
     color: #272727;
     cursor: auto;
-    overflow-y: scroll;
-    box-shadow: 0 0 3px 1px #DEDEDE;
+    // overflow-y: scroll;
+    box-shadow: 0 0 10px 1px #000;
     &.__visible{
         display: block;
+    }
+    .mCSB_scrollTools .mCSB_draggerRail{
+        display: none;
+    }
+    .mCSB_scrollTools .mCSB_draggerContainer{
+        margin: 20px 0;
     }
     @include for-desktop{
         width: 500px;
     }
-    @include for-pad{
+    @include for-mobile{
         right: 50%;
         transform: translateX(50%);
     }
